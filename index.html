@@ -1,0 +1,1682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Studio 1308 — Brand Guidelines</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Reset ─────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    /* ─── Tokens ─────────────────────────────────── */
+    :root {
+      --color-primary:        #7B2040;
+      --color-primary-rgb:    123, 32, 64;
+      --color-primary-light:  #9B3558;
+      --color-primary-dark:   #4E1228;
+      --color-secondary:      #C4A04A;
+      --color-secondary-rgb:  196, 160, 74;
+      --color-secondary-light:#D4B870;
+      --color-secondary-dark: #9A7830;
+      --color-cream:          #FAF6F0;
+      --color-cream-mid:      #EEE5D8;
+      --color-cream-dark:     #DDD0BE;
+      --color-taupe:          #A8918A;
+      --color-dark:           #1C0912;
+      --color-white:          #FFFFFF;
+
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body:    'Montserrat', Arial, sans-serif;
+
+      --space-4:  1rem;
+      --space-6:  1.5rem;
+      --space-8:  2rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+      --space-20: 5rem;
+      --space-24: 6rem;
+
+      --shadow-sm:   0 1px 4px rgba(var(--color-primary-rgb), 0.06);
+      --shadow-md:   0 4px 16px rgba(var(--color-primary-rgb), 0.08);
+      --shadow-lg:   0 12px 40px rgba(var(--color-primary-rgb), 0.12);
+      --shadow-gold: 0 4px 24px rgba(var(--color-secondary-rgb), 0.3);
+
+      --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    /* ─── Base ───────────────────────────────────── */
+    body {
+      background: var(--color-cream);
+      color: var(--color-dark);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ─── Reveal Animations ───────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ─── Shared Layout ───────────────────────────── */
+    .container {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .section {
+      padding: var(--space-20) 0;
+    }
+    .section-alt {
+      background: var(--color-cream-mid);
+    }
+    .section-dark {
+      background: var(--color-primary-dark);
+      color: var(--color-cream);
+    }
+
+    /* ─── Eyebrow ─────────────────────────────────── */
+    .eyebrow {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--color-secondary);
+      margin-bottom: 1rem;
+    }
+
+    /* ─── Gold Rule ───────────────────────────────── */
+    .gold-rule {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .gold-rule::before,
+    .gold-rule::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--color-secondary), transparent);
+    }
+    .gold-rule-icon {
+      font-size: 0.6rem;
+      color: var(--color-secondary);
+      letter-spacing: 0.3em;
+    }
+
+    /* ─── HERO ────────────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      background: var(--color-primary-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .hero-bg-texture {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 120%, rgba(var(--color-secondary-rgb), 0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 80% at 0% 50%, rgba(var(--color-primary-rgb), 0.3) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-grid-lines {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(var(--color-secondary-rgb), 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(var(--color-secondary-rgb), 0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 2rem;
+    }
+    .hero-logo-img {
+      width: 120px;
+      height: auto;
+      margin-bottom: 2.5rem;
+      filter: brightness(0) invert(1) sepia(1) saturate(0.4) brightness(1.4);
+      opacity: 0.95;
+    }
+    .hero-pretitle {
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--color-secondary);
+      margin-bottom: 1.5rem;
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 8vw, 7rem);
+      font-weight: 300;
+      line-height: 1;
+      color: var(--color-cream);
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--color-secondary-light);
+    }
+    .hero-subtitle {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: rgba(var(--color-secondary-rgb), 0.7);
+      margin-top: 2rem;
+    }
+    .hero-tagline {
+      font-family: var(--font-display);
+      font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(250, 246, 240, 0.6);
+      margin-top: 1rem;
+    }
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      animation: heroScrollPulse 2s ease-in-out infinite;
+    }
+    .hero-scroll-hint span {
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(var(--color-secondary-rgb), 0.5);
+      font-family: var(--font-body);
+    }
+    .hero-scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(180deg, var(--color-secondary), transparent);
+    }
+    @keyframes heroScrollPulse {
+      0%, 100% { opacity: 0.5; transform: translateX(-50%) translateY(0); }
+      50%       { opacity: 1;   transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ─── NAV (sticky) ────────────────────────────── */
+    .nav-sticky {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 2rem;
+      background: rgba(250, 246, 240, 0);
+      backdrop-filter: blur(0px);
+      transition: background 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease;
+    }
+    .nav-sticky.scrolled {
+      background: rgba(250, 246, 240, 0.96);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 1px 20px rgba(var(--color-primary-rgb), 0.08);
+    }
+    .nav-brand {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--color-cream);
+      letter-spacing: 0.05em;
+      transition: color 0.3s ease;
+    }
+    .nav-sticky.scrolled .nav-brand { color: var(--color-primary); }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(250, 246, 240, 0.7);
+      text-decoration: none;
+      transition: color 0.2s ease;
+      font-family: var(--font-body);
+    }
+    .nav-sticky.scrolled .nav-links a { color: var(--color-dark); }
+    .nav-links a:hover { color: var(--color-secondary) !important; }
+
+    /* ─── SECTION HEADINGS ────────────────────────── */
+    .section-heading {
+      text-align: center;
+      margin-bottom: var(--space-12);
+    }
+    .section-heading h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--color-primary);
+      letter-spacing: -0.01em;
+    }
+    .section-heading h2 em {
+      font-style: italic;
+      color: var(--color-primary-light);
+    }
+    .section-heading p {
+      max-width: 560px;
+      margin: 1.25rem auto 0;
+      font-size: 0.875rem;
+      color: var(--color-taupe);
+      line-height: 1.8;
+    }
+
+    /* ─── COLOR PALETTE ───────────────────────────── */
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+    .swatch-card {
+      background: var(--color-white);
+      border: 1px solid var(--color-cream-dark);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+    .swatch-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-4px);
+    }
+    .swatch-preview {
+      height: 120px;
+      display: flex;
+      align-items: flex-end;
+      padding: 0.75rem;
+    }
+    .swatch-hex-badge {
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(4px);
+      padding: 0.2rem 0.5rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.65rem;
+      color: white;
+      letter-spacing: 0.1em;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+    .swatch-hex-badge.dark-text {
+      color: var(--color-dark);
+      background: rgba(0,0,0,0.08);
+      border-color: rgba(0,0,0,0.15);
+    }
+    .swatch-info {
+      padding: 1rem;
+    }
+    .swatch-name {
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-dark);
+      margin-bottom: 0.25rem;
+    }
+    .swatch-role {
+      font-size: 0.75rem;
+      color: var(--color-taupe);
+      line-height: 1.5;
+    }
+
+    /* Color pair showcase */
+    .color-pair-demo {
+      margin-top: var(--space-12);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .pair-demo-card {
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .pair-demo-card h3 {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 300;
+      font-style: italic;
+      margin-bottom: 0.5rem;
+    }
+    .pair-demo-card p {
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      opacity: 0.7;
+    }
+    .pair-demo-card .demo-accent-line {
+      position: absolute;
+      bottom: 0; left: 0;
+      height: 3px;
+      width: 40%;
+    }
+
+    /* ─── TYPOGRAPHY ───────────────────────────────── */
+    .type-showcase {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+    .type-row {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 2rem;
+      align-items: baseline;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--color-cream-dark);
+    }
+    .type-row:last-child { border-bottom: none; }
+    .type-meta {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-taupe);
+      padding-top: 0.5rem;
+    }
+    .type-meta strong {
+      display: block;
+      color: var(--color-dark);
+      margin-bottom: 0.25rem;
+      font-weight: 600;
+    }
+    .type-sample-hero {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1;
+      color: var(--color-primary);
+      letter-spacing: -0.02em;
+    }
+    .type-sample-h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--color-primary);
+    }
+    .type-sample-h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--color-primary);
+    }
+    .type-sample-eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--color-secondary);
+    }
+    .type-sample-body {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--color-dark);
+      max-width: 540px;
+    }
+    .type-sample-caption {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: var(--color-taupe);
+    }
+
+    /* ─── LOGO SECTION ──────────────────────────────── */
+    .logo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .logo-usage-card {
+      padding: 3rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      border: 1px solid var(--color-cream-dark);
+    }
+    .logo-usage-card .logo-img-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100px;
+    }
+    .logo-usage-card img {
+      max-height: 80px;
+      width: auto;
+    }
+    .logo-usage-label {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-taupe);
+      text-align: center;
+    }
+
+    /* Clearspace diagram */
+    .clearspace-demo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem;
+      margin-top: 2rem;
+      border: 1px dashed var(--color-cream-dark);
+      position: relative;
+    }
+    .clearspace-inner {
+      border: 1px dashed var(--color-secondary);
+      padding: 1.5rem;
+      position: relative;
+    }
+    .clearspace-inner img { max-height: 60px; }
+    .clearspace-label {
+      position: absolute;
+      font-size: 0.6rem;
+      color: var(--color-secondary);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    .clearspace-label.top    { top: -1.5rem; left: 50%; transform: translateX(-50%); }
+    .clearspace-label.bottom { bottom: -1.5rem; left: 50%; transform: translateX(-50%); }
+    .clearspace-label.left   { left: -3.5rem; top: 50%; transform: translateY(-50%); }
+    .clearspace-label.right  { right: -3.5rem; top: 50%; transform: translateY(-50%); }
+
+    /* ─── VOICE & TONE ──────────────────────────────── */
+    .voice-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+    .voice-card {
+      background: var(--color-white);
+      border: 1px solid var(--color-cream-dark);
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow 0.3s ease;
+    }
+    .voice-card:hover { box-shadow: var(--shadow-md); }
+    .voice-card-accent {
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 100%;
+    }
+    .voice-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--color-primary);
+      margin-bottom: 0.75rem;
+    }
+    .voice-card p {
+      font-size: 0.8rem;
+      color: var(--color-taupe);
+      line-height: 1.7;
+    }
+    .voice-example {
+      margin-top: 1rem;
+      padding: 0.75rem 1rem;
+      background: var(--color-cream);
+      border-left: 2px solid var(--color-secondary);
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 0.9rem;
+      color: var(--color-dark);
+      line-height: 1.6;
+    }
+
+    /* ─── BUTTONS SHOWCASE ──────────────────────────── */
+    .btn-showcase {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      align-items: center;
+      padding: 3rem;
+      background: var(--color-cream);
+      border: 1px solid var(--color-cream-dark);
+    }
+    .btn-showcase-dark {
+      background: var(--color-primary-dark);
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.875rem 2rem;
+      background: var(--color-primary);
+      color: var(--color-cream);
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      border: 1px solid var(--color-primary);
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+    .btn-primary:hover { background: var(--color-primary-dark); border-color: var(--color-primary-dark); }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.875rem 2rem;
+      background: transparent;
+      color: var(--color-primary);
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      border: 1px solid var(--color-primary);
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    .btn-outline:hover { background: var(--color-primary); color: var(--color-cream); }
+
+    .btn-gold {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.875rem 2rem;
+      background: var(--color-secondary);
+      color: var(--color-dark);
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      border: 1px solid var(--color-secondary);
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    .btn-gold:hover { background: var(--color-secondary-dark); color: var(--color-white); }
+
+    .btn-ghost-cream {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.875rem 2rem;
+      background: transparent;
+      color: var(--color-cream);
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      border: 1px solid rgba(250,246,240,0.5);
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+    .btn-ghost-cream:hover { background: rgba(250,246,240,0.1); border-color: var(--color-cream); }
+
+    /* ─── SERVICES CARD EXAMPLE ─────────────────────── */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .service-card {
+      background: var(--color-white);
+      border: 1px solid var(--color-cream-dark);
+      overflow: hidden;
+      position: relative;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+    .service-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-6px);
+    }
+    .service-card-img {
+      height: 220px;
+      overflow: hidden;
+      position: relative;
+    }
+    .service-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s var(--ease-out-expo);
+    }
+    .service-card:hover .service-card-img img { transform: scale(1.06); }
+    .service-card-body {
+      padding: 1.5rem;
+    }
+    .service-card-body .eyebrow { margin-bottom: 0.5rem; }
+    .service-card-body h3 {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--color-primary);
+      margin-bottom: 0.5rem;
+    }
+    .service-card-body p {
+      font-size: 0.8rem;
+      color: var(--color-taupe);
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+    }
+    .service-card-price {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .service-card-price .price {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      color: var(--color-secondary);
+      font-weight: 400;
+    }
+    .service-card-left-accent {
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 3px; height: 0;
+      background: var(--color-secondary);
+      transition: height 0.4s var(--ease-out-expo);
+    }
+    .service-card:hover .service-card-left-accent { height: 100%; }
+
+    /* ─── DO / DON'T ───────────────────────────────── */
+    .do-dont-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .do-dont-card {
+      padding: 0;
+      border: 1px solid var(--color-cream-dark);
+      overflow: hidden;
+    }
+    .do-dont-header {
+      padding: 1rem 1.5rem;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .do-header  { background: rgba(120, 140, 93, 0.15); color: #4a6030; }
+    .dont-header{ background: rgba(123, 32, 64, 0.1); color: var(--color-primary); }
+    .do-dont-list {
+      list-style: none;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.875rem;
+    }
+    .do-dont-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 0.8rem;
+      color: var(--color-dark);
+      line-height: 1.6;
+    }
+    .do-dont-list li::before {
+      content: '';
+      flex-shrink: 0;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      margin-top: 0.55rem;
+    }
+    .do-list li::before   { background: #788c5d; }
+    .dont-list li::before { background: var(--color-primary); }
+
+    /* ─── PHOTOGRAPHY STYLE ─────────────────────────── */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: 280px 280px;
+      gap: 1rem;
+    }
+    .photo-item {
+      overflow: hidden;
+      position: relative;
+    }
+    .photo-item:first-child {
+      grid-row: span 2;
+    }
+    .photo-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.9) brightness(0.97);
+      transition: transform 0.6s var(--ease-out-expo), filter 0.3s ease;
+    }
+    .photo-item:hover img {
+      transform: scale(1.04);
+      filter: saturate(1) brightness(1);
+    }
+    .photo-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 50%, rgba(var(--color-primary-rgb), 0.5));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      display: flex;
+      align-items: flex-end;
+      padding: 1.5rem;
+    }
+    .photo-item:hover .photo-overlay { opacity: 1; }
+    .photo-overlay-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-cream);
+      font-family: var(--font-body);
+    }
+
+    /* ─── SPACING ───────────────────────────────────── */
+    .spacing-grid {
+      display: flex;
+      gap: 2rem;
+      align-items: flex-end;
+      flex-wrap: wrap;
+    }
+    .spacing-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .spacing-block {
+      background: var(--color-primary);
+      opacity: 0.15;
+      width: 60px;
+      flex-shrink: 0;
+    }
+    .spacing-label {
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-taupe);
+      text-align: center;
+    }
+    .spacing-label strong {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--color-dark);
+      font-weight: 600;
+    }
+
+    /* ─── TESTIMONIAL ───────────────────────────────── */
+    .testimonial-block {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+    .testimonial-quote {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--color-cream);
+      line-height: 1.5;
+      margin-bottom: 2rem;
+    }
+    .testimonial-attribution {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(var(--color-secondary-rgb), 0.7);
+    }
+
+    /* ─── FOOTER ────────────────────────────────────── */
+    .footer {
+      background: var(--color-primary-dark);
+      color: var(--color-cream);
+      padding: 4rem 0 2rem;
+    }
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(var(--color-secondary-rgb), 0.2);
+    }
+    .footer-brand h3 {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--color-cream);
+      margin-bottom: 0.5rem;
+    }
+    .footer-brand p {
+      font-size: 0.8rem;
+      color: rgba(250, 246, 240, 0.5);
+      line-height: 1.7;
+      max-width: 280px;
+    }
+    .footer-col h4 {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--color-secondary);
+      margin-bottom: 1.25rem;
+    }
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .footer-col ul li {
+      font-size: 0.8rem;
+      color: rgba(250,246,240,0.6);
+    }
+    .footer-bottom {
+      padding-top: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-bottom p {
+      font-size: 0.7rem;
+      color: rgba(250,246,240,0.35);
+      letter-spacing: 0.05em;
+    }
+    .footer-tagline {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 0.85rem;
+      color: rgba(var(--color-secondary-rgb), 0.6);
+    }
+
+    /* ─── TAG BADGES ────────────────────────────────── */
+    .badge {
+      display: inline-block;
+      padding: 0.3rem 0.75rem;
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-family: var(--font-body);
+    }
+    .badge-primary { background: rgba(var(--color-primary-rgb), 0.1); color: var(--color-primary); border: 1px solid rgba(var(--color-primary-rgb), 0.25); }
+    .badge-gold    { background: rgba(var(--color-secondary-rgb), 0.1); color: var(--color-secondary-dark); border: 1px solid rgba(var(--color-secondary-rgb), 0.3); }
+    .badge-cream   { background: var(--color-cream-mid); color: var(--color-taupe); border: 1px solid var(--color-cream-dark); }
+
+    /* ─── RESPONSIVE ────────────────────────────────── */
+    @media (max-width: 900px) {
+      .logo-grid       { grid-template-columns: 1fr 1fr; }
+      .services-grid   { grid-template-columns: 1fr 1fr; }
+      .do-dont-grid    { grid-template-columns: 1fr; }
+      .footer-inner    { grid-template-columns: 1fr 1fr; }
+      .color-pair-demo { grid-template-columns: 1fr; }
+      .photo-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 200px 200px 200px;
+      }
+      .photo-item:first-child { grid-row: span 1; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 600px) {
+      .logo-grid        { grid-template-columns: 1fr; }
+      .services-grid    { grid-template-columns: 1fr; }
+      .type-row         { grid-template-columns: 1fr; }
+      .footer-inner     { grid-template-columns: 1fr; }
+      .palette-grid     { grid-template-columns: 1fr 1fr; }
+      .photo-grid       { grid-template-columns: 1fr; grid-template-rows: repeat(5, 180px); }
+      .footer-bottom    { flex-direction: column; gap: 0.75rem; text-align: center; }
+      .spacing-grid     { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Sticky Nav ───────────────────────────────────── -->
+  <nav class="nav-sticky" id="mainNav">
+    <div class="nav-brand"><img src='logo-white.png' alt='Logo' width='120' /></div>
+    <ul class="nav-links">
+      <li><a href="#colors">Colors</a></li>
+      <li><a href="#typography">Type</a></li>
+      <li><a href="#logo">Logo</a></li>
+      <li><a href="#voice">Voice</a></li>
+      <li><a href="#components">Components</a></li>
+      <li><a href="#photography">Photography</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── Hero ─────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-bg-texture"></div>
+    <div class="hero-grid-lines"></div>
+    <div class="hero-content">
+      <img
+        src="https://img1.wsimg.com/isteam/ip/8d9d1f10-5781-4d9a-95ec-2a60b057ce8e/blob.png/:/rs=h:150,cg:true,m/qt=q:95"
+        alt="Studio 1308 Logo"
+        class="hero-logo-img"
+      />
+      <div class="hero-pretitle">Brand Guidelines — 2024</div>
+      <h1 class="hero-title">Studio <em>1308</em></h1>
+      <div class="hero-subtitle">Savannah, Georgia · Salon + Spa</div>
+      <p class="hero-tagline">European Luxury, Southern Soul</p>
+    </div>
+    <div class="hero-scroll-hint">
+      <span>Scroll</span>
+      <div class="hero-scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ── Brand Intro ───────────────────────────────────── -->
+  <section class="section">
+    <div class="container">
+      <div style="max-width: 720px; margin: 0 auto; text-align: center;">
+        <div class="eyebrow reveal">Our Identity</div>
+        <h2 class="reveal reveal-delay-1" style="font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; line-height: 1.2; color: var(--color-primary); margin-bottom: 1.5rem;">
+          A brand built on<br><em style="font-style: italic; color: var(--color-primary-light);">confidence &amp; craft</em>
+        </h2>
+        <div class="gold-rule reveal reveal-delay-2"><span class="gold-rule-icon">✦</span></div>
+        <p class="reveal reveal-delay-3" style="font-size: 0.9rem; color: var(--color-taupe); line-height: 1.9; max-width: 560px; margin: 0 auto 1.25rem;">
+          Studio 1308 is Savannah's premier salon and spa — a space where European luxury meets Southern warmth. Every touchpoint, from a business card to a social post, should feel refined, personal, and empowering.
+        </p>
+        <p class="reveal reveal-delay-4" style="font-size: 0.9rem; color: var(--color-taupe); line-height: 1.9; max-width: 560px; margin: 0 auto;">
+          These guidelines exist to protect and elevate that identity. When followed, every piece of communication reinforces one cohesive feeling: you are in the right place.
+        </p>
+        <div class="reveal reveal-delay-5" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2.5rem;">
+          <span class="badge badge-primary">Refine</span>
+          <span class="badge badge-gold">Elevate</span>
+          <span class="badge badge-primary">Empower</span>
+          <span class="badge badge-cream">Savannah, GA</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Colors ────────────────────────────────────────── -->
+  <section class="section section-alt" id="colors">
+    <div class="container">
+      <div class="section-heading">
+        <div class="eyebrow reveal">Color System</div>
+        <h2 class="reveal reveal-delay-1">The <em>Palette</em></h2>
+        <p class="reveal reveal-delay-2">Rooted in the deep burgundy of the Studio 1308 logo, paired with champagne gold that evokes candlelit warmth and European elegance.</p>
+      </div>
+
+      <div class="palette-grid">
+        <!-- Primary -->
+        <div class="swatch-card reveal">
+          <div class="swatch-preview" style="background: #7B2040;">
+            <span class="swatch-hex-badge">#7B2040</span>
+          </div>
+          <div class="swatch-info">
+            <div class="swatch-name">Bordeaux</div>
+            <div class="swatch-role">Primary brand color · Logo match · CTAs · Hero elements</div>
+          </div>
+        </div>
+        <!-- Primary Dark -->
+        <div class="swatch-card reveal reveal-delay-1">
+          <div class="swatch-preview" style="background: #4E1228;">
+            <span class="swatch-hex-badge">#4E1228</span>
+          </div>
+          <div class="swatch-info">
+            <div class="swatch-name">Deep Bordeaux</div>
+            <div class="swatch-role">Dark backgrounds · Footer · Hover state of primary</div>
+          </div>
+        </div>
+        <!-- Secondary Gold -->
+        <div class="swatch-card reveal reveal-delay-2">
+          <div class="swatch-preview" style="background: #C4A04A;">
+            <span class="swatch-hex-badge">#C4A04A</span>
+          </div>
+          <div class="swatch-info">
+            <div class="swatch-name">Champagne</div>
+            <div class="swatch-role">Secondary accent · Gold rules · Icon highlights · Premium details</div>
+          </div>
+        </div>
+        <!-- Secondary Light -->
+        <div class="swatch-card reveal reveal-delay-3">
+          <div class="swatch-preview" style="background: #D4B870;">
+            <span class="swatch-hex-badge">#D4B870</span>
+          </div>
+          <div class="swatch-info">
+            <div class="swatch-name">Light Champagne</div>
+            <div class="swatch-role">Hover state of gold · Text on dark backgrounds</div>
+          </div>
+        </div>
+        <!-- Cream -->
+        <div class="swatch-card reveal reveal-delay-4">
+          <div class="swatch-preview" style="background: #FAF6F0; border: 1px solid #DDD0BE;">
+            <span class="swatch-hex-badge dark-text">#FAF6F0</span>
+          </div>
+          <div class="swatch-info">
+            <div class="swatch-name">Parchment</div>
+            <div class="swatch-role">Page background · Base canvas · Never use pure white as bg</div>
+          </div>
+        </div>
+        <!-- Cream Mid -->
+        <div class="swatch-card reveal reveal-delay-5">
+          <div class="swatch-preview" style="background: #EEE5D8;">
+            <span class="swatch-hex-badge dark-text">#EEE5D8</span>
+          </div>
+          <div class="swatch-info">
+            <div class="swatch-name">Linen</div>
+            <div class="swatch-role">Card & section backgrounds · Subtle panels</div>
+          </div>
+        </div>
+        <!-- Taupe -->
+        <div class="swatch-card reveal">
+          <div class="swatch-preview" style="background: #A8918A;">
+            <span class="swatch-hex-badge">#A8918A</span>
+          </div>
+          <div class="swatch-info">
+            <div class="swatch-name">Rosewood Taupe</div>
+            <div class="swatch-role">Secondary text · Captions · Muted labels</div>
+          </div>
+        </div>
+        <!-- Dark -->
+        <div class="swatch-card reveal reveal-delay-1">
+          <div class="swatch-preview" style="background: #1C0912;">
+            <span class="swatch-hex-badge">#1C0912</span>
+          </div>
+          <div class="swatch-info">
+            <div class="swatch-name">Night Plum</div>
+            <div class="swatch-role">Primary text · Never use pure black</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Color Pair Demo -->
+      <div class="color-pair-demo" style="margin-top: 3rem;">
+        <div class="pair-demo-card reveal" style="background: var(--color-primary); color: var(--color-cream);">
+          <div style="font-family: var(--font-body); font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(var(--color-secondary-rgb), 0.7); margin-bottom: 1rem;">Primary Palette</div>
+          <h3>Bordeaux<br>on Parchment</h3>
+          <p>The primary pairing. Deep burgundy conveys luxury authority; warm cream provides the breath it needs to feel elegant, not heavy.</p>
+          <div class="demo-accent-line" style="background: var(--color-secondary);"></div>
+        </div>
+        <div class="pair-demo-card reveal reveal-delay-1" style="background: var(--color-cream-mid); color: var(--color-dark);">
+          <div style="font-family: var(--font-body); font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--color-secondary-dark); margin-bottom: 1rem;">Secondary Palette</div>
+          <h3 style="color: var(--color-primary);">Champagne<br>on Linen</h3>
+          <p style="color: var(--color-taupe);">Gold accent on warm linen. Use for featured cards, callouts, and premium service highlights.</p>
+          <div class="demo-accent-line" style="background: var(--color-primary);"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Typography ────────────────────────────────────── -->
+  <section class="section" id="typography">
+    <div class="container">
+      <div class="section-heading">
+        <div class="eyebrow reveal">Typography</div>
+        <h2 class="reveal reveal-delay-1">Words that <em>whisper</em> luxury</h2>
+        <p class="reveal reveal-delay-2">Cormorant Garamond for the soul. Montserrat for the structure. Together they balance old-world elegance with modern clarity.</p>
+      </div>
+
+      <div class="type-showcase">
+        <div class="type-row reveal">
+          <div class="type-meta"><strong>Hero Display</strong>Cormorant Garamond<br>300 weight · −0.02em tracking</div>
+          <div class="type-sample-hero">Beauty.</div>
+        </div>
+        <div class="type-row reveal">
+          <div class="type-meta"><strong>Heading H1</strong>Cormorant Garamond<br>400 weight · page titles</div>
+          <div class="type-sample-h1">Enhance. Elevate. Empower.</div>
+        </div>
+        <div class="type-row reveal">
+          <div class="type-meta"><strong>Heading H2</strong>Cormorant Garamond Italic<br>300 weight · section headings</div>
+          <div class="type-sample-h2">The art of making you feel extraordinary.</div>
+        </div>
+        <div class="type-row reveal">
+          <div class="type-meta"><strong>Eyebrow Label</strong>Montserrat<br>500 weight · 0.35em tracking · ALL CAPS</div>
+          <div class="type-sample-eyebrow">Our Services · Savannah, Georgia</div>
+        </div>
+        <div class="type-row reveal">
+          <div class="type-meta"><strong>Body Copy</strong>Montserrat<br>300 weight · 1.8 line height</div>
+          <div class="type-sample-body">At Studio 1308, every service is an experience crafted around you. From our signature head spa to precision color work, our artisans bring European technique to every appointment — with the warmth only the South can offer.</div>
+        </div>
+        <div class="type-row reveal">
+          <div class="type-meta"><strong>Caption</strong>Montserrat<br>400 weight · 0.08em tracking</div>
+          <div class="type-sample-caption">Classic Lash Extensions · Starting at $99 · Book online at studio1308.com</div>
+        </div>
+      </div>
+
+      <!-- Font pairing visual -->
+      <div class="reveal" style="margin-top: 4rem; background: var(--color-primary-dark); padding: 4rem 3rem; text-align: center;">
+        <div style="font-family: var(--font-body); font-size: 0.6rem; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(var(--color-secondary-rgb), 0.6); margin-bottom: 1.5rem;">Font Pairing in Context</div>
+        <div style="font-family: var(--font-body); font-size: 0.65rem; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--color-secondary); margin-bottom: 0.75rem;">Head Spa</div>
+        <div style="font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 300; color: var(--color-cream); line-height: 1.2; margin-bottom: 1rem;">The <em style="font-style:italic; color: var(--color-secondary-light);">Aphrodite</em><br>Head Spa</div>
+        <div style="font-family: var(--font-body); font-size: 0.85rem; font-weight: 300; color: rgba(250,246,240,0.6); max-width: 420px; margin: 0 auto 2rem; line-height: 1.8;">A deeply restorative scalp treatment rooted in ancient European wellness ritual. 75 minutes of pure renewal.</div>
+        <a href="#" class="btn-gold" onclick="return false;">Book Now — $149</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Logo ───────────────────────────────────────────── -->
+  <section class="section section-alt" id="logo">
+    <div class="container">
+      <div class="section-heading">
+        <div class="eyebrow reveal">Logo Usage</div>
+        <h2 class="reveal reveal-delay-1">The <em>Mark</em></h2>
+        <p class="reveal reveal-delay-2">The Studio 1308 logotype combines a strong serif numeral with a flowing script — authority and grace in a single gesture.</p>
+      </div>
+
+      <div class="logo-grid">
+        <!-- On light -->
+        <div class="logo-usage-card reveal" style="background: var(--color-cream);">
+          <div class="logo-img-wrapper">
+            <img src="https://img1.wsimg.com/isteam/ip/8d9d1f10-5781-4d9a-95ec-2a60b057ce8e/blob.png/:/rs=h:150,cg:true,m/qt=q:95" alt="Studio 1308 logo on light background" />
+          </div>
+          <div class="logo-usage-label">On Light (Parchment) ✓</div>
+        </div>
+        <!-- On white -->
+        <div class="logo-usage-card reveal reveal-delay-1" style="background: #ffffff;">
+          <div class="logo-img-wrapper">
+            <img src="https://img1.wsimg.com/isteam/ip/8d9d1f10-5781-4d9a-95ec-2a60b057ce8e/blob.png/:/rs=h:150,cg:true,m/qt=q:95" alt="Studio 1308 logo on white background" />
+          </div>
+          <div class="logo-usage-label">On White ✓</div>
+        </div>
+        <!-- On dark -->
+        <div class="logo-usage-card reveal reveal-delay-2" style="background: var(--color-primary-dark);">
+          <div class="logo-img-wrapper">
+            <img src="https://img1.wsimg.com/isteam/ip/8d9d1f10-5781-4d9a-95ec-2a60b057ce8e/blob.png/:/rs=h:150,cg:true,m/qt=q:95" alt="Studio 1308 logo on dark background" style="filter: brightness(0) invert(1) sepia(1) saturate(0.4) brightness(1.5);" />
+          </div>
+          <div class="logo-usage-label" style="color: rgba(250,246,240,0.6);">On Dark — Cream Tinted ✓</div>
+        </div>
+      </div>
+
+      <!-- Clearspace -->
+      <div class="reveal" style="margin-top: 3rem;">
+        <div style="text-align: center; margin-bottom: 2rem;">
+          <div class="eyebrow">Clear Space Rule</div>
+          <p style="font-size: 0.8rem; color: var(--color-taupe); max-width: 480px; margin: 0.5rem auto 0;">Always maintain a minimum clear space equal to the height of the "1" numeral on all four sides of the logo.</p>
+        </div>
+        <div class="clearspace-demo">
+          <div class="clearspace-inner">
+            <img src="https://img1.wsimg.com/isteam/ip/8d9d1f10-5781-4d9a-95ec-2a60b057ce8e/blob.png/:/rs=h:150,cg:true,m/qt=q:95" alt="Logo clearspace" />
+            <span class="clearspace-label top">min. clearspace</span>
+            <span class="clearspace-label bottom">min. clearspace</span>
+            <span class="clearspace-label left">min.</span>
+            <span class="clearspace-label right">min.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Don'ts for logo -->
+      <div class="reveal" style="margin-top: 3rem; padding: 2.5rem; background: var(--color-white); border: 1px solid var(--color-cream-dark);">
+        <div class="eyebrow" style="margin-bottom: 1.5rem;">Logo Don'ts</div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1.5rem; text-align: center;">
+          <div>
+            <div style="padding: 1.5rem; background: var(--color-cream-mid); margin-bottom: 0.75rem; display: flex; align-items: center; justify-content: center;">
+              <img src="https://img1.wsimg.com/isteam/ip/8d9d1f10-5781-4d9a-95ec-2a60b057ce8e/blob.png/:/rs=h:150,cg:true,m/qt=q:95" alt="No stretch" style="max-height: 50px; transform: scaleX(1.4);" />
+            </div>
+            <p style="font-size: 0.7rem; color: var(--color-primary); font-weight: 500;">Don't stretch</p>
+          </div>
+          <div>
+            <div style="padding: 1.5rem; background: var(--color-cream-mid); margin-bottom: 0.75rem; display: flex; align-items: center; justify-content: center;">
+              <img src="https://img1.wsimg.com/isteam/ip/8d9d1f10-5781-4d9a-95ec-2a60b057ce8e/blob.png/:/rs=h:150,cg:true,m/qt=q:95" alt="No rotation" style="max-height: 50px; transform: rotate(-15deg);" />
+            </div>
+            <p style="font-size: 0.7rem; color: var(--color-primary); font-weight: 500;">Don't rotate</p>
+          </div>
+          <div>
+            <div style="padding: 1.5rem; background: #ffd700; margin-bottom: 0.75rem; display: flex; align-items: center; justify-content: center;">
+              <img src="https://img1.wsimg.com/isteam/ip/8d9d1f10-5781-4d9a-95ec-2a60b057ce8e/blob.png/:/rs=h:150,cg:true,m/qt=q:95" alt="No clashing background" style="max-height: 50px;" />
+            </div>
+            <p style="font-size: 0.7rem; color: var(--color-primary); font-weight: 500;">Don't use clashing bg</p>
+          </div>
+          <div>
+            <div style="padding: 1.5rem; background: var(--color-cream-mid); margin-bottom: 0.75rem; display: flex; align-items: center; justify-content: center;">
+              <img src="https://img1.wsimg.com/isteam/ip/8d9d1f10-5781-4d9a-95ec-2a60b057ce8e/blob.png/:/rs=h:150,cg:true,m/qt=q:95" alt="No recolor" style="max-height: 50px; filter: hue-rotate(120deg);" />
+            </div>
+            <p style="font-size: 0.7rem; color: var(--color-primary); font-weight: 500;">Don't recolor</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Voice & Tone ───────────────────────────────────── -->
+  <section class="section" id="voice">
+    <div class="container">
+      <div class="section-heading">
+        <div class="eyebrow reveal">Voice &amp; Tone</div>
+        <h2 class="reveal reveal-delay-1">How Studio 1308 <em>speaks</em></h2>
+        <p class="reveal reveal-delay-2">Our voice is consistent everywhere — from Instagram captions to appointment reminders. Warm authority, never stiff. Aspirational, never out of reach.</p>
+      </div>
+
+      <div class="voice-grid">
+        <div class="voice-card reveal">
+          <div class="voice-card-accent" style="background: var(--color-primary);"></div>
+          <h3>Confident</h3>
+          <p>We know our craft. We don't hedge or apologize. We state what we do and stand behind every result.</p>
+          <div class="voice-example">"Our lash artists don't just apply extensions — they sculpt them to your eye shape."</div>
+        </div>
+        <div class="voice-card reveal reveal-delay-1">
+          <div class="voice-card-accent" style="background: var(--color-secondary);"></div>
+          <h3>Warm</h3>
+          <p>European luxury doesn't have to feel cold. We're a salon in Savannah — we welcome everyone like they belong here.</p>
+          <div class="voice-example">"Come as you are. Leave feeling like the best version of yourself."</div>
+        </div>
+        <div class="voice-card reveal reveal-delay-2">
+          <div class="voice-card-accent" style="background: var(--color-primary-light);"></div>
+          <h3>Elevated</h3>
+          <p>We don't chase trends. We set the standard. Our language is refined, specific, and expert.</p>
+          <div class="voice-example">"The Aphrodite Head Spa — a restorative ritual drawn from European scalp therapy tradition."</div>
+        </div>
+        <div class="voice-card reveal reveal-delay-3">
+          <div class="voice-card-accent" style="background: var(--color-cream-dark);"></div>
+          <h3>Empowering</h3>
+          <p>Every service is ultimately about the client. We frame beauty as something they possess — we just help reveal it.</p>
+          <div class="voice-example">"This summer, your glow isn't manufactured. It's already yours — we just help it show."</div>
+        </div>
+      </div>
+
+      <!-- Tone scale -->
+      <div class="reveal" style="margin-top: 3rem; padding: 2.5rem; background: var(--color-cream-mid); border: 1px solid var(--color-cream-dark);">
+        <div class="eyebrow" style="margin-bottom: 1.5rem;">Tone Dial</div>
+        <div style="display: grid; gap: 1.25rem;">
+          <div style="display: flex; align-items: start; gap: 1.5rem;">
+            <div style="width: 8px; height: 8px; border-radius: 50%; background: var(--color-secondary); flex-shrink: 0; margin-top: 0.4rem;"></div>
+            <div>
+              <div style="font-size: 0.65rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-dark); margin-bottom: 0.25rem;">Social Media</div>
+              <p style="font-size: 0.8rem; color: var(--color-taupe);">Warmer, shorter, a little playful. Emojis allowed sparingly. Always ends with a soft CTA or invitation.</p>
+            </div>
+          </div>
+          <div style="display: flex; align-items: start; gap: 1.5rem;">
+            <div style="width: 8px; height: 8px; border-radius: 50%; background: var(--color-primary); flex-shrink: 0; margin-top: 0.4rem;"></div>
+            <div>
+              <div style="font-size: 0.65rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-dark); margin-bottom: 0.25rem;">Website Copy</div>
+              <p style="font-size: 0.8rem; color: var(--color-taupe);">Balanced — warm authority. Full sentences. No jargon. Every word earns its place.</p>
+            </div>
+          </div>
+          <div style="display: flex; align-items: start; gap: 1.5rem;">
+            <div style="width: 8px; height: 8px; border-radius: 50%; background: var(--color-primary-dark); flex-shrink: 0; margin-top: 0.4rem;"></div>
+            <div>
+              <div style="font-size: 0.65rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-dark); margin-bottom: 0.25rem;">Email &amp; Booking</div>
+              <p style="font-size: 0.8rem; color: var(--color-taupe);">Most professional. Clear, specific, respectful of the client's time. No filler phrases.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Components ─────────────────────────────────────── -->
+  <section class="section section-alt" id="components">
+    <div class="container">
+      <div class="section-heading">
+        <div class="eyebrow reveal">Components</div>
+        <h2 class="reveal reveal-delay-1">Buttons &amp; <em>UI Elements</em></h2>
+        <p class="reveal reveal-delay-2">Every touchpoint follows the same design grammar. Clean, purposeful, unhurried.</p>
+      </div>
+
+      <!-- Buttons on light -->
+      <div class="reveal" style="margin-bottom: 1.5rem;">
+        <div style="font-size: 0.65rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-taupe); margin-bottom: 1rem;">On Light Background</div>
+        <div class="btn-showcase">
+          <a href="#" class="btn-primary" onclick="return false;">Book Now</a>
+          <a href="#" class="btn-outline" onclick="return false;">View Services</a>
+          <a href="#" class="btn-gold" onclick="return false;">Gift Certificate</a>
+        </div>
+      </div>
+
+      <!-- Buttons on dark -->
+      <div class="reveal">
+        <div style="font-size: 0.65rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-taupe); margin-bottom: 1rem;">On Dark Background</div>
+        <div class="btn-showcase btn-showcase-dark">
+          <a href="#" class="btn-gold" onclick="return false;">Book Now</a>
+          <a href="#" class="btn-ghost-cream" onclick="return false;">View Services</a>
+        </div>
+      </div>
+
+      <!-- Badges -->
+      <div class="reveal" style="margin-top: 3rem;">
+        <div style="font-size: 0.65rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-taupe); margin-bottom: 1rem;">Badges &amp; Tags</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; padding: 2rem; background: var(--color-white); border: 1px solid var(--color-cream-dark);">
+          <span class="badge badge-primary">Hair</span>
+          <span class="badge badge-primary">Lashes</span>
+          <span class="badge badge-gold">Featured</span>
+          <span class="badge badge-gold">Premium</span>
+          <span class="badge badge-cream">Savannah, GA</span>
+          <span class="badge badge-cream">New</span>
+        </div>
+      </div>
+
+      <!-- Service Cards -->
+      <div class="section-heading" style="margin-top: var(--space-16);">
+        <div class="eyebrow reveal">Service Cards</div>
+        <h2 class="reveal reveal-delay-1">How <em>services</em> are presented</h2>
+      </div>
+      <div class="services-grid">
+        <div class="service-card reveal">
+          <div class="service-card-left-accent"></div>
+          <div class="service-card-img">
+            <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=500&q=80" alt="Hair services at Studio 1308" />
+          </div>
+          <div class="service-card-body">
+            <div class="eyebrow">Hair</div>
+            <h3>Color &amp; Styling</h3>
+            <p>Precision cuts, balayage, and color corrections delivered by trained artisans using European-grade products.</p>
+            <div class="service-card-price">
+              <span class="price">From $85</span>
+              <a href="#" class="btn-outline" style="padding: 0.5rem 1.25rem; font-size: 0.65rem;" onclick="return false;">Book</a>
+            </div>
+          </div>
+        </div>
+        <div class="service-card reveal reveal-delay-1">
+          <div class="service-card-left-accent"></div>
+          <div class="service-card-img">
+            <img src="https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=500&q=80" alt="Lash extensions at Studio 1308" />
+          </div>
+          <div class="service-card-body">
+            <div class="eyebrow">Lashes</div>
+            <h3>Classic Extensions</h3>
+            <p>Full sets applied lash-by-lash for a natural, fluttery look that lasts. Certified lash artists only.</p>
+            <div class="service-card-price">
+              <span class="price">$99</span>
+              <a href="#" class="btn-outline" style="padding: 0.5rem 1.25rem; font-size: 0.65rem;" onclick="return false;">Book</a>
+            </div>
+          </div>
+        </div>
+        <div class="service-card reveal reveal-delay-2">
+          <div class="service-card-left-accent"></div>
+          <div class="service-card-img">
+            <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=500&q=80" alt="Head spa at Studio 1308" />
+          </div>
+          <div class="service-card-body">
+            <div class="eyebrow">Wellness</div>
+            <h3>Aphrodite Head Spa</h3>
+            <p>A deeply restorative scalp treatment rooted in European wellness ritual. 75 minutes of pure renewal.</p>
+            <div class="service-card-price">
+              <span class="price">$149</span>
+              <a href="#" class="btn-outline" style="padding: 0.5rem 1.25rem; font-size: 0.65rem;" onclick="return false;">Book</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Photography ────────────────────────────────────── -->
+  <section class="section" id="photography">
+    <div class="container">
+      <div class="section-heading">
+        <div class="eyebrow reveal">Photography</div>
+        <h2 class="reveal reveal-delay-1">The Visual <em>Language</em></h2>
+        <p class="reveal reveal-delay-2">Images should feel intimate and warm — never clinical or overly retouched. Show skin, texture, craft. Natural light always preferred.</p>
+      </div>
+
+      <div class="photo-grid reveal">
+        <div class="photo-item">
+          <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&q=80" alt="Warm-lit salon interior" />
+          <div class="photo-overlay"><span class="photo-overlay-label">Warm Interior</span></div>
+        </div>
+        <div class="photo-item">
+          <img src="https://images.unsplash.com/photo-1487412947147-5cebf100d293?w=500&q=80" alt="Hair artistry close-up" />
+          <div class="photo-overlay"><span class="photo-overlay-label">Artistry Close-Up</span></div>
+        </div>
+        <div class="photo-item">
+          <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=500&q=80" alt="Lash work detail" />
+          <div class="photo-overlay"><span class="photo-overlay-label">Detail &amp; Texture</span></div>
+        </div>
+        <div class="photo-item">
+          <img src="https://images.unsplash.com/photo-1581299894007-aaa50297cf16?w=500&q=80" alt="Relaxed client experience" />
+          <div class="photo-overlay"><span class="photo-overlay-label">Client Experience</span></div>
+        </div>
+        <div class="photo-item">
+          <img src="https://images.unsplash.com/photo-1470259078422-826894b933aa?w=500&q=80" alt="Before and after beauty" />
+          <div class="photo-overlay"><span class="photo-overlay-label">Results &amp; Glow</span></div>
+        </div>
+      </div>
+
+      <!-- Photography rules -->
+      <div class="reveal" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2.5rem;">
+        <div style="padding: 2rem; background: var(--color-cream-mid); border: 1px solid var(--color-cream-dark);">
+          <div style="font-size: 0.65rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #788c5d; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem;"><span>✓</span> Do</div>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem;">
+            <li style="font-size: 0.8rem; color: var(--color-dark); line-height: 1.6; display: flex; gap: 0.75rem;"><span style="color: #788c5d; flex-shrink:0;">—</span>Warm, golden-hour or studio lighting</li>
+            <li style="font-size: 0.8rem; color: var(--color-dark); line-height: 1.6; display: flex; gap: 0.75rem;"><span style="color: #788c5d; flex-shrink:0;">—</span>Close-up texture shots of hair, lashes, skin</li>
+            <li style="font-size: 0.8rem; color: var(--color-dark); line-height: 1.6; display: flex; gap: 0.75rem;"><span style="color: #788c5d; flex-shrink:0;">—</span>Candid, relaxed client expressions</li>
+            <li style="font-size: 0.8rem; color: var(--color-dark); line-height: 1.6; display: flex; gap: 0.75rem;"><span style="color: #788c5d; flex-shrink:0;">—</span>Marble and clean salon environment details</li>
+            <li style="font-size: 0.8rem; color: var(--color-dark); line-height: 1.6; display: flex; gap: 0.75rem;"><span style="color: #788c5d; flex-shrink:0;">—</span>Subtle warm tone grading (not orange-shifted)</li>
+          </ul>
+        </div>
+        <div style="padding: 2rem; background: var(--color-cream-mid); border: 1px solid var(--color-cream-dark);">
+          <div style="font-size: 0.65rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-primary); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem;"><span>✕</span> Don't</div>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem;">
+            <li style="font-size: 0.8rem; color: var(--color-dark); line-height: 1.6; display: flex; gap: 0.75rem;"><span style="color: var(--color-primary); flex-shrink:0;">—</span>Harsh, flat, or fluorescent lighting</li>
+            <li style="font-size: 0.8rem; color: var(--color-dark); line-height: 1.6; display: flex; gap: 0.75rem;"><span style="color: var(--color-primary); flex-shrink:0;">—</span>Heavy, over-processed filters or presets</li>
+            <li style="font-size: 0.8rem; color: var(--color-dark); line-height: 1.6; display: flex; gap: 0.75rem;"><span style="color: var(--color-primary); flex-shrink:0;">—</span>Low-resolution or poorly composed stock images</li>
+            <li style="font-size: 0.8rem; color: var(--color-dark); line-height: 1.6; display: flex; gap: 0.75rem;"><span style="color: var(--color-primary); flex-shrink:0;">—</span>Cluttered backgrounds or visible signage</li>
+            <li style="font-size: 0.8rem; color: var(--color-dark); line-height: 1.6; display: flex; gap: 0.75rem;"><span style="color: var(--color-primary); flex-shrink:0;">—</span>Cold-toned (blue/grey) color grading</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Do / Don't ────────────────────────────────────── -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-heading">
+        <div class="eyebrow reveal">Design Rules</div>
+        <h2 class="reveal reveal-delay-1">Do's &amp; <em>Don'ts</em></h2>
+        <p class="reveal reveal-delay-2">These rules protect the brand equity we've built. When in doubt, ask: does this feel refined and warm? If not, simplify.</p>
+      </div>
+      <div class="do-dont-grid">
+        <div class="do-dont-card reveal">
+          <div class="do-dont-header do-header">
+            <span>✓</span> Always Do This
+          </div>
+          <ul class="do-dont-list do-list">
+            <li>Use Cormorant Garamond for all headings and display text</li>
+            <li>Let cream and white space breathe around the burgundy — never crowd it</li>
+            <li>Use Champagne Gold as an accent only — sparingly, intentionally</li>
+            <li>Keep button text ALL CAPS in Montserrat 500</li>
+            <li>Maintain 1px borders — thin lines signal premium</li>
+            <li>Let hero images bleed full-width to the edges</li>
+            <li>Use lowercase Cormorant Garamond for section titles — feels intimate</li>
+            <li>Generous card padding — minimum 32px on all sides</li>
+          </ul>
+        </div>
+        <div class="do-dont-card reveal reveal-delay-1">
+          <div class="do-dont-header dont-header">
+            <span>✕</span> Never Do This
+          </div>
+          <ul class="do-dont-list dont-list">
+            <li>Never use burgundy as a large section background — reserve for accents and CTAs</li>
+            <li>Never use bold (600+) Cormorant Garamond — heaviness destroys the European feel</li>
+            <li>Never place gold and burgundy on the same interactive element</li>
+            <li>Never use sans-serif fonts for hero or section headings</li>
+            <li>Never center-align body copy that runs more than 3 lines</li>
+            <li>Never add drop shadows to text — use color contrast instead</li>
+            <li>Never use pure black (#000000) — always use Night Plum (#1C0912)</li>
+            <li>Never cram more than 3 font sizes into a single card component</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Spacing ────────────────────────────────────────── -->
+  <section class="section">
+    <div class="container">
+      <div class="section-heading">
+        <div class="eyebrow reveal">Spacing System</div>
+        <h2 class="reveal reveal-delay-1">Rhythm &amp; <em>Space</em></h2>
+        <p class="reveal reveal-delay-2">Generous spacing is a luxury signal. When in doubt, add more space — not less.</p>
+      </div>
+      <div class="spacing-grid reveal">
+        <div class="spacing-item">
+          <div class="spacing-block" style="height: 4px;"></div>
+          <div class="spacing-label"><strong>4px</strong>XS · Inline gap</div>
+        </div>
+        <div class="spacing-item">
+          <div class="spacing-block" style="height: 8px;"></div>
+          <div class="spacing-label"><strong>8px</strong>SM · Icon spacing</div>
+        </div>
+        <div class="spacing-item">
+          <div class="spacing-block" style="height: 16px;"></div>
+          <div class="spacing-label"><strong>16px</strong>Base · Text gap</div>
+        </div>
+        <div class="spacing-item">
+          <div class="spacing-block" style="height: 24px;"></div>
+          <div class="spacing-label"><strong>24px</strong>MD · Grid gutter</div>
+        </div>
+        <div class="spacing-item">
+          <div class="spacing-block" style="height: 32px;"></div>
+          <div class="spacing-label"><strong>32px</strong>LG · Card padding</div>
+        </div>
+        <div class="spacing-item">
+          <div class="spacing-block" style="height: 48px;"></div>
+          <div class="spacing-label"><strong>48px</strong>XL · Section inner</div>
+        </div>
+        <div class="spacing-item">
+          <div class="spacing-block" style="height: 64px;"></div>
+          <div class="spacing-label"><strong>64px</strong>2XL · Section padding</div>
+        </div>
+        <div class="spacing-item">
+          <div class="spacing-block" style="height: 96px;"></div>
+          <div class="spacing-label"><strong>96px</strong>3XL · Hero gap</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Testimonial / Dark CTA ────────────────────────── -->
+  <section class="section section-dark">
+    <div class="container">
+      <div class="testimonial-block">
+        <div class="gold-rule reveal"><span class="gold-rule-icon" style="color: rgba(var(--color-secondary-rgb), 0.6);">✦</span></div>
+        <blockquote class="testimonial-quote reveal reveal-delay-1">
+          "Walking into Studio 1308 feels like stepping into a boutique in Paris — except everyone makes you feel completely at home."
+        </blockquote>
+        <div class="testimonial-attribution reveal reveal-delay-2">— Studio 1308 Client · Savannah, GA</div>
+        <div class="gold-rule reveal reveal-delay-3"><span class="gold-rule-icon" style="color: rgba(var(--color-secondary-rgb), 0.6);">✦</span></div>
+        <div class="reveal reveal-delay-4" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2.5rem;">
+          <a href="https://www.studio1308.com" class="btn-gold">Visit Studio 1308</a>
+          <a href="https://www.instagram.com/1308studiosalonspa" class="btn-ghost-cream">Follow on Instagram</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ─────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <h3><img src='logo-white.png' alt='Logo' width='120' /></h3>
+          <p style="margin-bottom: 1rem; font-family: var(--font-body); font-size: 0.7rem; font-weight: 400; letter-spacing: 0.1em; color: var(--color-secondary); text-transform: uppercase;">ENHANCE · ELEVATE · EMPOWER</p>
+          <p>European Luxury, Southern Soul. Savannah's premier salon and spa, at the corner of craft and care.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li>Hair</li>
+            <li>Lash Extensions</li>
+            <li>Brow Treatments</li>
+            <li>Head Spa</li>
+            <li>Gentlemen's Services</li>
+            <li>Waxing &amp; Peels</li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Brand Colors</h4>
+          <ul>
+            <li style="display: flex; align-items: center; gap: 0.6rem;"><span style="display: inline-block; width: 12px; height: 12px; background: #7B2040; flex-shrink: 0;"></span>Bordeaux</li>
+            <li style="display: flex; align-items: center; gap: 0.6rem;"><span style="display: inline-block; width: 12px; height: 12px; background: #4E1228; flex-shrink: 0;"></span>Deep Bordeaux</li>
+            <li style="display: flex; align-items: center; gap: 0.6rem;"><span style="display: inline-block; width: 12px; height: 12px; background: #C4A04A; flex-shrink: 0;"></span>Champagne</li>
+            <li style="display: flex; align-items: center; gap: 0.6rem;"><span style="display: inline-block; width: 12px; height: 12px; background: #FAF6F0; border: 1px solid rgba(250,246,240,0.3); flex-shrink: 0;"></span>Parchment</li>
+            <li style="display: flex; align-items: center; gap: 0.6rem;"><span style="display: inline-block; width: 12px; height: 12px; background: #1C0912; flex-shrink: 0;"></span>Night Plum</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 Studio 1308 · Savannah, Georgia · Brand Guidelines</p>
+        <span class="footer-tagline">A Touch of Europe in the Heart of the South</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll state
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 80);
+    }, { passive: true });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Smooth anchor scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

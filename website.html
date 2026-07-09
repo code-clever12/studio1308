@@ -1,0 +1,2056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Studio 1308 — Salon + Spa · Savannah, GA</title>
+  <meta name="description" content="European Luxury, Southern Soul. Studio 1308 is Savannah's premier salon and spa offering hair, lash extensions, brow treatments, head spa, and more." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+
+/* ══════════════════════════════════════════
+   TOKENS — from DESIGN.md
+══════════════════════════════════════════ */
+:root {
+  --bordeaux:        #7B2040;
+  --bordeaux-rgb:    123, 32, 64;
+  --bordeaux-deep:   #4E1228;
+  --bordeaux-light:  #9B3558;
+  --champagne:       #C4A04A;
+  --champagne-rgb:   196, 160, 74;
+  --champagne-light: #D4B870;
+  --champagne-dark:  #9A7830;
+  --parchment:       #FAF6F0;
+  --linen:           #EEE5D8;
+  --linen-dark:      #DDD0BE;
+  --taupe:           #A8918A;
+  --night:           #1C0912;
+  --white:           #FFFFFF;
+
+  --display: 'Cormorant Garamond', Georgia, serif;
+  --sans:    'Montserrat', Arial, sans-serif;
+
+  --ease-out: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-in:  cubic-bezier(0.95, 0.05, 0.795, 0.035);
+}
+
+/* ══════════════════════════════════════════
+   RESET
+══════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  background: var(--parchment);
+  color: var(--night);
+  font-family: var(--sans);
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+img { display: block; max-width: 100%; }
+a  { text-decoration: none; color: inherit; }
+button, a { cursor: pointer; }
+
+/* ══════════════════════════════════════════
+   SCROLL REVEAL
+══════════════════════════════════════════ */
+.r { opacity: 0; transform: translateY(32px); transition: opacity .8s var(--ease-out), transform .8s var(--ease-out); }
+.r.v { opacity: 1; transform: translateY(0); }
+.r1 { transition-delay: .08s; }
+.r2 { transition-delay: .16s; }
+.r3 { transition-delay: .24s; }
+.r4 { transition-delay: .32s; }
+.r5 { transition-delay: .40s; }
+.r6 { transition-delay: .48s; }
+@media (prefers-reduced-motion: reduce) {
+  .r { opacity: 1; transform: none; transition: none; }
+}
+
+/* ══════════════════════════════════════════
+   SHARED
+══════════════════════════════════════════ */
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 2rem; }
+.wrap-tight { max-width: 780px; margin: 0 auto; padding: 0 2rem; }
+
+.eyebrow {
+  display: block;
+  font-family: var(--sans);
+  font-size: .625rem;
+  font-weight: 500;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  color: var(--champagne);
+  margin-bottom: .875rem;
+}
+.eyebrow-dark { color: var(--champagne-dark); }
+
+.gold-line {
+  width: 40px;
+  height: 1px;
+  background: var(--champagne);
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* ══════════════════════════════════════════
+   NAV
+══════════════════════════════════════════ */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.375rem 2.5rem;
+  transition: background .4s ease, box-shadow .4s ease, padding .3s ease;
+}
+.nav.solid {
+  background: rgba(250, 246, 240, 0.97);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 var(--linen-dark);
+  padding: 1rem 2.5rem;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+}
+.nav-logo img {
+  height: 36px;
+  width: auto;
+  filter: brightness(0) invert(1);
+  transition: filter .3s ease;
+}
+.nav.solid .nav-logo img { filter: none; }
+.nav-wordmark {
+  font-family: var(--display);
+  font-size: 1.1rem;
+  font-weight: 400;
+  letter-spacing: .04em;
+  color: rgba(250,246,240,.9);
+  transition: color .3s ease;
+}
+.nav.solid .nav-wordmark { color: var(--bordeaux); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2.25rem;
+  list-style: none;
+}
+.nav-links a {
+  font-size: .6rem;
+  font-weight: 500;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: rgba(250,246,240,.75);
+  transition: color .2s ease;
+  font-family: var(--sans);
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 50%;
+  width: 0; height: 1px;
+  background: var(--champagne);
+  transform: translateX(-50%);
+  transition: width .3s ease;
+}
+.nav-links a:hover { color: var(--champagne); }
+.nav-links a:hover::after { width: 100%; }
+.nav.solid .nav-links a { color: var(--taupe); }
+.nav.solid .nav-links a:hover { color: var(--bordeaux); }
+
+.nav-cta {
+  font-size: .6rem;
+  font-weight: 500;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  font-family: var(--sans);
+  padding: .625rem 1.5rem;
+  border: 1px solid rgba(250,246,240,.5);
+  color: rgba(250,246,240,.9);
+  transition: background .25s ease, color .25s ease, border-color .25s ease;
+}
+.nav-cta:hover { background: rgba(250,246,240,.1); border-color: rgba(250,246,240,.8); }
+.nav.solid .nav-cta {
+  border-color: var(--bordeaux);
+  color: var(--bordeaux);
+}
+.nav.solid .nav-cta:hover { background: var(--bordeaux); color: var(--parchment); }
+
+/* Mobile menu toggle */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  padding: .25rem;
+}
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 1px;
+  background: rgba(250,246,240,.8);
+  transition: background .3s ease;
+}
+.nav.solid .nav-hamburger span { background: var(--night); }
+
+/* ══════════════════════════════════════════
+   HERO — SPLIT DIAGONAL
+══════════════════════════════════════════ */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 640px;
+  overflow: hidden;
+}
+
+/* RIGHT: Editorial photo */
+.hero-photo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+}
+
+/* LEFT: Burgundy panel, diagonal right edge */
+.hero-panel {
+  position: absolute;
+  top: 0; left: 0;
+  width: 54%;
+  height: 100%;
+  background: var(--bordeaux-deep);
+  clip-path: polygon(0 0, 100% 0, 84% 100%, 0 100%);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 5% 0 2.5rem;
+}
+
+/* Ghost watermark "1308" — typographic depth signature */
+.hero-watermark {
+  position: absolute;
+  bottom: -0.15em;
+  left: -0.05em;
+  font-family: var(--display);
+  font-size: clamp(10rem, 22vw, 22rem);
+  font-weight: 300;
+  color: rgba(250,246,240,.04);
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 0;
+  letter-spacing: -.03em;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 480px;
+}
+.hero-city {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  margin-bottom: 1.75rem;
+}
+.hero-city span {
+  font-size: .6rem;
+  font-weight: 500;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--champagne);
+  font-family: var(--sans);
+}
+
+.hero-title {
+  font-family: var(--display);
+  font-size: clamp(2.8rem, 5.5vw, 5rem);
+  font-weight: 300;
+  line-height: 1.05;
+  color: var(--parchment);
+  letter-spacing: -.02em;
+  margin-bottom: 1.5rem;
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--champagne-light);
+  display: block;
+}
+.hero-sub {
+  font-family: var(--display);
+  font-size: clamp(1rem, 1.8vw, 1.3rem);
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(250,246,240,.6);
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+  max-width: 360px;
+}
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.btn-fill {
+  display: inline-block;
+  padding: .875rem 2rem;
+  background: var(--champagne);
+  color: var(--night);
+  font-family: var(--sans);
+  font-size: .625rem;
+  font-weight: 600;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  border: 1px solid var(--champagne);
+  transition: background .3s ease, color .3s ease;
+}
+.btn-fill:hover { background: var(--champagne-dark); color: var(--white); }
+.btn-ghost {
+  display: inline-block;
+  padding: .875rem 1.75rem;
+  background: transparent;
+  color: rgba(250,246,240,.8);
+  font-family: var(--sans);
+  font-size: .625rem;
+  font-weight: 500;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  border: 1px solid rgba(250,246,240,.4);
+  transition: border-color .3s ease, color .3s ease;
+}
+.btn-ghost:hover { border-color: rgba(250,246,240,.8); color: var(--parchment); }
+.btn-primary-dark {
+  display: inline-block;
+  padding: .875rem 2rem;
+  background: var(--bordeaux);
+  color: var(--parchment);
+  font-family: var(--sans);
+  font-size: .625rem;
+  font-weight: 500;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  border: 1px solid var(--bordeaux);
+  transition: background .3s ease, border-color .3s ease;
+}
+.btn-primary-dark:hover { background: var(--bordeaux-deep); border-color: var(--bordeaux-deep); }
+.btn-outline-dark {
+  display: inline-block;
+  padding: .875rem 2rem;
+  background: transparent;
+  color: var(--bordeaux);
+  font-family: var(--sans);
+  font-size: .625rem;
+  font-weight: 500;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  border: 1px solid var(--bordeaux);
+  transition: background .3s ease, color .3s ease;
+}
+.btn-outline-dark:hover { background: var(--bordeaux); color: var(--parchment); }
+
+/* Photo right bleed into panel */
+.hero-photo::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 45%;
+  height: 100%;
+  background: linear-gradient(105deg, var(--bordeaux-deep) 0%, transparent 100%);
+  z-index: 1;
+}
+
+/* Scroll hint */
+.hero-scroll {
+  position: absolute;
+  bottom: 2rem;
+  right: 2.5rem;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .5rem;
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+.hero-scroll span {
+  font-size: .55rem;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: rgba(250,246,240,.4);
+  font-family: var(--sans);
+  writing-mode: vertical-rl;
+}
+.hero-scroll-line {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(180deg, var(--champagne), transparent);
+}
+@keyframes scrollPulse {
+  0%,100% { opacity:.5; transform: translateY(0); }
+  50%      { opacity:1;  transform: translateY(6px); }
+}
+
+/* ══════════════════════════════════════════
+   MARQUEE
+══════════════════════════════════════════ */
+.marquee-strip {
+  background: var(--bordeaux);
+  padding: .875rem 0;
+  overflow: hidden;
+  user-select: none;
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 28s linear infinite;
+}
+.marquee-track:hover { animation-play-state: paused; }
+.marquee-item {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 0 1.5rem;
+  white-space: nowrap;
+}
+.marquee-text {
+  font-size: .6rem;
+  font-weight: 500;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: rgba(250,246,240,.75);
+  font-family: var(--sans);
+}
+.marquee-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--champagne);
+  flex-shrink: 0;
+}
+@keyframes marqueeScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ══════════════════════════════════════════
+   BRAND STORY
+══════════════════════════════════════════ */
+.story {
+  padding: 8rem 0 7rem;
+  background: var(--parchment);
+}
+.story-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+}
+.story-left {}
+.story-quote {
+  font-family: var(--display);
+  font-size: clamp(1.9rem, 3.5vw, 3rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--bordeaux);
+  line-height: 1.25;
+  margin-bottom: 2rem;
+  position: relative;
+  padding-left: 2rem;
+}
+.story-quote::before {
+  content: '\201C';
+  position: absolute;
+  left: 0; top: -.25rem;
+  font-size: 4rem;
+  color: var(--champagne);
+  font-family: var(--display);
+  line-height: 1;
+  font-style: normal;
+}
+.story-body {
+  font-size: .875rem;
+  line-height: 1.85;
+  color: var(--taupe);
+  margin-bottom: 2rem;
+  max-width: 440px;
+}
+.story-values {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+.story-value {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.story-value-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--champagne);
+  flex-shrink: 0;
+  margin-top: .55rem;
+}
+.story-value-text strong {
+  display: block;
+  font-size: .65rem;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--night);
+  margin-bottom: .2rem;
+}
+.story-value-text span {
+  font-size: .8rem;
+  color: var(--taupe);
+  line-height: 1.6;
+}
+
+.story-right {
+  position: relative;
+}
+.story-photo-main {
+  position: relative;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+}
+.story-photo-main img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform .8s var(--ease-out);
+}
+.story-photo-main:hover img { transform: scale(1.04); }
+.story-photo-accent {
+  position: absolute;
+  bottom: -2.5rem;
+  left: -2.5rem;
+  width: 48%;
+  aspect-ratio: 1;
+  border: 2px solid var(--champagne);
+  pointer-events: none;
+}
+.story-photo-caption {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  background: var(--bordeaux-deep);
+  padding: 1rem 1.25rem;
+  max-width: 180px;
+}
+.story-photo-caption p {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: .9rem;
+  color: var(--parchment);
+  line-height: 1.5;
+}
+.story-photo-caption span {
+  font-size: .55rem;
+  font-weight: 500;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--champagne);
+  font-family: var(--sans);
+  display: block;
+  margin-top: .5rem;
+}
+
+/* ══════════════════════════════════════════
+   SERVICES
+══════════════════════════════════════════ */
+.services {
+  padding: 0 0 8rem;
+  background: var(--parchment);
+}
+.services-header {
+  padding: 5rem 0 4rem;
+  text-align: center;
+}
+.services-header h2 {
+  font-family: var(--display);
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  font-weight: 300;
+  color: var(--bordeaux);
+  letter-spacing: -.01em;
+  margin-bottom: .5rem;
+}
+.services-header h2 em { font-style: italic; }
+.services-header p {
+  font-size: .85rem;
+  color: var(--taupe);
+  max-width: 440px;
+  margin: 1rem auto 0;
+  line-height: 1.8;
+}
+
+/* Editorial feature: alternating large-image layout */
+.service-feature {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 520px;
+  border-top: 1px solid var(--linen-dark);
+}
+.service-feature.reverse { direction: rtl; }
+.service-feature.reverse > * { direction: ltr; }
+
+.svc-img {
+  position: relative;
+  overflow: hidden;
+  min-height: 420px;
+}
+.svc-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform .8s var(--ease-out);
+}
+.service-feature:hover .svc-img img { transform: scale(1.05); }
+
+.svc-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem 3.5rem;
+  background: var(--white);
+}
+.svc-number {
+  font-family: var(--display);
+  font-size: 4rem;
+  font-weight: 300;
+  color: rgba(var(--bordeaux-rgb, 123, 32, 64), .06);
+  line-height: 1;
+  margin-bottom: -.5rem;
+  display: block;
+}
+.svc-body h3 {
+  font-family: var(--display);
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  font-weight: 300;
+  color: var(--bordeaux);
+  line-height: 1.2;
+  margin-bottom: .75rem;
+}
+.svc-body h3 em { font-style: italic; }
+.svc-tagline {
+  font-size: .7rem;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--champagne-dark);
+  margin-bottom: 1.25rem;
+  font-family: var(--sans);
+}
+.svc-desc {
+  font-size: .85rem;
+  line-height: 1.85;
+  color: var(--taupe);
+  max-width: 360px;
+  margin-bottom: 2rem;
+}
+.svc-treatments {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  margin-bottom: 2.5rem;
+}
+.svc-treatments li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: .8rem;
+  color: var(--night);
+  padding-bottom: .5rem;
+  border-bottom: 1px solid var(--linen);
+}
+.svc-treatments li .price {
+  font-family: var(--display);
+  font-size: 1rem;
+  color: var(--champagne-dark);
+}
+.svc-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .625rem;
+  font-size: .6rem;
+  font-weight: 500;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--bordeaux);
+  font-family: var(--sans);
+  padding-bottom: 2px;
+  border-bottom: 1px solid var(--champagne);
+  transition: color .2s ease, gap .2s ease;
+}
+.svc-link:hover { color: var(--bordeaux-deep); gap: .875rem; }
+.svc-link::after { content: '→'; font-size: .7rem; }
+
+/* ══════════════════════════════════════════
+   THE RITUAL
+══════════════════════════════════════════ */
+.ritual {
+  background: var(--bordeaux-deep);
+  padding: 8rem 0;
+  position: relative;
+  overflow: hidden;
+}
+.ritual::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 60%;
+  height: 140%;
+  background: radial-gradient(ellipse at center, rgba(var(--champagne-rgb), .06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.ritual-header {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+.ritual-header .eyebrow { color: rgba(var(--champagne-rgb), .6); }
+.ritual-header h2 {
+  font-family: var(--display);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 300;
+  color: var(--parchment);
+  letter-spacing: -.01em;
+  margin-bottom: 1rem;
+}
+.ritual-header h2 em { font-style: italic; color: var(--champagne-light); }
+.ritual-header p {
+  font-size: .85rem;
+  color: rgba(250,246,240,.5);
+  max-width: 420px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+.ritual-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid rgba(var(--champagne-rgb), .15);
+}
+.ritual-step {
+  padding: 3rem 2.25rem;
+  border-right: 1px solid rgba(var(--champagne-rgb), .15);
+  position: relative;
+  transition: background .3s ease;
+}
+.ritual-step:last-child { border-right: none; }
+.ritual-step:hover { background: rgba(var(--champagne-rgb), .04); }
+.ritual-step-num {
+  font-family: var(--display);
+  font-size: 3.5rem;
+  font-weight: 300;
+  color: rgba(var(--champagne-rgb), .18);
+  line-height: 1;
+  margin-bottom: 1.5rem;
+  display: block;
+}
+.ritual-step h3 {
+  font-family: var(--display);
+  font-size: 1.4rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--parchment);
+  margin-bottom: .75rem;
+  line-height: 1.3;
+}
+.ritual-step p {
+  font-size: .8rem;
+  color: rgba(250,246,240,.5);
+  line-height: 1.8;
+}
+.ritual-step-line {
+  position: absolute;
+  top: 3rem; right: 0;
+  width: 1px;
+  height: calc(100% - 6rem);
+  /* handled by border-right above */
+}
+.ritual-connector {
+  display: none; /* only for visual reference */
+}
+
+.ritual-cta {
+  text-align: center;
+  margin-top: 5rem;
+}
+.ritual-cta p {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: rgba(250,246,240,.5);
+  margin-bottom: 1.5rem;
+}
+
+/* ══════════════════════════════════════════
+   GALLERY — EDITORIAL MASONRY
+══════════════════════════════════════════ */
+.gallery {
+  padding: 8rem 0;
+  background: var(--linen);
+}
+.gallery-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+.gallery-header h2 {
+  font-family: var(--display);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 300;
+  color: var(--bordeaux);
+  letter-spacing: -.01em;
+}
+.gallery-header h2 em { font-style: italic; }
+.gallery-header p {
+  font-size: .8rem;
+  color: var(--taupe);
+  margin-top: .75rem;
+}
+
+/* Asymmetric editorial grid */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  grid-template-rows: 340px 340px;
+  gap: .75rem;
+}
+.g-item {
+  position: relative;
+  overflow: hidden;
+}
+.g-item.tall { grid-row: span 2; }
+.g-item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: saturate(.9) brightness(.97);
+  transition: transform .7s var(--ease-out), filter .3s ease;
+}
+.g-item:hover img { transform: scale(1.05); filter: saturate(1) brightness(1); }
+.g-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 55%, rgba(var(--bordeaux-rgb), .7));
+  opacity: 0;
+  transition: opacity .35s ease;
+  display: flex;
+  align-items: flex-end;
+  padding: 1.25rem;
+}
+.g-item:hover .g-overlay { opacity: 1; }
+.g-label {
+  font-size: .6rem;
+  font-weight: 500;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--parchment);
+  font-family: var(--sans);
+}
+
+.gallery-footer {
+  text-align: center;
+  margin-top: 3rem;
+}
+.gallery-footer p {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--taupe);
+  margin-bottom: 1.25rem;
+}
+
+/* ══════════════════════════════════════════
+   TESTIMONIALS
+══════════════════════════════════════════ */
+.testimonials {
+  background: var(--bordeaux);
+  padding: 8rem 0;
+  position: relative;
+  overflow: hidden;
+}
+.testimonials::before {
+  content: '\201C';
+  position: absolute;
+  top: -.1em; left: -.02em;
+  font-family: var(--display);
+  font-size: clamp(18rem, 30vw, 28rem);
+  font-weight: 300;
+  color: rgba(250,246,240,.025);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.testimonials-inner {
+  position: relative;
+  z-index: 1;
+}
+.testimonials-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+.testimonials-header .eyebrow { color: rgba(var(--champagne-rgb), .65); }
+.testimonials-header h2 {
+  font-family: var(--display);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 300;
+  color: var(--parchment);
+  letter-spacing: -.01em;
+}
+.testimonials-header h2 em { font-style: italic; color: var(--champagne-light); }
+
+.testi-slider {
+  max-width: 780px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 0 2rem;
+}
+.testi-slide {
+  display: none;
+}
+.testi-slide.active { display: block; }
+.testi-stars {
+  display: flex;
+  justify-content: center;
+  gap: .3rem;
+  margin-bottom: 2rem;
+}
+.testi-star {
+  color: var(--champagne);
+  font-size: .9rem;
+}
+.testi-quote {
+  font-family: var(--display);
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--parchment);
+  line-height: 1.55;
+  margin-bottom: 2.5rem;
+}
+.testi-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.testi-name {
+  font-size: .65rem;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--parchment);
+  font-family: var(--sans);
+}
+.testi-service {
+  font-size: .65rem;
+  font-weight: 400;
+  letter-spacing: .1em;
+  color: rgba(var(--champagne-rgb), .65);
+  font-family: var(--sans);
+}
+.testi-sep {
+  width: 1px;
+  height: 12px;
+  background: rgba(250,246,240,.25);
+}
+
+.testi-dots {
+  display: flex;
+  justify-content: center;
+  gap: .625rem;
+  margin-top: 3rem;
+}
+.testi-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: rgba(250,246,240,.2);
+  border: none;
+  cursor: pointer;
+  transition: background .25s ease, transform .25s ease;
+  padding: 0;
+}
+.testi-dot.active { background: var(--champagne); transform: scale(1.3); }
+
+/* ══════════════════════════════════════════
+   PRODUCTS — Social proof via brands
+══════════════════════════════════════════ */
+.products {
+  padding: 5rem 0;
+  background: var(--parchment);
+  border-top: 1px solid var(--linen-dark);
+  border-bottom: 1px solid var(--linen-dark);
+}
+.products-inner { text-align: center; }
+.products-label {
+  font-size: .6rem;
+  font-weight: 500;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--taupe);
+  font-family: var(--sans);
+  margin-bottom: 2.5rem;
+}
+.products-logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3.5rem;
+  flex-wrap: wrap;
+}
+.product-brand {
+  font-family: var(--display);
+  font-size: 1.15rem;
+  font-weight: 400;
+  letter-spacing: .08em;
+  color: var(--linen-dark);
+  transition: color .25s ease;
+  white-space: nowrap;
+}
+.product-brand:hover { color: var(--taupe); }
+
+/* ══════════════════════════════════════════
+   TEAM
+══════════════════════════════════════════ */
+.team {
+  padding: 8rem 0;
+  background: var(--white);
+}
+.team-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+.team-header h2 {
+  font-family: var(--display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 300;
+  color: var(--bordeaux);
+  letter-spacing: -.01em;
+}
+.team-header h2 em { font-style: italic; }
+.team-header p {
+  font-size: .85rem;
+  color: var(--taupe);
+  max-width: 420px;
+  margin: 1rem auto 0;
+  line-height: 1.8;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+.team-card {
+  position: relative;
+  overflow: hidden;
+}
+.team-card-photo {
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  position: relative;
+}
+.team-card-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  filter: saturate(.88) brightness(.98);
+  transition: transform .7s var(--ease-out), filter .3s ease;
+}
+.team-card:hover .team-card-photo img {
+  transform: scale(1.04);
+  filter: saturate(.95) brightness(1);
+}
+.team-card-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 60%, rgba(var(--bordeaux-rgb), .7));
+  opacity: 0;
+  transition: opacity .35s ease;
+}
+.team-card:hover .team-card-photo::after { opacity: 1; }
+.team-card-info {
+  padding: 1.25rem 0 0;
+}
+.team-card-info h3 {
+  font-family: var(--display);
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--bordeaux);
+  margin-bottom: .25rem;
+}
+.team-card-info span {
+  font-size: .65rem;
+  font-weight: 500;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--taupe);
+  font-family: var(--sans);
+}
+.team-card-specialty {
+  font-size: .75rem;
+  color: var(--champagne-dark);
+  margin-top: .375rem;
+  font-style: italic;
+  font-family: var(--display);
+}
+
+/* ══════════════════════════════════════════
+   INSTAGRAM TEASER
+══════════════════════════════════════════ */
+.instagram {
+  padding: 7rem 0;
+  background: var(--linen);
+  text-align: center;
+}
+.instagram h2 {
+  font-family: var(--display);
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--bordeaux);
+  margin-bottom: .75rem;
+}
+.instagram p {
+  font-size: .85rem;
+  color: var(--taupe);
+  max-width: 380px;
+  margin: 0 auto 2rem;
+  line-height: 1.8;
+}
+.instagram-handle {
+  display: inline-flex;
+  align-items: center;
+  gap: .75rem;
+  font-size: .65rem;
+  font-weight: 500;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--bordeaux);
+  font-family: var(--sans);
+  border-bottom: 1px solid var(--champagne);
+  padding-bottom: 2px;
+  transition: color .2s ease, gap .2s ease;
+  margin-bottom: 3rem;
+}
+.instagram-handle:hover { color: var(--bordeaux-deep); gap: 1rem; }
+.instagram-handle::after { content: '→'; }
+
+.ig-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: .375rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.ig-cell {
+  aspect-ratio: 1;
+  overflow: hidden;
+  position: relative;
+}
+.ig-cell img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: saturate(.85);
+  transition: transform .5s var(--ease-out), filter .3s ease;
+}
+.ig-cell:hover img { transform: scale(1.08); filter: saturate(1); }
+.ig-cell::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(var(--bordeaux-rgb), .3);
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+.ig-cell:hover::after { opacity: 1; }
+
+/* ══════════════════════════════════════════
+   BOOKING CTA
+══════════════════════════════════════════ */
+.booking {
+  background: var(--bordeaux-deep);
+  padding: 9rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.booking::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 80% at 50% 50%, rgba(var(--champagne-rgb), .07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.booking-inner { position: relative; z-index: 1; }
+.booking .eyebrow { color: rgba(var(--champagne-rgb), .65); }
+.booking h2 {
+  font-family: var(--display);
+  font-size: clamp(2.4rem, 5vw, 4.5rem);
+  font-weight: 300;
+  color: var(--parchment);
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
+  letter-spacing: -.02em;
+}
+.booking h2 em { font-style: italic; color: var(--champagne-light); }
+.booking p {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: rgba(250,246,240,.5);
+  max-width: 460px;
+  margin: 0 auto 3rem;
+  line-height: 1.7;
+}
+.booking-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+.booking-note {
+  font-size: .7rem;
+  color: rgba(250,246,240,.3);
+  margin-top: 2rem;
+  letter-spacing: .08em;
+  font-family: var(--sans);
+}
+
+/* ══════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════ */
+.footer {
+  background: var(--night);
+  color: var(--parchment);
+  padding: 5rem 0 2.5rem;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1fr;
+  gap: 3rem;
+  padding-bottom: 4rem;
+  border-bottom: 1px solid rgba(250,246,240,.07);
+}
+.footer-brand img {
+  height: 40px;
+  width: auto;
+  filter: brightness(0) invert(1) sepia(1) saturate(0.4) brightness(1.4);
+  margin-bottom: 1.25rem;
+}
+.footer-brand-tagline {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 1rem;
+  color: rgba(250,246,240,.5);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+.footer-brand-desc {
+  font-size: .78rem;
+  color: rgba(250,246,240,.35);
+  line-height: 1.8;
+  max-width: 260px;
+}
+.footer-col h4 {
+  font-size: .58rem;
+  font-weight: 500;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--champagne);
+  margin-bottom: 1.5rem;
+  font-family: var(--sans);
+}
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .625rem; }
+.footer-col ul li {
+  font-size: .78rem;
+  color: rgba(250,246,240,.45);
+  transition: color .2s ease;
+}
+.footer-col ul li:hover { color: rgba(250,246,240,.7); cursor: pointer; }
+.footer-col p {
+  font-size: .78rem;
+  color: rgba(250,246,240,.45);
+  line-height: 1.8;
+}
+.footer-social {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+.footer-social a {
+  font-size: .6rem;
+  font-weight: 500;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(250,246,240,.4);
+  font-family: var(--sans);
+  border-bottom: 1px solid rgba(250,246,240,.15);
+  padding-bottom: 1px;
+  transition: color .2s ease, border-color .2s ease;
+}
+.footer-social a:hover { color: var(--champagne); border-color: var(--champagne); }
+.footer-bottom {
+  padding-top: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.footer-bottom p {
+  font-size: .65rem;
+  color: rgba(250,246,240,.25);
+  letter-spacing: .05em;
+  font-family: var(--sans);
+}
+.footer-bottom-brand {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: .8rem;
+  color: rgba(var(--champagne-rgb), .4);
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .team-grid { grid-template-columns: repeat(2, 1fr); }
+  .ritual-steps { grid-template-columns: repeat(2, 1fr); }
+  .ritual-step { border-bottom: 1px solid rgba(var(--champagne-rgb), .15); }
+  .ritual-step:nth-child(2) { border-right: none; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 900px) {
+  .story-inner { grid-template-columns: 1fr; gap: 4rem; }
+  .story-photo-accent { display: none; }
+  .service-feature { grid-template-columns: 1fr; }
+  .service-feature.reverse { direction: ltr; }
+  .svc-img { min-height: 320px; }
+  .svc-body { padding: 2.5rem 2rem; }
+  .ig-grid { grid-template-columns: repeat(3, 1fr); }
+  .ig-grid .ig-cell:nth-child(n+4) { display: none; }
+  .nav-links, .nav-cta { display: none; }
+  .nav-hamburger { display: flex; }
+  .hero-panel { width: 100%; clip-path: none; background: rgba(var(--bordeaux-rgb), .75); backdrop-filter: blur(2px); }
+  .hero-content { max-width: 100%; }
+  .hero-photo::after { width: 100%; background: rgba(var(--bordeaux-rgb), .6); }
+}
+
+@media (max-width: 640px) {
+  .gallery-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(4, 200px);
+  }
+  .g-item.tall { grid-row: span 1; }
+  .team-grid { grid-template-columns: 1fr 1fr; }
+  .ritual-steps { grid-template-columns: 1fr; }
+  .ritual-step { border-right: none; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .products-logos { gap: 2rem; }
+  .ig-grid { grid-template-columns: repeat(2, 1fr); }
+  .ig-grid .ig-cell:nth-child(n+5) { display: none; }
+}
+
+/* ══════════════════════════════════════════
+   UTILITY
+══════════════════════════════════════════ */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+:focus-visible {
+  outline: 2px solid var(--champagne);
+  outline-offset: 3px;
+}
+
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════
+  NAV
+═══════════════════════════════════════════════ -->
+<header>
+  <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
+    <a href="/" class="nav-logo" aria-label="Studio 1308 home">
+      <img
+        src="https://img1.wsimg.com/isteam/ip/8d9d1f10-5781-4d9a-95ec-2a60b057ce8e/blob.png/:/rs=h:150,cg:true,m/qt=q:95"
+        alt="Studio 1308"
+      />
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#ritual">Experience</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#team">Our Team</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="https://www.studio1308.com/appointments" class="nav-cta">Book an Appointment</a>
+    <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false" id="hamburger">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+
+<!-- ═══════════════════════════════════════════════
+  HERO — SPLIT DIAGONAL
+═══════════════════════════════════════════════ -->
+<section class="hero" aria-label="Hero">
+  <!-- Right: Editorial photo -->
+  <div class="hero-photo" aria-hidden="true">
+    <img
+      src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1400&q=85"
+      alt="Warm interior of Studio 1308 salon"
+    />
+  </div>
+
+  <!-- Left: Burgundy panel with diagonal cut -->
+  <div class="hero-panel" aria-hidden="true">
+    <!-- Signature: Ghost "1308" watermark — typographic depth -->
+    <span class="hero-watermark" aria-hidden="true">1308</span>
+  </div>
+
+  <!-- Content overlay on panel -->
+  <div class="hero-panel" style="background: transparent; pointer-events: none;" aria-hidden="true"></div>
+  <div style="position: absolute; top: 0; left: 0; width: 54%; height: 100%; z-index: 3; display: flex; flex-direction: column; justify-content: center; padding: 0 3.5rem 0 2.5rem; clip-path: polygon(0 0, 100% 0, 84% 100%, 0 100%);">
+    <div class="hero-content">
+      <div class="hero-city">
+        <span class="gold-line"></span>
+        <span>Savannah, Georgia</span>
+      </div>
+      <h1 class="hero-title">
+        Where you become
+        <em>the finest version</em>
+        of yourself.
+      </h1>
+      <p class="hero-sub">
+        European technique. Southern warmth.<br>
+        Every service tailored to you, specifically.
+      </p>
+      <div class="hero-actions">
+        <a href="https://www.studio1308.com/appointments" class="btn-fill">Reserve Your Visit</a>
+        <a href="#services" class="btn-ghost">Explore Services</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll hint -->
+  <div class="hero-scroll" aria-hidden="true">
+    <div class="hero-scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+  MARQUEE
+═══════════════════════════════════════════════ -->
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-track" id="marqueeTrack">
+    <!-- Repeated twice for seamless loop -->
+    <div class="marquee-item"><span class="marquee-text">Enhance</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span class="marquee-text">Elevate</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span class="marquee-text">Empower</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span class="marquee-text">Savannah, GA</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span class="marquee-text">European Luxury</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span class="marquee-text">Southern Soul</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span class="marquee-text">Studio 1308</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span class="marquee-text">Hair · Lashes · Brows · Spa</span><span class="marquee-dot"></span></div>
+    <!-- Duplicate for loop -->
+    <div class="marquee-item"><span class="marquee-text">Enhance</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span class="marquee-text">Elevate</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span class="marquee-text">Empower</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span class="marquee-text">Savannah, GA</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span class="marquee-text">European Luxury</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span class="marquee-text">Southern Soul</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span class="marquee-text">Studio 1308</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span class="marquee-text">Hair · Lashes · Brows · Spa</span><span class="marquee-dot"></span></div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════
+  BRAND STORY
+═══════════════════════════════════════════════ -->
+<section class="story">
+  <div class="wrap">
+    <div class="story-inner">
+      <div class="story-left">
+        <span class="eyebrow r">Our Story</span>
+        <blockquote class="story-quote r r1">
+          A touch of Europe in the heart of the South.
+        </blockquote>
+        <p class="story-body r r2">
+          Studio 1308 was born from a simple belief: that every person who walks through our doors deserves to feel genuinely seen — and to leave looking like the best version of who they already are.
+        </p>
+        <p class="story-body r r3">
+          We bring European training, precision, and technique to Savannah's most discerning guests. Our team studies the crafts that elevate beauty from service into ritual — and every appointment reflects that standard.
+        </p>
+        <div class="story-values">
+          <div class="story-value r r3">
+            <div class="story-value-dot"></div>
+            <div class="story-value-text">
+              <strong>European Craft</strong>
+              <span>Techniques trained in the tradition of continental excellence</span>
+            </div>
+          </div>
+          <div class="story-value r r4">
+            <div class="story-value-dot"></div>
+            <div class="story-value-text">
+              <strong>Personalised Care</strong>
+              <span>Every service starts with a consultation. Nothing is one-size-fits-all.</span>
+            </div>
+          </div>
+          <div class="story-value r r5">
+            <div class="story-value-dot"></div>
+            <div class="story-value-text">
+              <strong>Empowering Results</strong>
+              <span>You leave not just looking different — you leave feeling like yourself, amplified.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="story-right r r1">
+        <div class="story-photo-main">
+          <img
+            src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=700&q=85"
+            alt="Studio 1308 client portrait"
+          />
+          <div class="story-photo-caption">
+            <p>"I've been a guest here for two years. There is nowhere else I'd go."</p>
+            <span>— Studio 1308 Guest</span>
+          </div>
+        </div>
+        <div class="story-photo-accent"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+  SERVICES
+═══════════════════════════════════════════════ -->
+<section class="services" id="services" aria-label="Services">
+  <div class="services-header wrap">
+    <span class="eyebrow r">The Arts We Practice</span>
+    <h2 class="r r1">Every service,<br><em>a studied craft.</em></h2>
+    <p class="r r2">From a precision cut to a full lash set, every treatment at Studio 1308 is performed with intent — and results that speak.</p>
+  </div>
+
+  <!-- Hair -->
+  <div class="service-feature r">
+    <div class="svc-img">
+      <img
+        src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800&q=85"
+        alt="Hair color and styling at Studio 1308"
+      />
+    </div>
+    <div class="svc-body">
+      <span class="svc-number">01</span>
+      <span class="eyebrow eyebrow-dark">Hair</span>
+      <h3>Color &amp; <em>Styling</em></h3>
+      <p class="svc-tagline">Precision cuts · Balayage · Color corrections</p>
+      <p class="svc-desc">
+        Our hair team is trained in European cutting and coloring techniques — balayage that moves with your bone structure, color corrections that restore without compromising. Every session opens with a consultation that accounts for your lifestyle, not just your preferences.
+      </p>
+      <ul class="svc-treatments">
+        <li><span>Women's Cut &amp; Style</span><span class="price">from $65</span></li>
+        <li><span>Balayage / Highlights</span><span class="price">from $120</span></li>
+        <li><span>Color Correction</span><span class="price">from $180</span></li>
+        <li><span>Keratin Treatment</span><span class="price">from $150</span></li>
+      </ul>
+      <a href="https://www.studio1308.com/hair" class="svc-link">View all hair services</a>
+    </div>
+  </div>
+
+  <!-- Lashes -->
+  <div class="service-feature reverse r">
+    <div class="svc-img">
+      <img
+        src="https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=800&q=85"
+        alt="Lash extensions at Studio 1308"
+      />
+    </div>
+    <div class="svc-body">
+      <span class="svc-number">02</span>
+      <span class="eyebrow eyebrow-dark">Lashes</span>
+      <h3>Lash <em>Extensions</em></h3>
+      <p class="svc-tagline">Classic · Hybrid · Volume · Mega Volume</p>
+      <p class="svc-desc">
+        Applied lash-by-lash with professional-grade adhesive, our extensions are styled to your eye shape, face structure, and lifestyle. We don't apply a template — we sculpt a look specific to you. Fills included with every new full set.
+      </p>
+      <ul class="svc-treatments">
+        <li><span>Classic Full Set</span><span class="price">$99</span></li>
+        <li><span>Hybrid Full Set</span><span class="price">$120</span></li>
+        <li><span>Volume Full Set</span><span class="price">$145</span></li>
+        <li><span>Classic Fill (2–3 wk)</span><span class="price">$55</span></li>
+      </ul>
+      <a href="https://www.studio1308.com/lashes" class="svc-link">View all lash services</a>
+    </div>
+  </div>
+
+  <!-- Head Spa -->
+  <div class="service-feature r">
+    <div class="svc-img">
+      <img
+        src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&q=85"
+        alt="Aphrodite Head Spa at Studio 1308"
+      />
+    </div>
+    <div class="svc-body">
+      <span class="svc-number">03</span>
+      <span class="eyebrow eyebrow-dark">Head Spa</span>
+      <h3>The Aphrodite <em>Head Spa</em></h3>
+      <p class="svc-tagline">Scalp analysis · Therapeutic massage · Deep treatment</p>
+      <p class="svc-desc">
+        A deeply restorative 75-minute ritual rooted in European scalp therapy tradition. Begins with a scalp analysis, moves into a customised treatment with premium Japanese and Moroccan formulas, and closes with a therapeutic massage that erases the week.
+      </p>
+      <ul class="svc-treatments">
+        <li><span>Aphrodite Head Spa (75 min)</span><span class="price">$149</span></li>
+        <li><span>Express Head Spa (45 min)</span><span class="price">$89</span></li>
+        <li><span>Scalp Analysis &amp; Treatment</span><span class="price">$75</span></li>
+      </ul>
+      <a href="https://www.studio1308.com/head-spa" class="svc-link">View head spa menu</a>
+    </div>
+  </div>
+
+  <!-- Brows + Gentlemen (split row — smaller) -->
+  <div class="r" style="display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--linen-dark);">
+    <div style="display: flex; flex-direction: column; background: var(--white); border-right: 1px solid var(--linen-dark);">
+      <div style="height: 280px; overflow: hidden;">
+        <img src="https://images.unsplash.com/photo-1487412947147-5cebf100d293?w=700&q=85" alt="Brow treatments at Studio 1308" style="width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease-out);" onmouseenter="this.style.transform='scale(1.05)'" onmouseleave="this.style.transform='scale(1)'" />
+      </div>
+      <div class="svc-body" style="padding: 2.5rem 2.5rem;">
+        <span class="svc-number">04</span>
+        <span class="eyebrow eyebrow-dark">Brows</span>
+        <h3>Brow <em>Design</em></h3>
+        <p class="svc-desc" style="margin-bottom: 1.5rem;">Lamination, tinting, threading, and waxing — sculpted to frame your face, not trend-follow it.</p>
+        <a href="https://www.studio1308.com/brows" class="svc-link">Brow menu</a>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; background: var(--white);">
+      <div style="height: 280px; overflow: hidden;">
+        <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=700&q=85" alt="Gentlemen's services at Studio 1308" style="width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease-out);" onmouseenter="this.style.transform='scale(1.05)'" onmouseleave="this.style.transform='scale(1)'" />
+      </div>
+      <div class="svc-body" style="padding: 2.5rem 2.5rem;">
+        <span class="svc-number">05</span>
+        <span class="eyebrow eyebrow-dark">Gentlemen</span>
+        <h3>Gentlemen's <em>Services</em></h3>
+        <p class="svc-desc" style="margin-bottom: 1.5rem;">Precision cuts, grooming, and waxing for the man who knows the difference attention to detail makes.</p>
+        <a href="https://www.studio1308.com/gentlemen" class="svc-link">Gentlemen's menu</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+  THE RITUAL
+═══════════════════════════════════════════════ -->
+<section class="ritual" id="ritual" aria-label="The Studio 1308 Experience">
+  <div class="wrap">
+    <div class="ritual-header">
+      <span class="eyebrow r">The Experience</span>
+      <h2 class="r r1">Every visit follows<br><em>a ritual.</em></h2>
+      <p class="r r2">Not a transaction. From the moment you arrive, every step is designed to make you feel precisely this: that you are exactly where you should be.</p>
+    </div>
+    <div class="ritual-steps">
+      <div class="ritual-step r">
+        <span class="ritual-step-num">I</span>
+        <h3>Arrive &amp; Settle</h3>
+        <p>You're welcomed with a warm towel, a beverage, and zero rush. Your time here begins the moment you walk in — not when the service starts.</p>
+      </div>
+      <div class="ritual-step r r1">
+        <span class="ritual-step-num">II</span>
+        <h3>A Real Consultation</h3>
+        <p>Not a quick nod and pick-up of tools. Your artist studies you — your face, your lifestyle, your vision — before a single move is made.</p>
+      </div>
+      <div class="ritual-step r r2">
+        <span class="ritual-step-num">III</span>
+        <h3>The Transformation</h3>
+        <p>Every technique applied is a studied decision. You're not receiving a service — you're in the hands of someone who cares about the outcome as much as you do.</p>
+      </div>
+      <div class="ritual-step r r3">
+        <span class="ritual-step-num">IV</span>
+        <h3>Leave Luminous</h3>
+        <p>You leave with your artist's full care instructions, a recommended maintenance timeline, and the particular confidence that comes from knowing you look extraordinary.</p>
+      </div>
+    </div>
+    <div class="ritual-cta r">
+      <p>Ready to begin your ritual?</p>
+      <a href="https://www.studio1308.com/appointments" class="btn-fill">Reserve Your Appointment</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+  GALLERY
+═══════════════════════════════════════════════ -->
+<section class="gallery" id="gallery" aria-label="Gallery">
+  <div class="wrap">
+    <div class="gallery-header">
+      <span class="eyebrow r">Portfolio</span>
+      <h2 class="r r1">The work <em>speaks.</em></h2>
+      <p class="r r2">Every image below is a real client, real result, and a real story of someone who came in and left transformed.</p>
+    </div>
+    <div class="gallery-grid r">
+      <div class="g-item tall">
+        <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=85" alt="Hair transformation at Studio 1308" />
+        <div class="g-overlay"><span class="g-label">Hair · Color</span></div>
+      </div>
+      <div class="g-item">
+        <img src="https://images.unsplash.com/photo-1487412947147-5cebf100d293?w=500&q=85" alt="Brow design at Studio 1308" />
+        <div class="g-overlay"><span class="g-label">Brow Design</span></div>
+      </div>
+      <div class="g-item">
+        <img src="https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=500&q=85" alt="Lash extensions at Studio 1308" />
+        <div class="g-overlay"><span class="g-label">Lash Extensions</span></div>
+      </div>
+      <div class="g-item">
+        <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=500&q=85" alt="Head spa treatment at Studio 1308" />
+        <div class="g-overlay"><span class="g-label">Head Spa</span></div>
+      </div>
+      <div class="g-item">
+        <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=500&q=85" alt="Balayage hair color at Studio 1308" />
+        <div class="g-overlay"><span class="g-label">Balayage</span></div>
+      </div>
+    </div>
+    <div class="gallery-footer r">
+      <p>See more on Instagram</p>
+      <a href="https://www.instagram.com/1308studiosalonspa" class="btn-outline-dark">@1308studiosalonspa</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+  TESTIMONIALS
+═══════════════════════════════════════════════ -->
+<section class="testimonials" aria-label="Guest reviews">
+  <div class="testimonials-inner wrap">
+    <div class="testimonials-header">
+      <span class="eyebrow r">Guest Voices</span>
+      <h2 class="r r1">What our guests <em>say.</em></h2>
+    </div>
+    <div class="testi-slider r">
+      <div class="testi-slide active">
+        <div class="testi-stars" aria-label="5 stars">
+          <span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span>
+        </div>
+        <p class="testi-quote">"Walking into Studio 1308 feels like stepping into a boutique in Paris — except everyone makes you feel completely at home. My balayage has never looked more natural. I will not go anywhere else."</p>
+        <div class="testi-meta">
+          <span class="testi-name">Camille R.</span>
+          <div class="testi-sep"></div>
+          <span class="testi-service">Balayage &amp; Styling</span>
+        </div>
+      </div>
+      <div class="testi-slide">
+        <div class="testi-stars" aria-label="5 stars">
+          <span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span>
+        </div>
+        <p class="testi-quote">"The Aphrodite Head Spa was the single most relaxing 75 minutes of my month. The scalp massage alone is worth every penny. My stylist knew exactly what my hair needed before I could even articulate it."</p>
+        <div class="testi-meta">
+          <span class="testi-name">Josephine T.</span>
+          <div class="testi-sep"></div>
+          <span class="testi-service">Aphrodite Head Spa</span>
+        </div>
+      </div>
+      <div class="testi-slide">
+        <div class="testi-stars" aria-label="5 stars">
+          <span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span>
+        </div>
+        <p class="testi-quote">"My lashes look so natural that people genuinely cannot tell they're extensions. I've tried four lash artists in Savannah and nobody comes close to this level of precision and care."</p>
+        <div class="testi-meta">
+          <span class="testi-name">Naomi K.</span>
+          <div class="testi-sep"></div>
+          <span class="testi-service">Classic Lash Extensions</span>
+        </div>
+      </div>
+      <div class="testi-slide">
+        <div class="testi-stars" aria-label="5 stars">
+          <span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span>
+        </div>
+        <p class="testi-quote">"As a man who usually dreads getting a haircut, Studio 1308 changed my standard entirely. My stylist actually listened, explained what she was doing, and the result was the best cut I've ever had."</p>
+        <div class="testi-meta">
+          <span class="testi-name">Marcus B.</span>
+          <div class="testi-sep"></div>
+          <span class="testi-service">Gentleman's Cut &amp; Style</span>
+        </div>
+      </div>
+    </div>
+    <div class="testi-dots r" role="tablist" aria-label="Testimonials">
+      <button class="testi-dot active" aria-label="Testimonial 1" data-index="0"></button>
+      <button class="testi-dot" aria-label="Testimonial 2" data-index="1"></button>
+      <button class="testi-dot" aria-label="Testimonial 3" data-index="2"></button>
+      <button class="testi-dot" aria-label="Testimonial 4" data-index="3"></button>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+  PRODUCTS
+═══════════════════════════════════════════════ -->
+<div class="products">
+  <div class="products-inner wrap">
+    <p class="products-label r">Premium products we trust</p>
+    <div class="products-logos r r1">
+      <span class="product-brand">Kérastase</span>
+      <span class="product-brand">Olaplex</span>
+      <span class="product-brand">Moroccanoil</span>
+      <span class="product-brand">Laneige</span>
+      <span class="product-brand">Color Wow</span>
+      <span class="product-brand">Redken</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════
+  TEAM
+═══════════════════════════════════════════════ -->
+<section class="team" id="team" aria-label="Our team">
+  <div class="wrap">
+    <div class="team-header">
+      <span class="eyebrow r">The Artists</span>
+      <h2 class="r r1">Meet the people who<br><em>make it happen.</em></h2>
+      <p class="r r2">Every member of our team is selected not just for their technical skill — but for their ability to make you feel genuinely welcomed and deeply understood.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card r">
+        <div class="team-card-photo">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=85" alt="Studio 1308 stylist" />
+        </div>
+        <div class="team-card-info">
+          <h3>Amara J.</h3>
+          <span>Master Colorist</span>
+          <p class="team-card-specialty">European color techniques · Balayage specialist</p>
+        </div>
+      </div>
+      <div class="team-card r r1">
+        <div class="team-card-photo">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=85" alt="Studio 1308 lash artist" />
+        </div>
+        <div class="team-card-info">
+          <h3>Sofia M.</h3>
+          <span>Lead Lash Artist</span>
+          <p class="team-card-specialty">Classic · Hybrid · Volume · Mega Volume</p>
+        </div>
+      </div>
+      <div class="team-card r r2">
+        <div class="team-card-photo">
+          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=85" alt="Studio 1308 spa therapist" />
+        </div>
+        <div class="team-card-info">
+          <h3>Elena V.</h3>
+          <span>Head Spa Therapist</span>
+          <p class="team-card-specialty">Scalp therapy · Aphrodite ritual specialist</p>
+        </div>
+      </div>
+      <div class="team-card r r3">
+        <div class="team-card-photo">
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=85" alt="Studio 1308 brow artist" />
+        </div>
+        <div class="team-card-info">
+          <h3>Nayla R.</h3>
+          <span>Brow &amp; Skin Specialist</span>
+          <p class="team-card-specialty">Lamination · Tinting · Chemical peels</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+  INSTAGRAM
+═══════════════════════════════════════════════ -->
+<section class="instagram" aria-label="Follow Studio 1308 on Instagram">
+  <div class="wrap">
+    <span class="eyebrow r">As seen on Instagram</span>
+    <h2 class="r r1">Our work, <em>in the wild.</em></h2>
+    <p class="r r2">Every post is a real guest, a real result, and a piece of who we are — follow along.</p>
+    <a href="https://www.instagram.com/1308studiosalonspa" class="instagram-handle r r2" target="_blank" rel="noopener">@1308studiosalonspa</a>
+    <div class="ig-grid r r3">
+      <div class="ig-cell"><img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=300&q=80" alt="Studio 1308 Instagram" /></div>
+      <div class="ig-cell"><img src="https://images.unsplash.com/photo-1487412947147-5cebf100d293?w=300&q=80" alt="Studio 1308 Instagram" /></div>
+      <div class="ig-cell"><img src="https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=300&q=80" alt="Studio 1308 Instagram" /></div>
+      <div class="ig-cell"><img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=300&q=80" alt="Studio 1308 Instagram" /></div>
+      <div class="ig-cell"><img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=300&q=80" alt="Studio 1308 Instagram" /></div>
+      <div class="ig-cell"><img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=300&q=80" alt="Studio 1308 Instagram" /></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+  BOOKING CTA
+═══════════════════════════════════════════════ -->
+<section class="booking" aria-label="Book your appointment">
+  <div class="booking-inner wrap-tight">
+    <span class="eyebrow r">Reserve Your Visit</span>
+    <h2 class="r r1">Your transformation<br>begins with <em>one<br>appointment.</em></h2>
+    <p class="r r2">We keep a limited number of new guest appointments available each week. When you're ready, we're here.</p>
+    <div class="booking-actions r r3">
+      <a href="https://www.studio1308.com/appointments" class="btn-fill">Book Online Now</a>
+      <a href="https://www.studio1308.com/gift-certificates" class="btn-ghost">Gift a Visit</a>
+    </div>
+    <p class="booking-note r r4">Complimentary consultation with every first visit · Online booking available 24/7</p>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+  FOOTER
+═══════════════════════════════════════════════ -->
+<footer class="footer" id="contact" aria-label="Footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img
+          src="https://img1.wsimg.com/isteam/ip/8d9d1f10-5781-4d9a-95ec-2a60b057ce8e/blob.png/:/rs=h:150,cg:true,m/qt=q:95"
+          alt="Studio 1308"
+        />
+        <p class="footer-brand-tagline">"European Luxury,<br>Southern Soul."</p>
+        <p class="footer-brand-desc">Savannah's premier salon and spa. Every service is a studied craft. Every guest, genuinely seen.</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/1308studiosalonspa" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.facebook.com" target="_blank" rel="noopener">Facebook</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li>Hair &amp; Color</li>
+          <li>Lash Extensions</li>
+          <li>Brow Design</li>
+          <li>Head Spa</li>
+          <li>Gentlemen's Services</li>
+          <li>Waxing</li>
+          <li>Chemical Peels</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Studio</h4>
+        <ul>
+          <li>About Us</li>
+          <li>Our Team</li>
+          <li>Gallery</li>
+          <li>Gift Certificates</li>
+          <li>Book Online</li>
+        </ul>
+      </div>
+      <div class="footer-col" id="contact">
+        <h4>Visit Us</h4>
+        <p>Savannah, Georgia<br>United States</p>
+        <p style="margin-top: 1rem;">
+          <a href="https://www.studio1308.com" style="font-size:.78rem;color:rgba(250,246,240,.45);border-bottom:1px solid rgba(250,246,240,.15);padding-bottom:1px;transition:color .2s,border-color .2s;" onmouseenter="this.style.color='rgba(196,160,74,.8)';this.style.borderColor='rgba(196,160,74,.4)'" onmouseleave="this.style.color='rgba(250,246,240,.45)';this.style.borderColor='rgba(250,246,240,.15)'">studio1308.com</a>
+        </p>
+        <p style="margin-top:.625rem;">
+          <a href="https://www.studio1308.com/appointments" class="btn-primary-dark" style="display:inline-block;margin-top:1rem;font-size:.58rem;">Book Now</a>
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Studio 1308 · Savannah, Georgia · All rights reserved</p>
+      <span class="footer-bottom-brand">Enhance · Elevate · Empower</span>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ═══════════════════════════════════════════════
+  JAVASCRIPT
+═══════════════════════════════════════════════ -->
+<script>
+  /* Nav scroll state */
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('solid', window.scrollY > 60);
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* Scroll reveal */
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('v'); revealObs.unobserve(e.target); }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.r').forEach(el => revealObs.observe(el));
+
+  /* Testimonial slider */
+  const slides = document.querySelectorAll('.testi-slide');
+  const dots   = document.querySelectorAll('.testi-dot');
+  let current  = 0;
+  let autoplay;
+
+  function goTo(i) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = (i + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+  }
+
+  dots.forEach(d => {
+    d.addEventListener('click', () => {
+      clearInterval(autoplay);
+      goTo(parseInt(d.dataset.index));
+      autoplay = setInterval(() => goTo(current + 1), 6000);
+    });
+  });
+
+  autoplay = setInterval(() => goTo(current + 1), 6000);
+
+  /* Anchor smooth scroll */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+
+  /* Mobile hamburger — simple show/hide links */
+  const hamburger = document.getElementById('hamburger');
+  const navLinks  = document.querySelector('.nav-links');
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', () => {
+      const open = hamburger.getAttribute('aria-expanded') === 'true';
+      hamburger.setAttribute('aria-expanded', !open);
+      if (!open) {
+        navLinks.style.cssText = 'display:flex;flex-direction:column;position:fixed;top:4rem;left:0;right:0;background:rgba(250,246,240,.97);padding:1.5rem 2rem;gap:1.25rem;border-top:1px solid var(--linen-dark);z-index:199;backdrop-filter:blur(12px);';
+        navLinks.querySelectorAll('a').forEach(a => { a.style.cssText = 'color:var(--night);font-size:.75rem;letter-spacing:.15em;'; });
+      } else {
+        navLinks.style.cssText = '';
+        navLinks.querySelectorAll('a').forEach(a => { a.style.cssText = ''; });
+      }
+    });
+  }
+</script>
+</body>
+</html>
