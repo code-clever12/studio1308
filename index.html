@@ -1529,7 +1529,7 @@
                 slidesToShow: 3,
                 slidesToScroll: 1,
                 autoplay: true,
-                infinite: true,
+                infinite: false,
                 arrows: false,
                 dots: false,
                 touchThreshold: 100,
@@ -1636,19 +1636,19 @@
     }
 
     // Check each review text — only show the button if content actually overflows 3 lines
-    function checkOverflow() {
-      reviews.forEach((review) => {
-        const textEl = document.getElementById(`text-${review.id}`);
-        const btnEl = document.getElementById(`btn-${review.id}`);
+    // function checkOverflow() {
+    //   reviews.forEach((review) => {
+    //     const textEl = document.getElementById(`text-${review.id}`);
+    //     const btnEl = document.getElementById(`btn-${review.id}`);
 
-        // scrollHeight > clientHeight means text is being clamped/cut off
-        if (textEl.scrollHeight > textEl.clientHeight + 1) {
-          btnEl.style.display = 'inline-block';
-        } else {
-          btnEl.style.display = 'none';
-        }
-      });
-    }
+    //     // scrollHeight > clientHeight means text is being clamped/cut off
+    //     if (textEl.scrollHeight > textEl.clientHeight + 1) {
+    //       btnEl.style.display = 'inline-block';
+    //     } else {
+    //       btnEl.style.display = 'none';
+    //     }
+    //   });
+    // }
 
     // Run after render, and again on resize (line count can change on smaller screens)
     // window.addEventListener('load', checkOverflow);
