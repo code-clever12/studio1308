@@ -207,12 +207,6 @@
       overflow: hidden;
       background: var(--dark);
     }
-    /*.hero-bg {*/
-    /*  position: absolute; inset: 0;*/
-    /*  background-image: url('img/hero-storefront-sign.jpg');*/
-    /*  background-size: cover; background-position: 25% center;*/
-    /*  opacity: .25;*/
-    /*}*/
     .hero-photos {
       position: absolute; top: 0; right: 0; bottom: 0;
       left: 43%;
@@ -855,7 +849,6 @@
 
 <!-- ===================== HERO ===================== -->
 <section class="hero">
-  <!--<div class="hero-bg"></div>-->
     <div class='hero-photos'>
       <div class="hero-photo"><img src="img/hero1.jpeg" alt="1308 Studio storefront sign in Savannah, GA" loading="eager"></div>
       <div class="hero-photo"><img src="img/hero2.jpeg" alt="1308 Studio storefront sign in Savannah, GA" loading="eager"></div>
@@ -1231,16 +1224,16 @@
         <img src="img/1492106087820.jpg" alt="Hair transformation" loading="lazy">
       </div>
       <div class="g">
-        <img src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?w=600&q=80" alt="Styling result" loading="lazy">
+        <img src="img/1492106087821.jpg" alt="Styling result" loading="lazy">
       </div>
       <div class="g">
-        <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&q=80" alt="Head spa treatment" loading="lazy">
+        <img src="img/1492106087822.jpg" alt="Head spa treatment" loading="lazy">
       </div>
       <div class="g">
-        <img src="https://images.unsplash.com/photo-1487412912498-0447578fcca8?w=600&q=80" alt="Blowout finish" loading="lazy">
+        <img src="img/1492106087823.jpg" alt="Blowout finish" loading="lazy">
       </div>
       <div class="g">
-        <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&q=80" alt="Salon interior" loading="lazy">
+        <img src="img/1492106087824.jpg" alt="Salon interior" loading="lazy">
       </div>
     </div>
     <p class="gallery-note r">
@@ -1508,110 +1501,110 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="slick.min.js"></script>
 <script>
-    (function($) {
-        $(document).ready(function() {
-            $('.hero-photos').slick({
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                autoplay: true,
-                arrows: false,
-                dots: true,
-                touchThreshold: 100,
-            });
+  (function($) {
+    $(document).ready(function() {
+      $('.hero-photos').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        arrows: false,
+        dots: true,
+        touchThreshold: 100,
+      });
 
-            $('.reviews-grid').slick({
-                slidesToShow: 3,
-                slidesToScroll: 1,
-                autoplay: true,
-                infinite: false,
-                arrows: false,
-                dots: false,
-                touchThreshold: 100,
-                responsive: [
-                  {
-                    breakpoint: 992,
-                    settings: {
-                      slidesToShow: 2,
-                    }
-                  },
-                  {
-                    breakpoint: 768,
-                    settings: {
-                      slidesToShow: 1,
-                    }
-                  }
-                ]
-            });
-        });
-    })(jQuery)
+      $('.reviews-grid').slick({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: true,
+        infinite: false,
+        arrows: false,
+        dots: false,
+        touchThreshold: 100,
+        responsive: [
+          {
+            breakpoint: 992,
+            settings: {
+              slidesToShow: 2,
+            }
+          },
+          {
+            breakpoint: 768,
+            settings: {
+              slidesToShow: 1,
+            }
+          }
+        ]
+      });
+    });
+  })(jQuery)
 
 
-    const reviews = [
-      {
-        id: 1,
-        stars: 5,
-        text: "Really great experience at 1308 studio. Alma coloured my hair, it looks amazing. She is professional, experienced and talented hairstylist. The salon is beautiful and clean. I’m definitely coming back to do my hair again at this friendly and professional place. Thank you!!",
-        name: "Larissa Gusseva",
-        service: "Hair coloring",
-        avatar: "https://lh3.googleusercontent.com/a/ACg8ocKNUvz9IgHs67XoKdFJIfhrk1LYl6ce1xOpBN0XJdbTO7OBlg=w36-h36-p-rp-mo-br100"
-      },
-      {
-        id: 2,
-        stars: 5,
-        text: "Went in for the Head Spa service, and I give it a 10/10. Every. Single. Aspect. • The salon - STUNNING. • Inga - STUNNING, so sweet, and professional • The Head Spa service - there are just no words to describe the relaxation. From the time I walked in, to the time I left, I felt like I was living in a dream. If you’re considering whether you should do the head spa service, DO IT!!!!",
-        name: "Summer Braddy",
-        service: "",
-        avatar: "https://lh3.googleusercontent.com/a-/ALV-UjUwA6JSuwQNWaxrEyqsuUPow5J4byAejSzjZ_gWKtT0BUvP6pcA=w36-h36-p-rp-mo-br100"
-      },
-      {
-        id: 3,
-        stars: 5,
-        text: "Alma was my hairdresser and she is amazing! Every detail was paid attention to and she made me feel like I was right at home! I will be returning solely for her amazing customer service and her beautiful talent.",
-        name: "Marleigh Hughes",
-        service: "",
-        avatar: "https://lh3.googleusercontent.com/a/ACg8ocLTTI0-5yGXnGrc0tY0OgDXyC0VIwTLhwJaoSZq4aA9_X4fXQ=w36-h36-p-rp-mo-br100"
-      },
-      {
-        id: 4,
-        stars: 5,
-        text: "Inga was incredible. My makeup and hair were exactly as I had imagined for my wedding day. I cannot recommend her enough. Super professional.",
-        name: "Alisha Esselstein",
-        service: "",
-        avatar: "https://lh3.googleusercontent.com/a/ACg8ocJAVqjSbNLlHHikayAW8htvxu2ClqWrhoZk0X78h6cAGL24sQ=w36-h36-p-rp-mo-br100"
-      },
-      {
-        id: 5,
-        stars: 5,
-        text: "Love my haircut from Alma! Thank you!",
-        name: "Jennifer Chapman",
-        service: "",
-        avatar: "https://lh3.googleusercontent.com/a-/ALV-UjUtstpLCpjdZIKBBTBnPU3ZgACcVH6oBe34mtKgAz5ZTL1HNOg=w36-h36-p-rp-mo-br100"
-      },
-      {
-        id: 6,
-        stars: 5,
-        text: "I drove 3 hours for a hair and makeup trial with Inga and I would do it again and again! I booked her that same day for my wedding happening a couple months later. She convinced me to do lashes and I am so so so glad she did. The way she did them was just perfect. My wedding was outdoors and my hair and makeup didn’t move an inch the entire day (and it ended up being windier than we anticipated). She was so kind and personable throughout the whole experience. It was a joy to have her with us and she made myself, my mom, and my maid of honor feel so beautiful.",
-        name: "Jennifer Chapman",
-        service: "Updos, Hairstyling, Special occasion makeup, Bridal makeup",
-        avatar: "https://lh3.googleusercontent.com/a-/ALV-UjWIOeDKN6XAhH6z4iInRIvQHJHjNhBFjbSLywGc9Z2HonhSpvY=w36-h36-p-rp-mo-br100"
-      },
-      {
-        id: 7,
-        stars: 5,
-        text: "I went here to get a lash lift (that comes with a complimentary tint!) for my wedding. I had never gotten my lashes lifted before this and went in with little to no expectation. Sophia, my technician, was absolutely wonderful! She was so fun to talk to, answered all of my questions completely and thoroughly, and was so knowledgeable about so many different realms of the beautician world. Not only was she beyond amazing, my lashes turned out perfect! They are more amazing than I ever thought they could be. I would post a picture but my eyebrows need some serious work right now. The salon was beautiful and very clean. I had to be lying down for an hour and I was never uncomfortable. They even had super soft fluffy blankets if you get cold! Highly highly highly recommend!",
-        name: "Alexis Assha",
-        service: "Eyelash enhancements",
-        avatar: "https://lh3.googleusercontent.com/a-/ALV-UjWODPvLTaOCX1nWHO6M6YM7ENBWod2flJ9IeBk9_COofURYj-U=w36-h36-p-rp-mo-ba12-br100"
-      },
-      {
-        id: 8,
-        stars: 5,
-        text: "Inga is fantastic! She did a wonderful job on my wedding hair and makeup.",
-        name: "Haley",
-        service: "Beauty makeovers",
-        avatar: "https://lh3.googleusercontent.com/a-/ALV-UjWI9CQT7oBwMP1wG0EgHdFWuD87GSttPHOzF2gHkJzMXiq3n5R6rQ=w36-h36-p-rp-mo-br100"
-      },
-    ];
+  const reviews = [
+    {
+      id: 1,
+      stars: 5,
+      text: "Really great experience at 1308 studio. Alma coloured my hair, it looks amazing. She is professional, experienced and talented hairstylist. The salon is beautiful and clean. I’m definitely coming back to do my hair again at this friendly and professional place. Thank you!!",
+      name: "Larissa Gusseva",
+      service: "Hair coloring",
+      avatar: "https://lh3.googleusercontent.com/a/ACg8ocKNUvz9IgHs67XoKdFJIfhrk1LYl6ce1xOpBN0XJdbTO7OBlg=w36-h36-p-rp-mo-br100"
+    },
+    {
+      id: 2,
+      stars: 5,
+      text: "Went in for the Head Spa service, and I give it a 10/10. Every. Single. Aspect. • The salon - STUNNING. • Inga - STUNNING, so sweet, and professional • The Head Spa service - there are just no words to describe the relaxation. From the time I walked in, to the time I left, I felt like I was living in a dream. If you’re considering whether you should do the head spa service, DO IT!!!!",
+      name: "Summer Braddy",
+      service: "",
+      avatar: "https://lh3.googleusercontent.com/a-/ALV-UjUwA6JSuwQNWaxrEyqsuUPow5J4byAejSzjZ_gWKtT0BUvP6pcA=w36-h36-p-rp-mo-br100"
+    },
+    {
+      id: 3,
+      stars: 5,
+      text: "Alma was my hairdresser and she is amazing! Every detail was paid attention to and she made me feel like I was right at home! I will be returning solely for her amazing customer service and her beautiful talent.",
+      name: "Marleigh Hughes",
+      service: "",
+      avatar: "https://lh3.googleusercontent.com/a/ACg8ocLTTI0-5yGXnGrc0tY0OgDXyC0VIwTLhwJaoSZq4aA9_X4fXQ=w36-h36-p-rp-mo-br100"
+    },
+    {
+      id: 4,
+      stars: 5,
+      text: "Inga was incredible. My makeup and hair were exactly as I had imagined for my wedding day. I cannot recommend her enough. Super professional.",
+      name: "Alisha Esselstein",
+      service: "",
+      avatar: "https://lh3.googleusercontent.com/a/ACg8ocJAVqjSbNLlHHikayAW8htvxu2ClqWrhoZk0X78h6cAGL24sQ=w36-h36-p-rp-mo-br100"
+    },
+    {
+      id: 5,
+      stars: 5,
+      text: "Love my haircut from Alma! Thank you!",
+      name: "Jennifer Chapman",
+      service: "",
+      avatar: "https://lh3.googleusercontent.com/a-/ALV-UjUtstpLCpjdZIKBBTBnPU3ZgACcVH6oBe34mtKgAz5ZTL1HNOg=w36-h36-p-rp-mo-br100"
+    },
+    {
+      id: 6,
+      stars: 5,
+      text: "I drove 3 hours for a hair and makeup trial with Inga and I would do it again and again! I booked her that same day for my wedding happening a couple months later. She convinced me to do lashes and I am so so so glad she did. The way she did them was just perfect. My wedding was outdoors and my hair and makeup didn’t move an inch the entire day (and it ended up being windier than we anticipated). She was so kind and personable throughout the whole experience. It was a joy to have her with us and she made myself, my mom, and my maid of honor feel so beautiful.",
+      name: "Jennifer Chapman",
+      service: "Updos, Hairstyling, Special occasion makeup, Bridal makeup",
+      avatar: "https://lh3.googleusercontent.com/a-/ALV-UjWIOeDKN6XAhH6z4iInRIvQHJHjNhBFjbSLywGc9Z2HonhSpvY=w36-h36-p-rp-mo-br100"
+    },
+    {
+      id: 7,
+      stars: 5,
+      text: "I went here to get a lash lift (that comes with a complimentary tint!) for my wedding. I had never gotten my lashes lifted before this and went in with little to no expectation. Sophia, my technician, was absolutely wonderful! She was so fun to talk to, answered all of my questions completely and thoroughly, and was so knowledgeable about so many different realms of the beautician world. Not only was she beyond amazing, my lashes turned out perfect! They are more amazing than I ever thought they could be. I would post a picture but my eyebrows need some serious work right now. The salon was beautiful and very clean. I had to be lying down for an hour and I was never uncomfortable. They even had super soft fluffy blankets if you get cold! Highly highly highly recommend!",
+      name: "Alexis Assha",
+      service: "Eyelash enhancements",
+      avatar: "https://lh3.googleusercontent.com/a-/ALV-UjWODPvLTaOCX1nWHO6M6YM7ENBWod2flJ9IeBk9_COofURYj-U=w36-h36-p-rp-mo-ba12-br100"
+    },
+    {
+      id: 8,
+      stars: 5,
+      text: "Inga is fantastic! She did a wonderful job on my wedding hair and makeup.",
+      name: "Haley",
+      service: "Beauty makeovers",
+      avatar: "https://lh3.googleusercontent.com/a-/ALV-UjWI9CQT7oBwMP1wG0EgHdFWuD87GSttPHOzF2gHkJzMXiq3n5R6rQ=w36-h36-p-rp-mo-br100"
+    },
+  ];
 
     const grid = document.getElementById('reviewsGrid');
 
@@ -1636,25 +1629,6 @@
       const isExpanded = textEl.classList.toggle('expanded');
       btnEl.textContent = isExpanded ? 'See less' : 'See more';
     }
-
-    // Check each review text only show the button if content actually overflows 3 lines
-    // function checkOverflow() {
-    //   reviews.forEach((review) => {
-    //     const textEl = document.getElementById(`text-${review.id}`);
-    //     const btnEl = document.getElementById(`btn-${review.id}`);
-
-    //     // scrollHeight > clientHeight means text is being clamped/cut off
-    //     if (textEl.scrollHeight > textEl.clientHeight + 1) {
-    //       btnEl.style.display = 'inline-block';
-    //     } else {
-    //       btnEl.style.display = 'none';
-    //     }
-    //   });
-    // }
-
-    // Run after render, and again on resize (line count can change on smaller screens)
-    // window.addEventListener('load', checkOverflow);
-    // window.addEventListener('resize', checkOverflow);
 
   // ── Sticky topbar shadow
   const topbar = document.getElementById('topbar');
