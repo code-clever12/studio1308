@@ -510,7 +510,6 @@
       grid-template-columns: 1.35fr 1fr 1fr;
       grid-template-rows: 270px 270px;
       gap: .7rem;
-      border-radius: 12px; overflow: hidden;
     }
     .g { overflow: hidden; }
     .g img { width: 100%; height: 100%; object-fit: cover; transition: transform .55s var(--ease); }
@@ -521,6 +520,78 @@
       font-size: .78rem; color: var(--taupe);
     }
     .gallery-note a { color: var(--bordeaux); font-weight: 600; }
+
+    /* =============================================
+       GALLERY — SHOW MORE REVEAL
+    ============================================= */
+    .gallery-wrap {
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .gallery-collapse {
+      position: relative;
+      overflow: hidden;
+      margin-top: .7rem;
+      transition: max-height .7s var(--ease);
+    }
+
+    /* Overlay only exists once JS marks the section as collapsible —
+       keeps the gallery fully visible for no-JS users. */
+    .gallery-fade { display: none; }
+
+    .gallery-collapse.is-collapsible .gallery-fade {
+      display: flex;
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: clamp(90px, 18vw, 160px);
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 1.25rem;
+      background: linear-gradient(to bottom, transparent 0%, var(--parchment) 88%);
+      opacity: 1;
+      transition: opacity .5s var(--ease);
+    }
+
+    .gallery-collapse.is-expanded .gallery-fade {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .gallery-expand-btn {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: var(--white);
+      border: 1.5px solid var(--champagne);
+      color: var(--bordeaux);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: var(--shadow-card);
+      transition: background .2s var(--ease), border-color .2s var(--ease), transform .2s var(--ease);
+    }
+    .gallery-expand-btn:hover {
+      background: var(--champagne-pale);
+      border-color: var(--bordeaux);
+      transform: translateY(-2px);
+    }
+    .gallery-expand-btn:focus-visible {
+      outline: 2px solid var(--bordeaux);
+      outline-offset: 3px;
+    }
+
+    .gallery-expand-arrow {
+      animation: galleryArrowBob 1.6s ease-in-out infinite;
+    }
+    @keyframes galleryArrowBob {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(5px); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .gallery-expand-arrow { animation: none; }
+    }
+
+    @media (max-width: 640px) {
+      .gallery-expand-btn { width: 42px; height: 42px; }
+      .gallery-collapse.is-collapsible .gallery-fade { height: clamp(70px, 22vw, 110px); }
+    }
 
     /* =============================================
        TESTIMONIALS
@@ -1219,21 +1290,59 @@
       <h2>Real Results. <em>Real Clients.</em></h2>
       <p>Every result is a real guest from Savannah. See what's possible when skill meets care.</p>
     </div>
-    <div class="gallery-grid r">
-      <div class="g g-tall">
-        <img src="img/1492106087820.jpg" alt="Hair transformation" loading="lazy">
+    <div class="gallery-wrap">
+      <div class="gallery-grid r">
+        <div class="g g-tall">
+          <img src="img/1492106087820.jpg" alt="Hair transformation" loading="lazy">
+        </div>
+        <div class="g">
+          <img src="img/1492106087821.jpg" alt="Styling result" loading="lazy">
+        </div>
+        <div class="g">
+          <img src="img/1492106087822.jpg" alt="Head spa treatment" loading="lazy">
+        </div>
+        <div class="g">
+          <img src="img/1492106087823.jpg" alt="Blowout finish" loading="lazy">
+        </div>
+        <div class="g">
+          <img src="img/1492106087824.jpg" alt="Salon interior" loading="lazy">
+        </div>
       </div>
-      <div class="g">
-        <img src="img/1492106087821.jpg" alt="Styling result" loading="lazy">
-      </div>
-      <div class="g">
-        <img src="img/1492106087822.jpg" alt="Head spa treatment" loading="lazy">
-      </div>
-      <div class="g">
-        <img src="img/1492106087823.jpg" alt="Blowout finish" loading="lazy">
-      </div>
-      <div class="g">
-        <img src="img/1492106087824.jpg" alt="Salon interior" loading="lazy">
+      <div class="gallery-collapse" id="galleryCollapse">
+        <div class="gallery-grid r">
+          <div class="g">
+            <img src="img/1492106087825.jpg" alt="Hair transformation" loading="lazy">
+          </div>
+          <div class="g">
+            <img src="img/1492106087826.jpg" alt="Styling result" loading="lazy">
+          </div>
+          <div class="g">
+            <img src="img/1492106087827.jpg" alt="Head spa treatment" loading="lazy">
+          </div>
+          <div class="g">
+            <img src="img/1492106087828.jpg" alt="Blowout finish" loading="lazy">
+          </div>
+          <div class="g">
+            <img src="img/1492106087829.jpg" alt="Salon interior" loading="lazy">
+          </div>
+          <div class="g">
+            <img src="img/1492106087830.jpg" alt="Salon interior" loading="lazy">
+          </div>
+        </div>
+
+        <div class="gallery-fade" id="galleryFade">
+          <button
+            class="gallery-expand-btn"
+            id="galleryExpandBtn"
+            type="button"
+            aria-label="Show more photos"
+            aria-expanded="false"
+            aria-controls="galleryCollapse">
+            <svg class="gallery-expand-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M6 9l6 6 6-6"/>
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
     <p class="gallery-note r">
@@ -1668,6 +1777,58 @@
     q.addEventListener('click', toggle);
     q.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
   });
+
+  // ── Gallery show more reveal
+  (function initGalleryReveal() {
+    const collapseEl = document.getElementById('galleryCollapse');
+    const btn = document.getElementById('galleryExpandBtn');
+    if (!collapseEl || !btn) return;
+
+    let expanded = false;
+
+    function debounce(fn, wait) {
+      let t;
+      return (...args) => {
+        clearTimeout(t);
+        t = setTimeout(() => fn(...args), wait);
+      };
+    }
+
+    function measureAndCollapse() {
+      if (expanded) return;
+      collapseEl.style.maxHeight = 'none';
+      const fullHeight = collapseEl.scrollHeight;
+      collapseEl.dataset.fullHeight = fullHeight;
+      collapseEl.style.maxHeight = Math.round(fullHeight * 0.2) + 'px';
+    }
+
+    // Only now do we reveal the overlay — no-JS visitors never see a clipped gallery.
+    collapseEl.classList.add('is-collapsible');
+    measureAndCollapse();
+
+    // Images load async; re-measure once they've settled so the 50% mark is accurate.
+    collapseEl.querySelectorAll('img').forEach(img => {
+      if (!img.complete) img.addEventListener('load', measureAndCollapse, { once: true });
+    });
+    window.addEventListener('load', measureAndCollapse);
+    window.addEventListener('resize', debounce(measureAndCollapse, 150));
+
+    btn.addEventListener('click', () => {
+      expanded = true;
+      const fullHeight = collapseEl.dataset.fullHeight || collapseEl.scrollHeight;
+      collapseEl.style.maxHeight = fullHeight + 'px';
+      collapseEl.classList.add('is-expanded');
+      btn.setAttribute('aria-expanded', 'true');
+      btn.setAttribute('aria-label', 'Gallery fully expanded');
+
+      collapseEl.addEventListener('transitionend', function onEnd(e) {
+        if (e.propertyName === 'max-height') {
+          collapseEl.style.maxHeight = 'none'; // let it grow freely if content changes later
+          collapseEl.removeEventListener('transitionend', onEnd);
+        }
+      });
+    });
+  })();
 
 </script>
 <!--Start of Tawk.to Script-->
