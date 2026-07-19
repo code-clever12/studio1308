@@ -1123,6 +1123,49 @@
       .gallery-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 130px; }
       .team-strip { grid-template-columns: 1fr 1fr; gap: 1rem; }
     }
+
+    /*popup css*/
+    .dialog_box {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      z-index: 999999;
+      display: flex;
+	    flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(8px);
+      opacity: 0;
+      visibility: hidden;
+      transition: .3s;
+    }
+    .dialog_box.open {
+      opacity: 1;
+      visibility: visible;
+    }
+    .dialog_box .dialog_message {
+      max-width: 94vw;
+      width: 430px;
+      height: auto;
+      overflow: auto;
+      transform: scale(.6);
+      transition: .3s
+    }
+    .dialog_box.open .dialog_message {
+      transform: scale(1);
+    }
+    .hero-lead-card.popup {
+      position: relative;
+      top: 0;
+      left: 0;
+      right: 0;
+      transform: translate(0, 0);
+      width: 100%;
+      margin: 0 0 0 0;
+    }
   </style>
 </head>
 <body>
@@ -1630,6 +1673,37 @@
   </a>
 </div>
 
+
+<!-- ===================== POPUP ===================== -->
+ <div class="dialog_box">
+  <div class="dialog_message">
+    <!-- LEAD FORM - hero right corner -->
+  <div class="hero-lead-card popup">
+    <span class="promo-countdown-chip" id="promoChip">⏳ Offer ends in --d --h --m</span>
+    <span class="lead-eyebrow" id="leadEyebrow">Limited Slots This Week</span>
+    <div class="lead-title" id="leadTitle">Claim Your <em>10% Off</em> First Visit</div>
+    <p class="lead-sub" id="leadSub">Tell us a bit about you and we'll text you back within minutes to lock in your spot.</p>
+    <form class="lead-form" id="heroLeadForm" action="#" method="POST">
+      <input class="lead-field" type="text" name="name" placeholder="Full Name" required>
+      <input class="lead-field" type="tel" name="phone" placeholder="Phone Number" required>
+      <select class="lead-field" name="service" required>
+        <option value="" disabled selected>Interested In...</option>
+        <option value="hair">Hair</option>
+        <option value="lashes">Lashes</option>
+        <option value="brows">Brows</option>
+        <option value="headspa">Head Spa</option>
+        <option value="other">Something Else</option>
+      </select>
+      <button type="submit" class="lead-submit">Claim My Spot →</button>
+    </form>
+    <div class="lead-note">
+      <span class="t-ic">🅿️</span>
+      Free Parking Front &amp; Back · No Obligation
+    </div>
+  </div>
+  </div>
+ </div>
+
 <script src="jquery.min.js"></script>
 <script src="slick.min.js"></script>
 <script>
@@ -1733,6 +1807,23 @@
           { breakpoint: 700, settings: { slidesToShow: 1 } }
         ]
       });
+    
+      $(document).ready(function() {
+        let exitTriggered = false;
+        $(document).on("mouseleave", function(e) {
+          if (!exitTriggered && e.clientY <= 0) {
+            $(".dialog_box").addClass("open");
+            exitTriggered = true;
+          }
+        });
+
+        $(".dialog_box").on("click", function(e){
+          if (!$(e.target).closest(".dialog_message").length) {
+            $(".dialog_box").removeClass("open");
+          }
+        });
+      });
+
     });
   })(jQuery);
 
