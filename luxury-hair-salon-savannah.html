@@ -379,6 +379,11 @@
       margin-top: .3rem;
       transition: background .2s, transform .2s;
     }
+    button.lead-submit:disabled {
+      opacity: 0.6;
+      cursor: no-drop;
+      background: var(--bordeaux);
+    }
     .lead-submit:hover { background: var(--bordeaux-deep); transform: translateY(-1px); }
     .lead-note {
       display: flex; align-items: center; justify-content: center; gap: .45rem;
@@ -390,6 +395,12 @@
       padding: .65rem .75rem;
       margin-top: 1rem;
       animation: leadNoteGlow 2.2s ease-in-out infinite;
+    }
+    .form-msg.success {
+      color: green;
+    }
+    .form-msg.error {
+      color: red;
     }
     .lead-note .t-ic { font-size: 1rem; flex-shrink: 0; animation: parkPulse 2.2s ease-in-out infinite; }
     @keyframes leadNoteGlow {
@@ -1245,7 +1256,7 @@
     <span class="lead-eyebrow" id="leadEyebrow">Limited Slots This Week</span>
     <div class="lead-title" id="leadTitle">Claim Your <em>10% Off</em> First Visit</div>
     <p class="lead-sub" id="leadSub">Tell us a bit about you and we'll text you back within minutes to lock in your spot.</p>
-    <form class="lead-form" id="heroLeadForm" action="#" method="POST">
+    <form class="lead-form" data-form-slug="hair-salon-contact-us" data-form-name="Hair Salon Contact Us">
       <input class="lead-field" type="text" name="name" placeholder="Full Name" required>
       <input class="lead-field" type="tel" name="phone" placeholder="Phone Number" required>
       <select class="lead-field" name="service" required>
@@ -1257,6 +1268,7 @@
         <option value="other">Something Else</option>
       </select>
       <button type="submit" class="lead-submit">Claim My Spot →</button>
+      <div class="form-msg"></div>
     </form>
     <div class="lead-note">
       <span class="t-ic">🅿️</span>
@@ -1683,7 +1695,7 @@
     <span class="lead-eyebrow" id="leadEyebrow">Limited Slots This Week</span>
     <div class="lead-title" id="leadTitle">Claim Your <em>10% Off</em> First Visit</div>
     <p class="lead-sub" id="leadSub">Tell us a bit about you and we'll text you back within minutes to lock in your spot.</p>
-    <form class="lead-form" id="heroLeadForm" action="#" method="POST">
+    <form class="lead-form" data-form-slug="hair-salon-popup-contact-us" data-form-name="Hair Salon Popup Contact Us">
       <input class="lead-field" type="text" name="name" placeholder="Full Name" required>
       <input class="lead-field" type="tel" name="phone" placeholder="Phone Number" required>
       <select class="lead-field" name="service" required>
@@ -1695,6 +1707,7 @@
         <option value="other">Something Else</option>
       </select>
       <button type="submit" class="lead-submit">Claim My Spot →</button>
+      <div class="form-msg"></div>
     </form>
     <div class="lead-note">
       <span class="t-ic">🅿️</span>
@@ -1829,14 +1842,57 @@
         });
       });
 
-    });
-  })(jQuery);
+      let API_URL = 'https://studio1308.code-clever.com/api/v1/submit-form';
+      $('.lead-form').on('submit', function (e) {
+        e.preventDefault();
 
-  // Lead form — placeholder submit handler, wire to your CRM/webhook when ready
-  document.getElementById('heroLeadForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    alert('Form UI only — connect this to your lead endpoint (CRM, Zapier, email, etc.) before going live.');
-  });
+        let $form = $(this);
+        let $msg = $form.find('.form-msg');
+        let $button = $form.find('button[type="submit"]');
+
+        let data = {};
+        $form.serializeArray().forEach(function (field) {
+          data[field.name] = field.value;
+        });
+
+        // Per-form metadata, pulled from the form's own data attributes
+        data.form_slug = $form.data('form-slug');
+        data.form_name = $form.data('form-name');
+        data.url = window.location.href;
+        if ($form.data('value')) {
+          data.value = $form.data('value');
+        }
+
+        // Optional: capture UTM params from the page's own query string
+        let params = new URLSearchParams(window.location.search);
+        ['utm_source', 'utm_medium', 'utm_campaign'].forEach(function (key) {
+          if (params.has(key)) data[key] = params.get(key);
+        });
+
+        $button.prop('disabled', true);
+        $msg.text('');
+
+        $.ajax({
+          url: API_URL,
+          type: 'POST',
+          contentType: 'application/json',
+          data: JSON.stringify(data),
+          dataType: 'json'
+        })
+        .done(function () {
+          $msg.removeClass('error').addClass('success').text("Thanks, we'll be in touch!");
+          $form[0].reset();
+        })
+        .fail(function () {
+          $msg.removeClass('success').addClass('error').text('Something went wrong, please try again.');
+        })
+        .always(function () {
+          $button.prop('disabled', false);
+        });
+      });
+    });
+
+  })(jQuery);
 
   /* =============================================
      PROMO CONFIG — edit these 5 lines when the
