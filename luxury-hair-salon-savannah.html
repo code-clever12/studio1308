@@ -1731,6 +1731,7 @@
 
 <script src="jquery.min.js"></script>
 <script src="slick.min.js"></script>
+<script src="lead-form.js"></script>
 <script src="datalayer.js"></script>
 <script>
   // Real Google reviews, pulled directly from studio1308.com — filtered to hair-relevant
@@ -1852,64 +1853,6 @@
           if (!$(e.target).closest(".dialog_message").length) {
             $(".dialog_box").removeClass("open");
           }
-        });
-      });
-
-      let API_URL = 'https://studio1308.code-clever.com/api/v1/submit-form';
-      $('.lead-form').on('submit', function (e) {
-        e.preventDefault();
-
-        let $form = $(this);
-        let $msg = $form.find('.form-msg');
-        let $button = $form.find('button[type="submit"]');
-
-        let data = {};
-        $form.serializeArray().forEach(function (field) {
-          data[field.name] = field.value;
-        });
-
-        // Per-form metadata, pulled from the form's own data attributes
-        data.form_slug = $form.data('form-slug');
-        data.form_name = $form.data('form-name');
-        data.url = window.location.href;
-        if ($form.data('value')) {
-          data.value = $form.data('value');
-        }
-
-        // Optional: capture UTM params from the page's own query string
-        let params = new URLSearchParams(window.location.search);
-        ['utm_source', 'utm_medium', 'utm_campaign'].forEach(function (key) {
-          if (params.has(key)) data[key] = params.get(key);
-        });
-
-        $button.prop('disabled', true);
-        $msg.text('');
-
-        $.ajax({
-          url: API_URL,
-          type: 'POST',
-          contentType: 'application/json',
-          data: JSON.stringify(data),
-          dataType: 'json'
-        })
-        .done(function () {
-          $msg.removeClass('error').addClass('success').text("Thanks, we'll be in touch!");
-          window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({
-            event: 'generate_lead',
-            form_id: $form.attr('id') || 'unknown_form',
-            form_slug: data.form_slug || 'unknown_slug',
-            form_name: data.form_name || 'Unknown Form',
-            form_location: $form.data('form-location') || $form.closest('section').attr('id') || 'general',
-            service: data.service || ''
-          });
-          $form[0].reset();
-        })
-        .fail(function () {
-          $msg.removeClass('success').addClass('error').text('Something went wrong, please try again.');
-        })
-        .always(function () {
-          $button.prop('disabled', false);
         });
       });
     });
