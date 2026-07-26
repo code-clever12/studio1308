@@ -35,11 +35,14 @@ document.addEventListener('submit', function (e) {
     entries.forEach(function(entry) {
       if (!entry.isIntersecting || seen.has(entry.target.id)) return;
       seen.add(entry.target.id);
-      trackEvent('section_view', {
+      window.dataLayer.push({
+        event: 'section_view',
         section_name: entry.target.dataset.sectionName,
-        section_id: entry.target.id
+        section_id: entry.target.id || 'unknown'
       });
     });
   }, { threshold: 0, rootMargin: '-15% 0px -15% 0px' });
-  sections.forEach(function(s) { observer.observe(s); });
+  sections.forEach(function(s) { 
+    observer.observe(s); 
+  });
 })();
