@@ -10,24 +10,6 @@ document.addEventListener('click', function (e) {
   });
 });
 
-
-document.addEventListener('submit', function (e) {
-  const form = e.target.closest('form');
-
-  if (!form) return;
-
-  const formId = form.id || 'unknown_form';
-  const formLocation = form.getAttribute('data-form-location') || form.closest('section')?.id || 'general';
-
-  // dataLayer event for lead generation
-  window.dataLayer.push({
-    event: 'generate_lead',
-    form_id: formId,
-    form_location: formLocation
-  });
-
-});
-
 (function() {
   const sections = document.querySelectorAll('section[data-section-name]');
   const seen = new Set();

@@ -1922,6 +1922,15 @@
         })
         .done(function () {
           $msg.removeClass('error').addClass('success').text("Thanks, we'll be in touch!");
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: 'generate_lead',
+            form_id: $form.attr('id') || 'unknown_form',
+            form_slug: data.form_slug || 'unknown_slug',
+            form_name: data.form_name || 'Unknown Form',
+            form_location: $form.data('form-location') || $form.closest('section').attr('id') || 'general',
+            service: data.service || ''
+          });
           $form[0].reset();
         })
         .fail(function () {
