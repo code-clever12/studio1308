@@ -57,7 +57,6 @@ jQuery(function ($) {
     data.is_partial = true;
 
     submitLead(data, $form.find('.form-msg'));
-    submitToSheet(data);
     $form.data('partial-sent', true); // avoid re-sending on every blur
     });
 
