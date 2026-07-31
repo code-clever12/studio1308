@@ -37,6 +37,10 @@ jQuery(function ($) {
 
     // Partial capture: as soon as the phone field looks valid, save progress
     // in the background so an abandoned form is still a recoverable lead.
+    // Delayed + cancellable: clicking Submit blurs this field first, which would
+    // otherwise fire this same-draft_id request in a race with the real submit
+    // a few ms later and make the real submit fail. The submit handler cancels
+    // this timer, so only one request ever goes out for a normal submission.
     $('.lead-form').on('blur', 'input[name="phone"]', function () {
     let $form = $(this).closest('.lead-form');
     let phone = $(this).val();
@@ -45,25 +49,30 @@ jQuery(function ($) {
         return;
     }
 
-    let data = {};
-    $form.serializeArray().forEach(function (field) {
-        data[field.name] = field.value;
-    });
+    let timer = setTimeout(function () {
+        let data = {};
+        $form.serializeArray().forEach(function (field) {
+            data[field.name] = field.value;
+        });
 
-    data.form_slug = $form.data('form-slug');
-    data.form_name = $form.data('form-name');
-    data.url = window.location.href;
-    data.draft_id = $form.data('draft-id');
-    data.is_partial = true;
+        data.form_slug = $form.data('form-slug');
+        data.form_name = $form.data('form-name');
+        data.url = window.location.href;
+        data.draft_id = $form.data('draft-id');
+        data.is_partial = true;
 
-    submitLead(data, $form.find('.form-msg'));
-    $form.data('partial-sent', true); // avoid re-sending on every blur
+        submitLead(data, $form.find('.form-msg'));
+        $form.data('partial-sent', true); // avoid re-sending on every blur
+    }, 400);
+
+    $form.data('partial-timer', timer);
     });
 
     $('.lead-form').on('submit', function (e) {
     e.preventDefault();
 
     let $form = $(this);
+    clearTimeout($form.data('partial-timer')); // a full submit supersedes any pending partial capture
     let $msg = $form.find('.form-msg');
     let $button = $form.find('button[type="submit"]');
     let phone = $form.find('input[name="phone"]').val();
