@@ -1907,29 +1907,29 @@
     },
   ];
 
-    const grid = document.getElementById('reviewsGrid');
+  const grid = document.getElementById('reviewsGrid');
 
-    grid.innerHTML = reviews.map((review, index) => `
-      <div class="rev-card">
-        <div class="rev-stars">${'★'.repeat(review.stars)}</div>
-        <p class="rev-text" id="text-${review.id}">"${review.text}"</p>
-        <button class="see-more-btn" id="btn-${review.id}" onclick="toggleText(${review.id})">See more</button>
-        <div class="rev-author">
-          <div class="rev-av"><img src="${review.avatar}" alt="${review.name}"></div>
-          <div>
-            <div class="rev-name">${review.name}</div>
-            <div class="rev-svc">${review.service}</div>
-          </div>
+  grid.innerHTML = reviews.map((review, index) => `
+    <div class="rev-card">
+      <div class="rev-stars">${'★'.repeat(review.stars)}</div>
+      <p class="rev-text" id="text-${review.id}">"${review.text}"</p>
+      <button class="see-more-btn" id="btn-${review.id}" onclick="toggleText(${review.id})">See more</button>
+      <div class="rev-author">
+        <div class="rev-av"><img src="${review.avatar}" alt="${review.name}"></div>
+        <div>
+          <div class="rev-name">${review.name}</div>
+          <div class="rev-svc">${review.service}</div>
         </div>
       </div>
-    `).join('');
+    </div>
+  `).join('');
 
-    function toggleText(id) {
-      const textEl = document.getElementById(`text-${id}`);
-      const btnEl = document.getElementById(`btn-${id}`);
-      const isExpanded = textEl.classList.toggle('expanded');
-      btnEl.textContent = isExpanded ? 'See less' : 'See more';
-    }
+  function toggleText(id) {
+    const textEl = document.getElementById(`text-${id}`);
+    const btnEl = document.getElementById(`btn-${id}`);
+    const isExpanded = textEl.classList.toggle('expanded');
+    btnEl.textContent = isExpanded ? 'See less' : 'See more';
+  }
 
   // ── Sticky topbar shadow
   const topbar = document.getElementById('topbar');

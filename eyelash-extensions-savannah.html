@@ -1766,56 +1766,72 @@
 <script src="lead-form.js"></script>
 <script src="datalayer.js"></script>
 <script>
-  // Real Google reviews, pulled directly from studio1308.com — filtered to hair-relevant
-  // reviews only (color, cuts, updos, wedding hair), same as the Gallery/Services sections.
+  // Real Google reviews, pulled directly from studio1308.com — filtered to Eyelash-relevant
+  // reviews only eyelash, same as the Gallery/Services sections.
   const reviews = [
     {
       id: 1,
       stars: 5,
-      text: "Really great experience at 1308 studio. Alma coloured my hair, it looks amazing. She is professional, experienced and talented hairstylist. The salon is beautiful and clean. I’m definitely coming back to do my hair again at this friendly and professional place. Thank you!!",
-      name: "Larissa Gusseva",
-      service: "Hair Coloring",
-      avatar: "https://lh3.googleusercontent.com/a/ACg8ocKNUvz9IgHs67XoKdFJIfhrk1LYl6ce1xOpBN0XJdbTO7OBlg=w36-h36-p-rp-mo-br100"
+      text: "Sophie did a great job on my eyelash lift/tint, as well as my brow lamination/tint. Loved the bag of goodies she provided for after care!",
+      name: "Kasi Watson",
+      service: "Eyebrow tinting",
+      avatar: "https://lh3.googleusercontent.com/a-/ALV-UjVYAEsL7buZtSi1pl9atg_evXNOx78ummT7dRVxsT0FgvGxBTHhng=s64-c-rp-mo-ba12-br100"
     },
     {
       id: 2,
       stars: 5,
-      text: "Alma was my hairdresser and she is amazing! Every detail was paid attention to and she made me feel like I was right at home! I will be returning solely for her amazing customer service and her beautiful talent.",
-      name: "Marleigh Hughes",
-      service: "Haircut & Style",
-      avatar: "https://lh3.googleusercontent.com/a/ACg8ocLTTI0-5yGXnGrc0tY0OgDXyC0VIwTLhwJaoSZq4aA9_X4fXQ=w36-h36-p-rp-mo-br100"
+      text: "I went here to get my first ever lash extensions. Vera did an excellent job on this color set. I'm so happy with the results and will keep coming back.",
+      name: "Cherry Mosholder",
+      service: "Eyelash extensions",
+      avatar: "https://lh3.googleusercontent.com/a-/ALV-UjXDv3EmkM4Jy8DmaIwtltiWd0JiZKPXbxYkuAxkQRuJBNRzD7au=s64-c-rp-mo-ba12-br100"
     },
     {
       id: 3,
       stars: 5,
-      text: "Inga was incredible. My makeup and hair were exactly as I had imagined for my wedding day. I cannot recommend her enough. Super professional.",
-      name: "Alisha Esselstein",
-      service: "Bridal Hair & Makeup",
-      avatar: "https://lh3.googleusercontent.com/a/ACg8ocJAVqjSbNLlHHikayAW8htvxu2ClqWrhoZk0X78h6cAGL24sQ=w36-h36-p-rp-mo-br100"
+      text: "I’ve been coming here regularly for lashes, eyebrow shaping, and facial treatments — and every single service has been absolutely flawless. The staff is not only professional and skilled, but also incredibly warm and attentive. They take their time to ensure everything is perfect, and I always leave feeling refreshed and confident.",
+      name: "alex suru",
+      service: "",
+      avatar: "https://lh3.googleusercontent.com/a-/ALV-UjWArsWNpcF8DVdMMT9gHOYM15DkgVT0wBGMypeXb7qScxup_lbI=s64-c-rp-mo-ba12-br100"
     },
     {
       id: 4,
       stars: 5,
-      text: "Love my haircut from Alma! Thank you!",
-      name: "Jennifer Chapman",
-      service: "Haircut",
-      avatar: "https://lh3.googleusercontent.com/a-/ALV-UjUtstpLCpjdZIKBBTBnPU3ZgACcVH6oBe34mtKgAz5ZTL1HNOg=w36-h36-p-rp-mo-br100"
+      text: "Inga and her team at 1308 Studio are absolutely amazing! I’ve gone to her for hair and makeup multiple times, plus brow tinting, lamination, and lash tinting — and every single time she nails it. Everyone there is so kind, welcoming, and talented. The studio itself is like a dream spa — beautiful, relaxing, and the perfect place to treat yourself. I always leave feeling my absolute best. Can’t recommend Inga and her studio enough!",
+      name: "Michal McKee",
+      service: "",
+      avatar: "https://lh3.googleusercontent.com/a-/ALV-UjXgZJ7hechxbG3hE4b548ZB1Yc6lBeRer2BDDWXiIX0k7hPnC_AmA=s64-c-rp-mo-br100"
     },
     {
       id: 5,
       stars: 5,
-      text: "I drove 3 hours for a hair and makeup trial with Inga and I would do it again and again! I booked her that same day for my wedding happening a couple months later. She convinced me to do lashes and I am so so so glad she did. The way she did them was just perfect. My wedding was outdoors and my hair and makeup didn’t move an inch the entire day (and it ended up being windier than we anticipated). She was so kind and personable throughout the whole experience. It was a joy to have her with us and she made myself, my mom, and my maid of honor feel so beautiful.",
-      name: "Jennifer Chapman",
-      service: "Updos, Hairstyling, Bridal Makeup",
-      avatar: "https://lh3.googleusercontent.com/a-/ALV-UjWIOeDKN6XAhH6z4iInRIvQHJHjNhBFjbSLywGc9Z2HonhSpvY=w36-h36-p-rp-mo-br100"
+      text: "1308 is absolutely amazing. They do everything from lashes, hair, brows, Headspa, and waxing. Igna is absolutely the most amazing person!",
+      name: "Natalie Stephens",
+      service: "",
+      avatar: "https://lh3.googleusercontent.com/a/ACg8ocLlxrGzdHuc3oim528AVgB2fThCwu2iwDTDKJtTEQXP5RFZ_Q=s64-c-rp-mo-br100"
     },
     {
       id: 6,
       stars: 5,
-      text: "Inga is fantastic! She did a wonderful job on my wedding hair and makeup.",
-      name: "Haley",
-      service: "Wedding Hair & Makeup",
-      avatar: "https://lh3.googleusercontent.com/a-/ALV-UjWI9CQT7oBwMP1wG0EgHdFWuD87GSttPHOzF2gHkJzMXiq3n5R6rQ=w36-h36-p-rp-mo-br100"
+      text: "Always satisfied with Inga's work! Her new studio is absolutely beautiful. Atmosphere is amazing. Quality of service always wonderful. Today i got my eyebrows waxed and laminated. My eyelashes lifted and tinted. These pictures I have absolutely no makeup. Those are my natural brows and no lash extensions. I drove from statesboro to savannah just to have her do them. I dont trust anyone else.",
+      name: "Jessica Wilson",
+      service: "Eyebrow lamination",
+      avatar: "https://lh3.googleusercontent.com/a-/ALV-UjUc-3fynSE6Byx3pRbIrs4f_FToDkA_pmm_39lPumHZkjBiHACe8Q=s64-c-rp-mo-ba12-br100"
+    },
+    {
+      id: 7,
+      stars: 5,
+      text: "Inga is amazing! Her incredible salon is gorgeous and clean. I will be returning for more treatments. If you need thr BEST lash expert in the world, Inga IS that EXPERT!! Go see her!!",
+      name: "Jennifer Johnson",
+      service: "Eyelash enhancements",
+      avatar: "https://lh3.googleusercontent.com/a-/ALV-UjUneaykEZRaabxleygq3QcJUDDzp3bbR7D1-yd-z8PzREUU8h0=s64-c-rp-mo-br100"
+    },
+    {
+      id: 8,
+      stars: 5,
+      text: "Amazing studio in downtown Savannah. You couldn’t ask for a better experience. The services are by far the best in town, from lashes to make up and hair to spa services you will not be disappointed",
+      name: "Lashes",
+      service: "Lashes",
+      avatar: "https://lh3.googleusercontent.com/a-/ALV-UjVXssXOG7hA-DcfpIm_6YUIQbhO3GaLInVVZ39PuoZr5jyq_F-U=s64-c-rp-mo-br100"
     },
   ];
 
