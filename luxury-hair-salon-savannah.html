@@ -593,6 +593,78 @@
     }
 
     /* =============================================
+       GALLERY — SHOW MORE REVEAL
+    ============================================= */
+    .gallery-wrap {
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .gallery-collapse {
+      position: relative;
+      overflow: hidden;
+      margin-top: .7rem;
+      transition: max-height .7s var(--ease);
+    }
+
+    /* Overlay only exists once JS marks the section as collapsible —
+       keeps the gallery fully visible for no-JS users. */
+    .gallery-fade { display: none; }
+
+    .gallery-collapse.is-collapsible .gallery-fade {
+      display: flex;
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: clamp(90px, 18vw, 160px);
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 1.25rem;
+      background: linear-gradient(to bottom, transparent 0%, var(--parchment) 88%);
+      opacity: 1;
+      transition: opacity .5s var(--ease);
+    }
+
+    .gallery-collapse.is-expanded .gallery-fade {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .gallery-expand-btn {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: var(--white);
+      border: 1.5px solid var(--champagne);
+      color: var(--bordeaux);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: var(--shadow-card);
+      transition: background .2s var(--ease), border-color .2s var(--ease), transform .2s var(--ease);
+    }
+    .gallery-expand-btn:hover {
+      background: var(--champagne-pale);
+      border-color: var(--bordeaux);
+      transform: translateY(-2px);
+    }
+    .gallery-expand-btn:focus-visible {
+      outline: 2px solid var(--bordeaux);
+      outline-offset: 3px;
+    }
+
+    .gallery-expand-arrow {
+      animation: galleryArrowBob 1.6s ease-in-out infinite;
+    }
+    @keyframes galleryArrowBob {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(5px); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .gallery-expand-arrow { animation: none; }
+    }
+
+    @media (max-width: 640px) {
+      .gallery-expand-btn { width: 42px; height: 42px; }
+      .gallery-collapse.is-collapsible .gallery-fade { height: clamp(70px, 22vw, 110px); }
+    }
+
+    /* =============================================
        HAIR SERVICES - 4-card menu grid
     ============================================= */
     .services-sec { padding: clamp(3.5rem,7vw,6rem) 0; background: var(--parchment); }
@@ -1313,46 +1385,127 @@
       <p>Every color, cut, and style below was created chair-side at Studio 1308 — the luxury hair salon Savannah keeps coming back to.</p>
     </div>
 
-    <div class="gallery-grid">
-      <div class="g-item g-tall r d1">
-        <img src="img/gallery/hair/BalayageWaves.jpg" alt="Balayage Waves at Studio 1308" loading="lazy">
-        <div class="g-cap"><span>Balayage Waves</span></div>
+    <div class="gallery-collapse" id="galleryCollapse">
+      <div class="gallery-grid r">
+        <div class="g-item g-tall r d1">
+          <img src="img/gallery/hair/BalayageWaves.jpg" alt="Balayage Waves at Studio 1308" loading="lazy">
+          <div class="g-cap"><span>Balayage Waves</span></div>
+        </div>
+        <div class="g-item r d2">
+          <img src="img/gallery/hair/ClassicBridalUpdo.jpg" alt="Classic Bridal Updo at Studio 1308" loading="lazy">
+          <div class="g-cap"><span>Classic Bridal Updo</span></div>
+        </div>
+        <div class="g-item r d3">
+          <img src="img/gallery/hair/DesiBridalHair.jpg" alt="Desi Bridal Hair at Studio 1308" loading="lazy">
+          <div class="g-cap"><span>Desi Bridal Hair</span></div>
+        </div>
+        <div class="g-item r d1">
+          <img src="img/gallery/hair/ElegantHollywoodWaves.jpg" alt="Elegant Hollywood Waves at Studio 1308" loading="lazy">
+          <div class="g-cap"><span>Elegant Hollywood Waves</span></div>
+        </div>
+        <div class="g-item r d2">
+          <img src="img/gallery/hair/GlamorousCurlyHair.jpg" alt="Glamorous Curly Hair at Studio 1308" loading="lazy">
+          <div class="g-cap"><span>Glamorous Curly Hair</span></div>
+        </div>
+        <div class="g-item g-tall r d3">
+          <img src="img/gallery/hair/RomanticSoftCurl.jpg" alt="Romantic Soft Curl at Studio 1308" loading="lazy">
+          <div class="g-cap"><span>Romantic Soft Curl</span></div>
+        </div>
+        <div class="g-item r d4">
+          <img src="img/gallery/hair/SignatureBridalHair.jpg" alt="Signature Bridal Hair at Studio 1308" loading="lazy">
+          <div class="g-cap"><span>Signature Bridal Hair</span></div>
+        </div>
+        <div class="g-item r d5">
+          <img src="img/gallery/hair/SleekBridalHair.jpg" alt="Sleek Bridal Hair at Studio 1308" loading="lazy">
+          <div class="g-cap"><span>Sleek Bridal Hair</span></div>
+        </div>
+        <div class="g-item r d6">
+          <img src="img/gallery/hair/SoftBridalWaves.jpg" alt="Soft Bridal Waves at Studio 1308" loading="lazy">
+          <div class="g-cap"><span>Soft Bridal Waves</span></div>
+        </div>
+        <div class="g-item r d6">
+          <img src="img/gallery/hair/VoluminousBeachWaves.jpg" alt="Voluminous Beach Waves at Studio 1308" loading="lazy">
+          <div class="g-cap"><span>Voluminous Beach Waves</span></div>
+        </div>
+        <div class="g-item r d1">
+          <img src="img/gallery/hair/AshBalayage.jpg" alt="Ash Balayage at Studio 1308" loading="lazy">
+          <div class="g-cap"><span>Ash Balayage</span></div>
+        </div>
+        <div class="g-item r d2">
+          <img src="img/gallery/hair/AshBrown.jpg" alt="Ash Brown at Studio 1308" loading="lazy">
+          <div class="g-cap"><span>Ash Brown</span></div>
+        </div>
+        <div class="g-item r d3">
+          <img src="img/gallery/hair/BlondeBlowout.jpg" alt="Blonde Blowout at Studio 1308" loading="lazy">
+          <div class="g-cap"><span>Blonde Blowout</span></div>
+        </div>
+        <div class="g-item r d4">
+          <img src="img/gallery/hair/BrunetteBalayage.jpg" alt="Brunette Balayage at Studio 1308" loading="lazy">
+          <div class="g-cap"><span>Brunette Balayage</span></div>
+        </div>
+        <div class="g-item r d5">
+          <img src="img/gallery/hair/ClassicBalayage.jpg" alt="Classic Balayage at Studio 1308" loading="lazy">
+          <div class="g-cap"><span>Classic Balayage</span></div>
+        </div>
+        <div class="g-item r d6">
+          <img src="img/gallery/hair/FullHighlights.jpg" alt="Full Highlights at Studio 1308" loading="lazy">
+          <div class="g-cap"><span>Full Highlights</span></div>
+        </div>
+        <div class="g-item r d1">
+          <img src="img/gallery/hair/HairExtensions.jpg" alt="Hair Extensions at Studio 1308" loading="lazy">
+          <div class="g-cap"><span>Hair Extensions</span></div>
+        </div>
+        <div class="g-item r d2">
+          <img src="img/gallery/hair/HoneyHighlights.jpg" alt="Honey Highlights at Studio 1308" loading="lazy">
+          <div class="g-cap"><span>Honey Highlights</span></div>
+        </div>
+        <div class="g-item r d3">
+          <img src="img/gallery/hair/IceBlonde.jpg" alt="Ice Blonde at Studio 1308" loading="lazy">
+          <div class="g-cap"><span>Ice Blonde</span></div>
+        </div>
+        <div class="g-item r d4">
+          <img src="img/gallery/hair/MochaGloss.jpg" alt="Mocha Gloss at Studio 1308" loading="lazy">
+          <div class="g-cap"><span>Mocha Gloss</span></div>
+        </div>
+        <div class="g-item r d5">
+          <img src="img/gallery/hair/PlatinumBalayage.jpg" alt="Platinum Balayage at Studio 1308" loading="lazy">
+          <div class="g-cap"><span>Platinum Balayage</span></div>
+        </div>
+        <div class="g-item r d6">
+          <img src="img/gallery/hair/RootMelt.jpg" alt="Root Melt at Studio 1308" loading="lazy">
+          <div class="g-cap"><span>Root Melt</span></div>
+        </div>
+        <div class="g-item r d1">
+          <img src="img/gallery/hair/SignatureBlonde.jpg" alt="Signature Blonde at Studio 1308" loading="lazy">
+          <div class="g-cap"><span>Signature Blonde</span></div>
+        </div>
+        <div class="g-item r d2">
+          <img src="img/gallery/hair/SilkPress.jpg" alt="Silk Press at Studio 1308" loading="lazy">
+          <div class="g-cap"><span>Silk Press</span></div>
+        </div>
+        <div class="g-item r d3">
+          <img src="img/gallery/hair/SleekBrunette.jpg" alt="Sleek Brunette at Studio 1308" loading="lazy">
+          <div class="g-cap"><span>Sleek Brunette</span></div>
+        </div>
+        <div class="g-item r d4">
+          <img src="img/gallery/hair/SoftHighlights.jpg" alt="Soft Highlights at Studio 1308" loading="lazy">
+          <div class="g-cap"><span>Soft Highlights</span></div>
+        </div>
+
       </div>
-      <div class="g-item r d2">
-        <img src="img/gallery/hair/ClassicBridalUpdo.jpg" alt="Classic Bridal Updo at Studio 1308" loading="lazy">
-        <div class="g-cap"><span>Classic Bridal Updo</span></div>
-      </div>
-      <div class="g-item r d3">
-        <img src="img/gallery/hair/DesiBridalHair.jpg" alt="Desi Bridal Hair at Studio 1308" loading="lazy">
-        <div class="g-cap"><span>Desi Bridal Hair</span></div>
-      </div>
-      <div class="g-item r d1">
-        <img src="img/gallery/hair/ElegantHollywoodWaves.jpg" alt="Elegant Hollywood Waves at Studio 1308" loading="lazy">
-        <div class="g-cap"><span>Elegant Hollywood Waves</span></div>
-      </div>
-      <div class="g-item r d2">
-        <img src="img/gallery/hair/GlamorousCurlyHair.jpg" alt="Glamorous Curly Hair at Studio 1308" loading="lazy">
-        <div class="g-cap"><span>Glamorous Curly Hair</span></div>
-      </div>
-      <div class="g-item g-tall r d3">
-        <img src="img/gallery/hair/RomanticSoftCurl.jpg" alt="Romantic Soft Curl at Studio 1308" loading="lazy">
-        <div class="g-cap"><span>Romantic Soft Curl</span></div>
-      </div>
-      <div class="g-item r d4">
-        <img src="img/gallery/hair/SignatureBridalHair.jpg" alt="Signature Bridal Hair at Studio 1308" loading="lazy">
-        <div class="g-cap"><span>Signature Bridal Hair</span></div>
-      </div>
-      <div class="g-item r d5">
-        <img src="img/gallery/hair/SleekBridalHair.jpg" alt="Sleek Bridal Hair at Studio 1308" loading="lazy">
-        <div class="g-cap"><span>Sleek Bridal Hair</span></div>
-      </div>
-      <div class="g-item r d6">
-        <img src="img/gallery/hair/SoftBridalWaves.jpg" alt="Soft Bridal Waves at Studio 1308" loading="lazy">
-        <div class="g-cap"><span>Soft Bridal Waves</span></div>
-      </div>
-      <div class="g-item r d6">
-        <img src="img/gallery/hair/VoluminousBeachWaves.jpg" alt="Voluminous Beach Waves at Studio 1308" loading="lazy">
-        <div class="g-cap"><span>Voluminous Beach Waves</span></div>
+
+      <div class="gallery-fade" id="galleryFade">
+        <button
+          class="gallery-expand-btn"
+          id="galleryExpandBtn"
+          type="button"
+          aria-label="Show more photos"
+          aria-expanded="false"
+          aria-controls="galleryCollapse">
+          <svg class="gallery-expand-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 9l6 6 6-6"/>
+          </svg>
+        </button>
       </div>
     </div>
 
@@ -1852,6 +2005,57 @@
     });
 
   })(jQuery);
+
+  // ── Show more reveal (photo + video galleries)
+  (function initGalleryReveals() {
+    const debounce = (fn, wait) => {
+      let t;
+      return (...args) => {
+        clearTimeout(t);
+        t = setTimeout(() => fn(...args), wait);
+      };
+    };
+
+    document.querySelectorAll('.gallery-collapse').forEach(collapseEl => {
+      const btn = collapseEl.querySelector('.gallery-expand-btn');
+      if (!btn) return;
+
+      let expanded = false;
+      const ratio = parseFloat(collapseEl.dataset.collapseRatio) || 0.5;
+
+      function measureAndCollapse() {
+        if (expanded) return;
+        collapseEl.style.maxHeight = 'none';
+        const fullHeight = collapseEl.scrollHeight;
+        collapseEl.dataset.fullHeight = fullHeight;
+        collapseEl.style.maxHeight = Math.round(fullHeight * ratio) + 'px';
+      }
+
+      collapseEl.classList.add('is-collapsible');
+      measureAndCollapse();
+
+      collapseEl.querySelectorAll('img').forEach(img => {
+        if (!img.complete) img.addEventListener('load', measureAndCollapse, { once: true });
+      });
+      window.addEventListener('load', measureAndCollapse);
+      window.addEventListener('resize', debounce(measureAndCollapse, 150));
+
+      btn.addEventListener('click', () => {
+        expanded = true;
+        const fullHeight = collapseEl.dataset.fullHeight || collapseEl.scrollHeight;
+        collapseEl.style.maxHeight = fullHeight + 'px';
+        collapseEl.classList.add('is-expanded');
+        btn.setAttribute('aria-expanded', 'true');
+
+        collapseEl.addEventListener('transitionend', function onEnd(e) {
+          if (e.propertyName === 'max-height') {
+            collapseEl.style.maxHeight = 'none';
+            collapseEl.removeEventListener('transitionend', onEnd);
+          }
+        });
+      });
+    });
+  })();
 
   /* =============================================
      PROMO CONFIG — edit these 5 lines when the
