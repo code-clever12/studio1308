@@ -1,6 +1,21 @@
 jQuery(function ($) {
     let API_URL = 'https://studio1308.code-clever.com/api/v1/submit-form';
 
+    // Paste the /exec URL from your Google Apps Script deployment here.
+    // Leave blank to skip the Google Sheets copy.
+    let GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzYbM0MShIVm56KgGfdAgq8EIp-6Ht8VQ2KsatLLqkDuaEmaoeANWFNOAMpaHR5_lRy/exec';
+
+    function submitToSheet(data) {
+        if (!GOOGLE_SHEETS_URL) return;
+        // no-cors: Apps Script doesn't return CORS headers, and we don't need to read the response
+        fetch(GOOGLE_SHEETS_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'text/plain' },
+            body: JSON.stringify(data)
+        }).catch(function () {});
+    }
+
     function isValidPhone(phone) {
     return (phone || '').replace(/\D/g, '').length >= 10;
     }
@@ -42,6 +57,7 @@ jQuery(function ($) {
     data.is_partial = true;
 
     submitLead(data, $form.find('.form-msg'));
+    submitToSheet(data);
     $form.data('partial-sent', true); // avoid re-sending on every blur
     });
 
@@ -75,12 +91,14 @@ jQuery(function ($) {
 
     // Optional: capture UTM params from the page's own query string
     let params = new URLSearchParams(window.location.search);
-    ['utm_source', 'utm_medium', 'utm_campaign'].forEach(function (key) {
+    ['utm_term', 'utm_content', 'adgroupid', 'gad_campaignid', 'gclid'].forEach(function (key) {
         if (params.has(key)) data[key] = params.get(key);
     });
 
     $button.prop('disabled', true);
     $msg.text('');
+
+    submitToSheet(data);
 
     $.ajax({
         url: API_URL,
