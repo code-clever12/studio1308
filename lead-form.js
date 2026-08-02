@@ -369,6 +369,15 @@ jQuery(function ($) {
         $form.data('partial-sent', false);
         $form.data('draft-id', 'draft-' + Date.now() + '-' + Math.random().toString(36).slice(2, 10)); // fresh id for next lead
         $form.data('booking-state', null);
+
+        // Let the visitor read the confirmation, then reset to a blank
+        // step 1 so the form is ready for another submission.
+        setTimeout(function () {
+            $form.find('.lead-step-2').removeClass('active');
+            $form.find('.lead-step-1').addClass('active');
+            $form.find('.booking-picker').removeClass('show-times');
+            $msg.removeClass('success error').text('');
+        }, 2500);
     })
     .fail(function () {
         $msg.removeClass('success').addClass('error').text('Something went wrong, please try again.');
