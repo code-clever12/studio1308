@@ -95,6 +95,7 @@ jQuery(function ($) {
                 '<div class="booking-picker">' +
                     '<div class="booking-cal"></div>' +
                     '<div class="booking-times">' +
+                        '<button type="button" class="booking-change-date">&larr; Change date</button>' +
                         '<div class="booking-times-head">Select a date</div>' +
                         '<div class="booking-times-list"></div>' +
                     '</div>' +
@@ -248,6 +249,7 @@ jQuery(function ($) {
     $msg.text('');
     $form.find('.lead-step-1').removeClass('active');
     $form.find('.lead-step-2').addClass('active');
+    $form.find('.booking-picker').removeClass('show-times'); // always start on the calendar
     renderCalendar($form);
     renderTimeList($form);
     });
@@ -277,6 +279,12 @@ jQuery(function ($) {
     renderCalendar($form);
     renderTimeList($form);
     $form.find('.lead-confirm').prop('disabled', true);
+    $form.find('.booking-picker').addClass('show-times'); // hide calendar, show times for the picked date
+    });
+
+    $(document).on('click', '.booking-change-date', function () {
+    let $form = $(this).closest('.lead-form');
+    $form.find('.booking-picker').removeClass('show-times');
     });
 
     $(document).on('click', '.time-slot', function () {
