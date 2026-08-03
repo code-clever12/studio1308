@@ -885,6 +885,15 @@
     .book-sec p { font-size: .88rem; color: rgba(250,246,240,.55); max-width: 380px; margin: 0 auto 2.2rem; }
     .book-ctas { display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; }
 
+    .book-widget-wrap {
+      margin: 2.5rem auto 0;
+      max-width: 900px;
+      background: var(--white);
+      border-radius: 16px;
+      padding: clamp(1.5rem, 4vw, 2.5rem) clamp(1rem, 3vw, 1.5rem);
+      box-shadow: 0 30px 70px -20px rgba(0,0,0,.4);
+    }
+
     /* =============================================
        FOOTER
     ============================================= */
@@ -1861,6 +1870,21 @@
         </a>
       </div>
     </div>
+
+    <!-- Inline Vagaro booking widget — every "Book Now"/"Book Online" link scrolls here -->
+    <div class="book-widget-wrap r" id="book-widget">
+      <div id="frameTitle" class="embedded-widget-title" style="font-size: 20px; color: var(--bordeaux-deep); font-family: var(--body); line-height: 24px; padding: 0 10px 14px; text-align: center; box-sizing: border-box;"></div>
+      <div class="vagaro" style="width: 100%; max-width: 900px; padding: 0; border: 0; margin: 0 auto; text-align: center;">
+        <script type="text/javascript" src="https://www.vagaro.com/resources/WidgetEmbeddedLoader/OZqoC30mEJOcT3qmV35y6JuPlXez3Py79oz34mC2PeFJ4mC30m9dSycvCu7gevEhAJDXwOapcUbfY?v=qy3Z6HbRJPrGIgUDZeqKtnSD2d5EaGU94DWwZn4aaju#"></script>
+        <div style="margin-top: 12px;">
+          <style>.vagaro a {font-size: 12px; color: #AAA; text-decoration: none;}</style>
+          <a href="https://www.vagaro.com/pro/">Powered by Vagaro</a> &nbsp;
+          <a href="https://www.vagaro.com/pro/salon-software">Salon Software</a>, &nbsp;
+          <a href="https://www.vagaro.com/pro/spa-software">Spa Software</a> &amp; &nbsp;
+          <a href="https://www.vagaro.com/pro/fitness-software">Fitness Software</a>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1928,6 +1952,11 @@
 <script>
   (function($) {
     $(document).ready(function() {
+      $('a[href="https://www.vagaro.com/1308studio"]').on('click', function(e) {
+        e.preventDefault();
+        document.getElementById('book-widget').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+
       $('.hero-photos').slick({
         slidesToShow: 1,
         slidesToScroll: 1,

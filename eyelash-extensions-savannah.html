@@ -1079,6 +1079,15 @@
     .book-sec p { font-size: .88rem; color: rgba(250,246,240,.55); max-width: 380px; margin: 0 auto 2.2rem; }
     .book-ctas { display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; }
 
+    .book-widget-wrap {
+      margin: 2.5rem auto 0;
+      max-width: 900px;
+      background: var(--white);
+      border-radius: 16px;
+      padding: clamp(1.5rem, 4vw, 2.5rem) clamp(1rem, 3vw, 1.5rem);
+      box-shadow: 0 30px 70px -20px rgba(0,0,0,.4);
+    }
+
     /* =============================================
        FOOTER
     ============================================= */
@@ -1217,38 +1226,6 @@
     }
 
     /*popup css*/
-    .dialog_box {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      z-index: 999999;
-      display: flex;
-	    flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      backdrop-filter: blur(8px);
-      opacity: 0;
-      visibility: hidden;
-      transition: .3s;
-    }
-    .dialog_box.open {
-      opacity: 1;
-      visibility: visible;
-    }
-    .dialog_box .dialog_message {
-      max-width: 94vw;
-      width: 430px;
-      height: auto;
-      overflow: auto;
-      transform: scale(.6);
-      transition: .3s
-    }
-    .dialog_box.open .dialog_message {
-      transform: scale(1);
-    }
     .hero-lead-card.popup {
       position: relative;
       top: 0;
@@ -1408,31 +1385,6 @@
     </div>
   </div>
 
-  <!-- LEAD FORM - hero right corner -->
-  <div class="hero-lead-card" id="heroLeadCard">
-    <span class="promo-countdown-chip" id="promoChip">⏳ Offer ends in --d --h --m</span>
-    <span class="lead-eyebrow" id="leadEyebrow">Limited Lash Slots This Week</span>
-    <div class="lead-title" id="leadTitle">Claim Your <em>20% Off</em> First Visit</div>
-    <p class="lead-sub" id="leadSub">Tell us a bit about you and we'll text you back within minutes to lock in your spot.</p>
-    <form class="lead-form" id="hero_lead_form" data-form-slug="eyelash-extension-contact-us" data-form-name="Eyelash Extension Contact Us" data-form-location="Eyelash Extension Hero Lead Form">
-      <input class="lead-field" type="text" name="name" placeholder="Full Name" autocomplete="name" required>
-      <input class="lead-field" type="tel" name="phone" placeholder="Phone Number" autocomplete="tel" required>
-      <select class="lead-field" name="service" required>
-        <option disabled value="">Interested In...</option>
-        <option value="hair">Hair</option>
-        <option selected value="lashes">Lashes</option>
-        <option value="brows">Brows</option>
-        <option value="headspa">Head Spa</option>
-        <option value="other">Something Else</option>
-      </select>
-      <button type="submit" class="lead-submit">Claim My Spot →</button>
-      <div class="form-msg"></div>
-    </form>
-    <div class="lead-note">
-      <span class="t-ic">🅿️</span>
-      Free Parking Front &amp; Back · No Obligation
-    </div>
-  </div>
 </section>
 
 <!-- ===================== LASH GALLERY ===================== -->
@@ -1740,6 +1692,21 @@
         </a>
       </div>
     </div>
+
+    <!-- Inline Vagaro booking widget — every "Book Now" button scrolls here -->
+    <div class="book-widget-wrap r" id="book-widget">
+      <div id="frameTitle" class="embedded-widget-title" style="font-size: 20px; color: var(--bordeaux-deep); font-family: var(--body); line-height: 24px; padding: 0 10px 14px; text-align: center; box-sizing: border-box;"></div>
+      <div class="vagaro" style="width: 100%; max-width: 900px; padding: 0; border: 0; margin: 0 auto; text-align: center;">
+        <script type="text/javascript" src="https://www.vagaro.com/resources/WidgetEmbeddedLoader/OZqoC30mEJOcT3qmV35y6JuPlXez3Py79oz34mC2PeFJ4mC30m9dSycvCu7gevEhAJDXwOapcUbfY?v=qy3Z6HbRJPrGIgUDZeqKtnSD2d5EaGU94DWwZn4aaju#"></script>
+        <div style="margin-top: 12px;">
+          <style>.vagaro a {font-size: 12px; color: #AAA; text-decoration: none;}</style>
+          <a href="https://www.vagaro.com/pro/">Powered by Vagaro</a> &nbsp;
+          <a href="https://www.vagaro.com/pro/salon-software">Salon Software</a>, &nbsp;
+          <a href="https://www.vagaro.com/pro/spa-software">Spa Software</a> &amp; &nbsp;
+          <a href="https://www.vagaro.com/pro/fitness-software">Fitness Software</a>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1801,37 +1768,6 @@
   </a>
 </div>
 
-
-<!-- ===================== POPUP ===================== -->
- <div class="dialog_box">
-  <div class="dialog_message">
-    <!-- LEAD FORM - hero right corner -->
-  <div class="hero-lead-card popup">
-    <span class="promo-countdown-chip" id="promoChip">⏳ Offer ends in --d --h --m</span>
-    <span class="lead-eyebrow" id="leadEyebrow">Limited Slots This Week</span>
-    <div class="lead-title" id="leadTitle">Claim Your <em>20% Off</em> First Visit</div>
-    <p class="lead-sub" id="leadSub">Tell us a bit about you and we'll text you back within minutes to lock in your spot.</p>
-    <form class="lead-form" id="popup_lead_form" data-form-slug="eyelash-extensions-popup-contact-us" data-form-name="Eyelash Extensions Popup Contact Us" data-form-location="Eyelash Extensions Popup Lead Form">
-      <input class="lead-field" type="text" name="name" placeholder="Full Name" autocomplete="name" required>
-      <input class="lead-field" type="tel" name="phone" placeholder="Phone Number" autocomplete="tel" required>
-      <select class="lead-field" name="service" required>
-        <option disabled value="">Interested In...</option>
-        <option value="hair">Hair</option>
-        <option selected value="lashes">Lashes</option>
-        <option value="brows">Brows</option>
-        <option value="headspa">Head Spa</option>
-        <option value="other">Something Else</option>
-      </select>
-      <button type="submit" class="lead-submit">Claim My Spot →</button>
-      <div class="form-msg"></div>
-    </form>
-    <div class="lead-note">
-      <span class="t-ic">🅿️</span>
-      Free Parking Front &amp; Back · No Obligation
-    </div>
-  </div>
-  </div>
- </div>
 
 <script src="jquery.min.js"></script>
 <script src="slick.min.js"></script>
@@ -1956,23 +1892,9 @@
       });
     
       $(document).ready(function() {
-        let exitTriggered = false;
-        $(document).on("mouseleave", function(e) {
-          if (!exitTriggered && e.clientY <= 0) {
-            $(".dialog_box").addClass("open");
-            exitTriggered = true;
-          }
-        });
-
         $('.popup_btn').on('click', function(e) {
           e.preventDefault();
-          $(".dialog_box").addClass("open");
-        });
-
-        $(".dialog_box").on("click", function(e){
-          if (!$(e.target).closest(".dialog_message").length) {
-            $(".dialog_box").removeClass("open");
-          }
+          document.getElementById('book-widget').scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
       });
     });
@@ -2002,7 +1924,12 @@
     const end   = new Date(PROMO.end);
 
     const bar   = document.getElementById('promoBar');
-    const card  = document.getElementById('heroLeadCard');
+    // Hero lead card was removed from this page — these are all optional now,
+    // so the promo bar itself keeps working independently of them.
+    const card       = document.getElementById('heroLeadCard');
+    const eyebrowEl  = document.getElementById('leadEyebrow');
+    const titleEl    = document.getElementById('leadTitle');
+    const subEl      = document.getElementById('leadSub');
 
     function isLive() {
       // Preview override for testing/QA: open the page as index.html?promo=1
@@ -2014,14 +1941,11 @@
     function pad(n) { return String(n).padStart(2, '0'); }
 
     // Snapshot the original (non-promo) copy once, before we ever touch it
-    const eyebrowEl = document.getElementById('leadEyebrow');
-    const titleEl   = document.getElementById('leadTitle');
-    const subEl     = document.getElementById('leadSub');
-    const defaults = {
+    const defaults = card ? {
       eyebrow: eyebrowEl.innerHTML,
       title:   titleEl.innerHTML,
       sub:     subEl.innerHTML
-    };
+    } : null;
 
     let wasLive = null; // force first-run copy swap
 
@@ -2029,12 +1953,17 @@
       const live = isLive();
 
       if (live !== wasLive) {
-        bar.classList.toggle('is-active', live);
-        card.classList.toggle('is-promo', live);
-        eyebrowEl.innerHTML = live ? PROMO.eyebrow : defaults.eyebrow;
-        titleEl.innerHTML   = live ? PROMO.title   : defaults.title;
-        subEl.innerHTML     = live ? PROMO.sub     : defaults.sub;
-        if (live) document.getElementById('promoBarText').textContent = PROMO.barText;
+        if (bar) bar.classList.toggle('is-active', live);
+        if (card) {
+          card.classList.toggle('is-promo', live);
+          eyebrowEl.innerHTML = live ? PROMO.eyebrow : defaults.eyebrow;
+          titleEl.innerHTML   = live ? PROMO.title   : defaults.title;
+          subEl.innerHTML     = live ? PROMO.sub     : defaults.sub;
+        }
+        if (live) {
+          const barTextEl = document.getElementById('promoBarText');
+          if (barTextEl) barTextEl.textContent = PROMO.barText;
+        }
         wasLive = live;
       }
 
@@ -2046,8 +1975,11 @@
       const m = Math.max(0, Math.floor((diff % 3600000) / 60000));
       const s = Math.max(0, Math.floor((diff % 60000) / 1000));
 
-      document.getElementById('promoBarCountdown').textContent = `${d}d ${pad(h)}h ${pad(m)}m ${pad(s)}s`;
-      document.getElementById('promoChip').textContent = `⏳ Offer ends in ${d}d ${pad(h)}h ${pad(m)}m`;
+      const countdownEl = document.getElementById('promoBarCountdown');
+      if (countdownEl) countdownEl.textContent = `${d}d ${pad(h)}h ${pad(m)}m ${pad(s)}s`;
+
+      const chipEl = document.getElementById('promoChip');
+      if (chipEl) chipEl.textContent = `⏳ Offer ends in ${d}d ${pad(h)}h ${pad(m)}m`;
     }
 
     tick();
