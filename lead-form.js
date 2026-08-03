@@ -96,10 +96,16 @@ jQuery(function ($) {
         data.value = $form.data('value');
     }
 
-    // Optional: capture UTM params from the page's own query string
+    // Optional: capture UTM/ad-tracking params from the page's own query string.
+    // URL param names are set by Google Ads and can't be renamed — only the key
+    // we send them under is renamed to "utm_..." so the admin CRM groups them
+    // with the rest of the tracking data instead of listing them separately.
     let params = new URLSearchParams(window.location.search);
     ['utm_term', 'utm_content', 'adgroupid', 'gad_campaignid', 'gclid'].forEach(function (key) {
-        if (params.has(key)) data[key] = params.get(key);
+        if (params.has(key)) {
+            let apiKey = key.indexOf('utm_') === 0 ? key : 'utm_' + key;
+            data[apiKey] = params.get(key);
+        }
     });
 
     $button.prop('disabled', true);
