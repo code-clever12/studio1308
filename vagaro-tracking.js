@@ -6,12 +6,13 @@
   var VALUE_KEY    = 'vagaro_booking_value';
   var CURRENCY_KEY = 'vagaro_booking_currency';
   var TXN_KEY      = 'vagaro_booking_txn';
-  var DEBUG_KEY    = 'vagaro_last_message_debug';
+  var DEBUG_KEY    = 'vagaro_message_history'; // keeps every message seen this session, not just the last one
+  var DEBUG_MAX    = 50; // cap so a long session doesn't grow this unbounded
 
   // Best-effort field name guesses — Vagaro's real payload shape is
   // unconfirmed. Do one real test booking, check the browser console
-  // (or localStorage["vagaro_last_message_debug"]) for the actual
-  // field names, then tighten this list to match exactly.
+  // (or JSON.parse(localStorage["vagaro_message_history"]) for the full
+  // sequence) for the actual field names, then tighten this list to match.
   var VALUE_KEYS = [
     'total', 'grandtotal', 'grandTotal', 'bookingtotal', 'bookingTotal',
     'ordertotal', 'orderTotal', 'amount', 'amountpaid', 'amountPaid',
@@ -59,13 +60,18 @@
   window.addEventListener('message', function (event) {
     if (!event.origin || event.origin.indexOf('vagaro.com') === -1) return;
 
-    // Discovery logging — keep this until Vagaro's real payload shape is
-    // confirmed from a live test booking, then it's safe to remove.
+    // Discovery logging — keeps every message from this page load in order,
+    // so we can see the full sequence (e.g. a booking-confirmation message
+    // that fires right before a later resize event would otherwise overwrite
+    // it). Keep this until Vagaro's real payload shape is confirmed from a
+    // live test booking, then it's safe to remove.
     console.log('[Vagaro message]', event.origin, event.data);
     try {
-      localStorage.setItem(DEBUG_KEY, JSON.stringify({
-        origin: event.origin, data: event.data, at: new Date().toISOString()
-      }));
+      var history = [];
+      try { history = JSON.parse(localStorage.getItem(DEBUG_KEY)) || []; } catch (e) {}
+      history.push({ origin: event.origin, data: event.data, at: new Date().toISOString() });
+      if (history.length > DEBUG_MAX) history = history.slice(history.length - DEBUG_MAX);
+      localStorage.setItem(DEBUG_KEY, JSON.stringify(history));
     } catch (e) {}
 
     var data = event.data;
