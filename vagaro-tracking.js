@@ -21,7 +21,8 @@
   ];
   var TXN_KEYS = [
     'transactionid', 'transactionId', 'bookingid', 'bookingId',
-    'orderid', 'orderId', 'id', 'confirmationnumber', 'confirmationNumber'
+    'orderid', 'orderId', 'id', 'confirmationnumber', 'confirmationNumber',
+    'customerid', 'customerId'
   ];
 
   function findFirstMatch(obj, keys, seen) {
@@ -57,39 +58,60 @@
     return null;
   }
 
+  // Confirmed-noisy message shapes from a live test — Vagaro's iframe fires
+  // these constantly (roughly every 0.5-1s) purely to auto-resize itself.
+  // They carry no booking data and were flooding the capped debug history
+  // below, pushing out the rarer, meaningful events (e.g. the confirmed
+  // "eventName": "CreditCardCaptureViewed" style messages).
+  function isNoise(data) {
+    if (!data || typeof data !== 'object') return false;
+    if (data.object === 'requestSize') return true;
+    if (data.eventType === 'setHeightBuilder') return true;
+    return false;
+  }
+
   window.addEventListener('message', function (event) {
     if (!event.origin || event.origin.indexOf('vagaro.com') === -1) return;
 
-    // Discovery logging — keeps every message from this page load in order,
-    // so we can see the full sequence (e.g. a booking-confirmation message
-    // that fires right before a later resize event would otherwise overwrite
-    // it). Keep this until Vagaro's real payload shape is confirmed from a
-    // live test booking, then it's safe to remove.
-    console.log('[Vagaro message]', event.origin, event.data);
-    try {
-      var history = [];
-      try { history = JSON.parse(localStorage.getItem(DEBUG_KEY)) || []; } catch (e) {}
-      history.push({ origin: event.origin, data: event.data, at: new Date().toISOString() });
-      if (history.length > DEBUG_MAX) history = history.slice(history.length - DEBUG_MAX);
-      localStorage.setItem(DEBUG_KEY, JSON.stringify(history));
-    } catch (e) {}
-
-    var data = event.data;
+    var raw = event.data;
+    var data = raw;
     if (typeof data === 'string') {
-      try { data = JSON.parse(data); } catch (e) { return; }
+      try { data = JSON.parse(data); } catch (e) { data = null; }
     }
-    if (!data || typeof data !== 'object') return;
 
-    var value = toNumber(findFirstMatch(data, VALUE_KEYS));
-    var txn = findFirstMatch(data, TXN_KEYS);
-
-    if (value !== null) {
+    // Discovery logging — keeps every non-noise message from this page load
+    // in order, so we can see the full sequence (e.g. a booking-confirmation
+    // message near the end). Keep this until Vagaro's real payload shape for
+    // a *completed* booking is confirmed, then it's safe to remove.
+    if (!isNoise(data)) {
+      console.log('[Vagaro message]', event.origin, raw);
       try {
-        localStorage.setItem(VALUE_KEY, String(value));
-        localStorage.setItem(CURRENCY_KEY, 'USD');
-        if (txn) localStorage.setItem(TXN_KEY, String(txn));
-        console.log('[Vagaro] captured booking value:', value, 'txn:', txn);
+        var history = [];
+        try { history = JSON.parse(localStorage.getItem(DEBUG_KEY)) || []; } catch (e) {}
+        history.push({ origin: event.origin, data: raw, at: new Date().toISOString() });
+        if (history.length > DEBUG_MAX) history = history.slice(history.length - DEBUG_MAX);
+        localStorage.setItem(DEBUG_KEY, JSON.stringify(history));
       } catch (e) {}
     }
+
+    if (!data || typeof data !== 'object') return;
+
+    // Only extract from the confirmed, authoritative completion event.
+    // Scanning every message risked grabbing a price shown earlier in the
+    // flow (e.g. while browsing services, before the customer finished or
+    // changed their booking) and mistaking it for the final value.
+    if (data.eventName !== 'BookingCompleted') return;
+
+    var value = toNumber(findFirstMatch(data, VALUE_KEYS));
+    var txn = findFirstMatch(data, TXN_KEYS); // reliably finds customerId on this event
+
+    try {
+      if (value !== null) {
+        localStorage.setItem(VALUE_KEY, String(value));
+        localStorage.setItem(CURRENCY_KEY, 'USD');
+      }
+      if (txn) localStorage.setItem(TXN_KEY, String(txn));
+      console.log('[Vagaro] BookingCompleted captured — value:', value, 'txn:', txn);
+    } catch (e) {}
   });
 })();
