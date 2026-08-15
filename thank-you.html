@@ -34,8 +34,49 @@
 
     // Booking-confirmed conversion event — fires once, when Vagaro redirects here.
     window.dataLayer.push({ event: 'booking_confirmed' });
-    /* If you have a Google Ads booking conversion action, fire it here too, e.g.:
-       gtag('event', 'conversion', { send_to: 'AW-18207205061/XXXXXXXXXXXX' }); */
+
+    (function fireBookingConversion() {
+      var GOOGLE_ADS_CONVERSION_LABEL = 'AW-18207205061/MWGeCJiMwNscEMXN7-lD';
+
+      var VALUE_KEY    = 'vagaro_booking_value';
+      var CURRENCY_KEY = 'vagaro_booking_currency';
+      var TXN_KEY      = 'vagaro_booking_txn';
+      var FIRED_KEY    = 'vagaro_conversion_fired_txn';
+
+      // Wrapped defensively: if localStorage is unavailable for any reason
+      // (locked-down privacy mode, sandboxed context, etc.), fall back to
+      // "no prior data" instead of letting a thrown error skip the whole
+      // conversion fire below.
+      var value = null, currency = 'USD', txn = 'no-txn-' + Date.now(), alreadyFired = null;
+      try {
+        value = localStorage.getItem(VALUE_KEY);
+        currency = localStorage.getItem(CURRENCY_KEY) || 'USD';
+        txn = localStorage.getItem(TXN_KEY) || txn;
+        alreadyFired = localStorage.getItem(FIRED_KEY);
+      } catch (e) {}
+
+      // Don't refire the same conversion on a page refresh/revisit.
+      if (alreadyFired === txn) return;
+
+      var params = { send_to: GOOGLE_ADS_CONVERSION_LABEL, transaction_id: txn };
+      if (value !== null) {
+        params.value = parseFloat(value);
+        params.currency = currency;
+      }
+      // If no value was captured (postMessage from Vagaro never fired, or its
+      // payload shape didn't match our field-name guesses), this still fires
+      // as a count-only conversion — better than tracking nothing.
+
+      gtag('event', 'conversion', params);
+
+      try {
+        localStorage.setItem(FIRED_KEY, txn);
+        // Clean up so a future, unrelated booking doesn't reuse stale data.
+        localStorage.removeItem(VALUE_KEY);
+        localStorage.removeItem(CURRENCY_KEY);
+        localStorage.removeItem(TXN_KEY);
+      } catch (e) {}
+    })();
   </script>
 
   <style>
