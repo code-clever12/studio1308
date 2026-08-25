@@ -32,8 +32,36 @@
     gtag('js', new Date());
     gtag('config', 'G-DSQ6HBS9YN');
 
+    // Vagaro appends ?appointmentId=... to this page's URL on redirect after
+    // a completed booking — a real, unique ID per appointment, straight from
+    // Vagaro itself (no widget-side capturing needed).
+    var appointmentId = new URLSearchParams(window.location.search).get('appointmentId');
+
     // Booking-confirmed event — fires once, when Vagaro redirects here.
-    window.dataLayer.push({ event: 'booking_confirmed' });
+    window.dataLayer.push({ event: 'booking_confirmed', appointment_id: appointmentId });
+
+    (function fireBookingConversion() {
+      if (!appointmentId) return; // only fire when we actually have a real appointment
+
+      var GOOGLE_ADS_CONVERSION_LABEL = 'AW-18207205061/MWGeCJiMwNscEMXN7-lD';
+      var FIRED_KEY = 'vagaro_conversion_fired_appointment';
+
+      // Don't refire the same conversion on a page refresh/revisit.
+      var alreadyFired = null;
+      try { alreadyFired = localStorage.getItem(FIRED_KEY); } catch (e) {}
+      if (alreadyFired === appointmentId) return;
+
+      // No dollar value available from Vagaro (confirmed via live testing —
+      // neither the widget's postMessage stream nor this redirect exposes
+      // price) — this fires as a count-only conversion, deduplicated by the
+      // real appointment ID instead of a random fallback.
+      gtag('event', 'conversion', {
+        send_to: GOOGLE_ADS_CONVERSION_LABEL,
+        transaction_id: appointmentId
+      });
+
+      try { localStorage.setItem(FIRED_KEY, appointmentId); } catch (e) {}
+    })();
   </script>
 
   <style>
