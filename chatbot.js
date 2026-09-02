@@ -145,7 +145,7 @@
       var card = document.createElement('div');
       card.className = 'chatbot-capture';
       card.innerHTML =
-        '<p class="chatbot-capture-title">Call us now at <a href="tel:' + STUDIO_PHONE_TEL + '" class="chatbot-capture-phone">' + STUDIO_PHONE_DISPLAY + '</a>, or share a few quick details below and we\'ll reach out within minutes.</p>' +
+        '<p class="chatbot-capture-title">Call us now at <a href="tel:' + STUDIO_PHONE_TEL + '" class="chatbot-capture-phone">' + STUDIO_PHONE_DISPLAY + '</a>, or share a few quick details below and we\'ll reach out within few minutes.</p>' +
         '<input type="text" class="chatbot-capture-input" id="chatbotCapName" placeholder="Full name" autocomplete="name">' +
         '<input type="tel" class="chatbot-capture-input" id="chatbotCapPhone" placeholder="Phone number" autocomplete="tel">' +
         '<input type="email" class="chatbot-capture-input" id="chatbotCapEmail" placeholder="Email (optional)" autocomplete="email">' +
