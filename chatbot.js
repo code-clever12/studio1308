@@ -145,7 +145,7 @@
       var card = document.createElement('div');
       card.className = 'chatbot-capture';
       card.innerHTML =
-        '<p class="chatbot-capture-title">Before we start — mind sharing a bit about you?</p>' +
+        '<p class="chatbot-capture-title">Call us now at <a href="tel:' + STUDIO_PHONE_TEL + '" class="chatbot-capture-phone">' + STUDIO_PHONE_DISPLAY + '</a>, or share a few quick details below and we\'ll reach out within minutes.</p>' +
         '<input type="text" class="chatbot-capture-input" id="chatbotCapName" placeholder="Full name" autocomplete="name">' +
         '<input type="tel" class="chatbot-capture-input" id="chatbotCapPhone" placeholder="Phone number" autocomplete="tel">' +
         '<input type="email" class="chatbot-capture-input" id="chatbotCapEmail" placeholder="Email (optional)" autocomplete="email">' +
@@ -181,9 +181,18 @@
         submitLead(contact);
 
         card.remove();
-        addBotMessage(messages, 'Thanks, ' + name.split(' ')[0] + '! Ask me anything, or tap a quick question below.');
+        addBotMessage(messages, 'Thanks, ' + escapeHTML(name.split(' ')[0]) + '! Ask me anything, or tap a quick question below.');
         onResolved();
       });
+    }
+
+    // Bot bubbles render via innerHTML (so hardcoded answers can include real
+    // links), so any visitor-supplied text folded into a bot message — like
+    // their own name here — must be escaped first to avoid it being parsed as HTML.
+    function escapeHTML(str) {
+      var div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
     }
 
     function isValidPhone(phone) {
@@ -267,10 +276,13 @@
       container.appendChild(el);
       container.scrollTop = container.scrollHeight;
     }
-    function renderBotBubble(container, text) {
+    // innerHTML is safe here: bot answers only ever come from the hardcoded
+    // knowledge base or the page's own on-page FAQ text — never from what a
+    // visitor types (that stays on textContent in renderUserBubble above).
+    function renderBotBubble(container, html) {
       var el = document.createElement('div');
       el.className = 'chatbot-msg chatbot-msg-bot';
-      el.textContent = text;
+      el.innerHTML = html;
       container.appendChild(el);
       container.scrollTop = container.scrollHeight;
     }
@@ -348,7 +360,7 @@
       {
         keywords: ['phone', 'call', 'number', 'text', 'reach'],
         question: 'How can I reach you?',
-        answer: 'Call or text us at +1 (912) 800-0555, or book online anytime.'
+        answer: 'Call or text us at <a href="tel:' + STUDIO_PHONE_TEL + '" class="chatbot-msg-link">' + STUDIO_PHONE_DISPLAY + '</a>, or book online anytime.'
       },
       {
         keywords: ['service', 'services', 'price', 'pricing', 'cost', 'menu', 'hair', 'lash', 'lashes', 'brow', 'brows'],
