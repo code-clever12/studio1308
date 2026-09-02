@@ -63,6 +63,11 @@
       body.innerHTML =
         '<div class="chatbot-welcome">' +
           '<p class="chatbot-greeting">Hi! 👋 I\'m here to help. What can I do for you?</p>' +
+          '<button type="button" class="chatbot-menu-btn" id="chatbotCallBtn">' +
+            '<span class="chatbot-menu-icon">📞</span>' +
+            '<span>Call us</span>' +
+            '<span class="chatbot-menu-arrow">' + arrowIcon() + '</span>' +
+          '</button>' +
           '<button type="button" class="chatbot-menu-btn" id="chatbotFaqBtn">' +
             '<span class="chatbot-menu-icon">💬</span>' +
             '<span>Have a question?</span>' +
@@ -75,6 +80,7 @@
           '</button>' +
         '</div>';
 
+      body.querySelector('#chatbotCallBtn').addEventListener('click', function () { window.location.href = 'tel:' + STUDIO_PHONE_TEL; });
       body.querySelector('#chatbotFaqBtn').addEventListener('click', function () { renderThread(false); });
       body.querySelector('#chatbotBookBtn').addEventListener('click', function () { scrollToSection('book-widget'); });
     }
