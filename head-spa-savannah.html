@@ -142,6 +142,23 @@
   }
   </script>
 
+  <!-- VideoObject structured data — the real Aphrodite Head Spa ritual footage,
+       uploaded to YouTube. Lets Google surface it as a video result for
+       "head spa" queries alongside the page. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "name": "Aphrodite Head Spa Ritual at Studio 1308, Savannah GA",
+    "description": "Real footage of the Aphrodite Head Spa ritual at Studio 1308 — deep scalp cleanse, therapeutic massage, and nourishing care in Savannah, GA.",
+    "thumbnailUrl": "https://i.ytimg.com/vi/7dP-ebC-BoY/hqdefault.jpg",
+    "uploadDate": "2026-09-29",
+    "duration": "PT26S",
+    "contentUrl": "https://youtube.com/shorts/7dP-ebC-BoY",
+    "embedUrl": "https://www.youtube.com/embed/7dP-ebC-BoY"
+  }
+  </script>
+
   <style>
     /* =============================================
        DESIGN TOKENS - matched to studio1308.com
@@ -593,7 +610,7 @@
     /* =============================================
        HEAD SPA GALLERY - head-spa-only proof section
     ============================================= */
-    .gallery-sec { padding: clamp(3.5rem,7vw,6rem) 0 0; background: var(--parchment); }
+    .gallery-sec { padding: clamp(3.5rem,7vw,6rem) 0; background: var(--parchment); }
     .gallery-grid {
       display: grid;
       grid-template-columns: 1.3fr 1fr 1fr 1fr;
@@ -645,7 +662,25 @@
     }
 
     /* =============================================
-       LASH SERVICES - 4-card menu grid
+       RITUAL VIDEO - single YouTube Short embed,
+       same .v-card/.v-embed pattern as studio1308.com's
+       homepage video gallery, sized for one centered clip.
+    ============================================= */
+    .video-sec { padding: clamp(3.5rem,7vw,6rem) 0; background: var(--white); }
+    .video-card-wrap { max-width: 340px; margin: 0 auto; }
+    .v-card {
+      background: var(--dark);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+    }
+    .v-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card); }
+    .v-embed { position: relative; aspect-ratio: 9 / 16; background: var(--dark); }
+    .v-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+
+    /* =============================================
+       HEAD SPA SERVICES - 4-card menu grid
     ============================================= */
     .services-sec { padding: clamp(3.5rem,7vw,6rem) 0; background: var(--parchment); }
     .service-grid {
@@ -1429,6 +1464,36 @@
     <p class="gallery-note r">
       Follow us on <a href="https://www.instagram.com/1308studiosalonspa" target="_blank">@1308studiosalonspa</a> for daily behind-the-scenes
     </p>
+    <div class="gallery-cta r">
+      <a href="#" target="_blank" class="btn-gold popup_btn">
+        Book My Head Spa
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== RITUAL VIDEO ===================== -->
+<section class="video-sec" id="ritual-video" data-section-name="Ritual Video">
+  <div class="wrap">
+    <div class="sec-head r">
+      <span class="eyebrow">See It In Motion</span>
+      <h2>Inside the <em>Aphrodite</em> Ritual</h2>
+      <p>Real footage from Studio 1308 — the deep cleanse, the massage, the calm.</p>
+    </div>
+    <div class="video-card-wrap r">
+      <div class="v-card">
+        <div class="v-embed">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/7dP-ebC-BoY"
+            title="Aphrodite Head Spa ritual at Studio 1308, Savannah GA"
+            loading="lazy"
+            allow="accelerate-picture-in-picture; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
     <div class="gallery-cta r">
       <a href="#" target="_blank" class="btn-gold popup_btn">
         Book My Head Spa
