@@ -1472,7 +1472,7 @@
       color: var(--dark);
       line-height: 1.8;
       margin-bottom: 1.5rem;
-      max-width: 560px;
+      max-width: 100%;
     }
 
     .stylist-bio strong {
@@ -2594,6 +2594,45 @@
         right: 14px;
       }
     }
+  
+    /* Owner row: small photo beside the "Owner" label */
+    .stylist-card {
+      grid-template-columns: 1fr;
+    }
+
+    .own-box {
+      display: grid;
+      grid-template-columns: 50px 1fr;
+      gap: 20px;
+      align-items: center;
+      margin-bottom: .9rem;
+    }
+
+    .own-box .stylist-photo-frame {
+      width: 100%;
+      max-width: 50px;
+      margin: 0;
+      border-width: 0;
+      outline-offset: 0;
+      box-shadow: var(--shadow-card);
+    }
+
+    .own-box .stylist-monogram {
+      font-size: 1.1rem;
+    }
+
+    .own-box .stylist-award-ribbon {
+      width: 16px;
+      height: 16px;
+      bottom: 0;
+      right: 0;
+      border-width: 1.5px;
+      font-size: .55rem;
+    }
+
+    .own-box .stylist-eyebrow {
+      margin-bottom: 0;
+    }
   </style>
 </head>
 
@@ -2924,7 +2963,9 @@
       </div>
 
       <div class="stylist-card r">
-        <div class="stylist-photo-frame">
+<div class="stylist-info">
+          <div class="own-box">
+            <div class="stylist-photo-frame">
           <!-- Inga's real headshot -->
           <img src="img/Inga-Krasileviciute.jpg"
             alt="Inga Krasileviciute, owner and lead hairstylist at Studio 1308, Savannah GA"
@@ -2932,9 +2973,8 @@
           <div class="stylist-monogram" style="display:none;">IK</div>
           <span class="stylist-award-ribbon" title="Award Winner">🏆</span>
         </div>
-
-        <div class="stylist-info">
-          <span class="stylist-eyebrow">Owner &amp; Lead Hairstylist</span>
+            <span class="stylist-eyebrow">Owner &amp; Lead Hairstylist</span>
+          </div>
           <div class="stylist-name">Inga Krasileviciute</div>
           <div class="stylist-title">Multi-Award-Winning Hairstylist &amp; Makeup Artist</div>
 
