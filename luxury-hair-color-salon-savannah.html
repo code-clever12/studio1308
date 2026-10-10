@@ -2479,7 +2479,6 @@
       }
 
       .team-strip {
-        grid-template-columns: 1fr;
         gap: 1rem;
       }
     }
@@ -2664,6 +2663,18 @@
 
       .own-box .stylist-photo-frame {
         max-width: 50px;
+      }
+    }
+
+    @media (max-width: 575px) {
+      .team-strip {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 380px) {
+      .team-strip {
+        grid-template-columns: 1fr;
       }
     }
   </style>
