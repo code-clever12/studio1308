@@ -29,14 +29,14 @@
     content="The Aphrodite Head Spa — deep scalp cleanse, therapeutic massage & nourishing care. Free parking front & back. Book today.">
   <meta name="twitter:image" content="https://studio1308.com/img/aphrodite_head_spa.jpg">
 
-  <link rel="icon" type="image/x-icon" href="img/logo-transparent1.png">
+  <link rel="icon" type="image/png" href="img/opt/favicon-96.png">
+  <link rel="preload" as="image" href="img/opt/aphrodite_head_spa.webp" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="slick.css">
-  <link rel="stylesheet" href="chatbot.css">
 
   <!-- Google Tag Manager -->
   <script>
@@ -215,6 +215,8 @@
     html,
     body {
       overflow-x: hidden;
+      /* clip (unlike hidden) does not turn html/body into scroll containers, which was silently disabling the sticky header */
+      overflow-x: clip;
       max-width: 100%;
     }
 
@@ -2640,6 +2642,19 @@
         grid-template-columns: 1fr;
       }
     }
+    /* Keep the header (phone + Book Now) in view while scrolling on desktop and tablet.
+       On phones (640px and below) the fixed Call / Book Now bar at the bottom does this job. */
+    @media (max-width: 640px) {
+      .topbar {
+        position: relative;
+      }
+    }
+
+    @media (min-width: 641px) {
+      #book-widget {
+        scroll-margin-top: 120px;
+      }
+    }
   </style>
 </head>
 
@@ -2656,7 +2671,7 @@
       <span class="promo-bar-badge">Limited Time</span>
       <span class="promo-bar-text" id="promoBarText">Back To School</span>
       <span class="promo-bar-count" id="promoBarCountdown">--d --h --m --s</span>
-      <a href="#" class="promo-bar-cta popup_btn">Claim Offer →</a>
+      <a href="#book-widget" class="promo-bar-cta popup_btn">Claim Offer →</a>
     </div>
   </div>
 
@@ -2664,7 +2679,7 @@
   <header class="topbar" id="topbar" data-section-name="Topbar">
     <div class="topbar-inner">
       <a href="#hero" class="logo-text">
-        <img src="img/logo-transparent1.png" alt="1308 Studio" class="logo-badge">
+        <img src="img/opt/logo-320.webp" alt="1308 Studio" class="logo-badge" width="159" height="72">
       </a>
       <div class="topbar-right">
         <a href="tel:+19128000555" class="topbar-phone">
@@ -2674,7 +2689,7 @@
           </svg>
           <span>+1 912 800 0555</span>
         </a>
-        <a href="#" class="topbar-book popup_btn">Book Now</a>
+        <a href="#book-widget" class="topbar-book popup_btn">Book Now</a>
       </div>
     </div>
   </header>
@@ -2682,13 +2697,11 @@
   <!-- ===================== HERO ===================== -->
   <section class="hero" id="hero" data-section-name="Hero">
     <div class="hero-photos">
-      <div class="hero-photo"><img src="img/aphrodite_head_spa.jpg"
-          alt="Aphrodite Head Spa scalp ritual at Studio 1308, Savannah GA" loading="eager"></div>
-      <div class="hero-photo"><img src="img/head_spa_scalp_massage.jpg"
-          alt="Head spa scalp massage treatment at Studio 1308, Savannah GA" loading="eager"></div>
+      <div class="hero-photo"><img src="img/opt/aphrodite_head_spa.webp" width="534" height="676" alt="Aphrodite Head Spa scalp ritual at Studio 1308, Savannah GA" fetchpriority="high" decoding="async"></div>
+      <div class="hero-photo"><img data-src="img/opt/head_spa_scalp_massage.webp" width="402" height="551" alt="Head spa scalp massage treatment at Studio 1308, Savannah GA" decoding="async"></div>
     </div>
     <div class="hero-panel"></div>
-    <img class="hero-wm" src="img/logo-badge.jpg" alt="">
+    <img class="hero-wm" src="img/opt/logo-badge-640.webp" width="640" height="543" alt="" loading="lazy" decoding="async">
 
     <div class="hero-content">
       <div class="hero-stars">
@@ -2719,7 +2732,7 @@
       </div>
 
       <div class="hero-ctas">
-        <a href="#" class="btn-gold popup_btn">
+        <a href="#book-widget" class="btn-gold popup_btn">
           Book My Head Spa
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <path d="M5 12h14M12 5l7 7-7 7" />
@@ -2749,23 +2762,23 @@
 
       <div class="gallery-grid">
         <div class="g-item g-tall r d1">
-          <img src="img/aphrodite_head_spa.jpg" alt="Aphrodite Head Spa ritual at Studio 1308" loading="lazy">
+          <img src="img/opt/aphrodite_head_spa.webp" width="534" height="676" decoding="async" alt="Aphrodite Head Spa ritual at Studio 1308" loading="lazy">
           <div class="g-cap"><span>Aphrodite Head Spa</span></div>
         </div>
         <div class="g-item r d2">
-          <img src="img/1492106087822.jpg" alt="Head spa treatment at Studio 1308" loading="lazy">
+          <img src="img/opt/1492106087822.webp" width="402" height="551" decoding="async" alt="Head spa treatment at Studio 1308" loading="lazy">
           <div class="g-cap"><span>Deep Scalp Cleanse</span></div>
         </div>
         <div class="g-item r d3">
-          <img src="img/1492106087827.jpg" alt="Scalp massage head spa treatment at Studio 1308" loading="lazy">
+          <img src="img/opt/1492106087827.webp" width="402" height="551" decoding="async" alt="Scalp massage head spa treatment at Studio 1308" loading="lazy">
           <div class="g-cap"><span>Therapeutic Scalp Massage</span></div>
         </div>
         <div class="g-item r d1">
-          <img src="img/1492106087824.jpg" alt="Studio 1308 salon interior, Savannah GA" loading="lazy">
+          <img src="img/opt/1492106087824.webp" width="402" height="551" decoding="async" alt="Studio 1308 salon interior, Savannah GA" loading="lazy">
           <div class="g-cap"><span>Relax &amp; Unwind</span></div>
         </div>
         <div class="g-item r d2">
-          <img src="img/1492106087829.jpg" alt="Studio 1308 salon interior, Savannah GA" loading="lazy">
+          <img src="img/opt/1492106087829.webp" width="402" height="551" decoding="async" alt="Studio 1308 salon interior, Savannah GA" loading="lazy">
           <div class="g-cap"><span>Studio 1308, Savannah</span></div>
         </div>
       </div>
@@ -2775,7 +2788,7 @@
         daily behind-the-scenes
       </p>
       <div class="gallery-cta r">
-        <a href="#" target="_blank" class="btn-gold popup_btn">
+        <a href="#book-widget" class="btn-gold popup_btn">
           Book My Head Spa
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <path d="M5 12h14M12 5l7 7-7 7" />
@@ -2805,7 +2818,7 @@
         </div>
       </div>
       <div class="gallery-cta r">
-        <a href="#" target="_blank" class="btn-gold popup_btn">
+        <a href="#book-widget" class="btn-gold popup_btn">
           Book My Head Spa
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <path d="M5 12h14M12 5l7 7-7 7" />
@@ -2827,7 +2840,7 @@
       <div class="service-grid"
         style="grid-template-columns:repeat(auto-fit,minmax(280px,360px));justify-content:center;max-width:780px;margin:0 auto;">
         <div class="svc-card r d1">
-          <div class="svc-img"><img src="img/aphrodite_head_spa.jpg"
+          <div class="svc-img"><img src="img/opt/aphrodite_head_spa.webp" width="534" height="676" decoding="async"
               alt="Aphrodite Head Spa at Studio 1308 hair salon Savannah GA" loading="lazy"></div>
           <div class="svc-body">
             <h3>Aphrodite Head Spa</h3>
@@ -2838,11 +2851,11 @@
               <span class="svc-badge">Featured</span>
             </div>
           </div>
-          <a href="#" target="_blank" class="svc-book popup_btn">Book This →</a>
+          <a href="#book-widget" class="svc-book popup_btn">Book This →</a>
         </div>
 
         <div class="svc-card r d2">
-          <div class="svc-img"><img src="img/1492106087827.jpg" alt="Luxe Head Spa at Studio 1308 hair salon Savannah"
+          <div class="svc-img"><img src="img/opt/1492106087827.webp" width="402" height="551" decoding="async" alt="Luxe Head Spa at Studio 1308 hair salon Savannah"
               loading="lazy"></div>
           <div class="svc-body">
             <h3>Luxe Head Spa</h3>
@@ -2852,12 +2865,12 @@
               <div class="svc-price"><span class="pfrom">from </span>$229</div>
             </div>
           </div>
-          <a href="#" target="_blank" class="svc-book popup_btn">Book This →</a>
+          <a href="#book-widget" class="svc-book popup_btn">Book This →</a>
         </div>
       </div>
 
       <div class="services-cta r">
-        <a href="#" class="btn-wine popup_btn">
+        <a href="#book-widget" class="btn-wine popup_btn">
           View Full Menu &amp; Book Online
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <path d="M5 12h14M12 5l7 7-7 7" />
@@ -2882,7 +2895,7 @@
           <div class="own-box">
             <div class="stylist-photo-frame">
           <!-- Inga's real headshot -->
-          <img src="img/Inga-Krasileviciute.jpg" alt="Inga Krasileviciute, owner of Studio 1308, Savannah GA"
+          <img src="img/opt/Inga-Krasileviciute-160.webp" width="160" height="160" loading="lazy" decoding="async" alt="Inga Krasileviciute, owner of Studio 1308, Savannah GA"
             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
           <div class="stylist-monogram" style="display:none;">IK</div>
           <span class="stylist-award-ribbon" title="Award Winner">🏆</span>
@@ -2907,7 +2920,7 @@
           <div class="team-strip">
             <div class="team-member">
               <div class="team-avatar">
-                <img src="img/inga.png" alt="Inga, Head Spa Specialist at Studio 1308" loading="lazy"
+                <img src="img/opt/inga-340.webp" width="340" height="469" alt="Inga, Head Spa Specialist at Studio 1308" loading="lazy" decoding="async"
                   onerror="this.style.display='none'; this.parentElement.textContent='I';">
               </div>
               <div class="team-name">Inga</div>
@@ -2915,7 +2928,7 @@
             </div>
             <div class="team-member">
               <div class="team-avatar">
-                <img src="img/alma.svg" alt="Alma, Master Hair Colorist at Studio 1308" loading="lazy"
+                <img src="img/opt/alma-340.webp" width="340" height="450" alt="Alma, Master Hair Colorist at Studio 1308" loading="lazy" decoding="async"
                   onerror="this.style.display='none'; this.parentElement.textContent='A';">
               </div>
               <div class="team-name">Alma</div>
@@ -2923,7 +2936,7 @@
             </div>
             <div class="team-member">
               <div class="team-avatar">
-                <img src="img/omaira.svg" alt="Omaira, Master Hairstylist at Studio 1308" loading="lazy"
+                <img src="img/opt/omaira-340.webp" width="340" height="510" alt="Omaira, Master Hairstylist at Studio 1308" loading="lazy" decoding="async"
                   onerror="this.style.display='none'; this.parentElement.textContent='O';">
               </div>
               <div class="team-name">Omaira</div>
@@ -2931,7 +2944,7 @@
             </div>
             <div class="team-member">
               <div class="team-avatar">
-                <img src="img/manar.svg" alt="Manar, Wax Specialist at Studio 1308" loading="lazy"
+                <img src="img/opt/manar-340.webp" width="340" height="473" alt="Manar, Wax Specialist at Studio 1308" loading="lazy" decoding="async"
                   onerror="this.style.display='none'; this.parentElement.textContent='M';">
               </div>
               <div class="team-name">Manar</div>
@@ -2939,7 +2952,7 @@
             </div>
             <div class="team-member">
               <div class="team-avatar">
-                <img src="img/stacey.svg" alt="Stacey, Facial Specialist at Studio 1308" loading="lazy"
+                <img src="img/opt/stacey-340.webp" width="340" height="473" alt="Stacey, Facial Specialist at Studio 1308" loading="lazy" decoding="async"
                   onerror="this.style.display='none'; this.parentElement.textContent='S';">
               </div>
               <div class="team-name">Stacey</div>
@@ -2947,7 +2960,7 @@
             </div>
             <div class="team-member">
               <div class="team-avatar">
-                <img src="img/larisa.svg" alt="Larisa, Facial Specialist at Studio 1308" loading="lazy"
+                <img src="img/opt/larisa-340.webp" width="340" height="490" alt="Larisa, Facial Specialist at Studio 1308" loading="lazy" decoding="async"
                   onerror="this.style.display='none'; this.parentElement.textContent='L';">
               </div>
               <div class="team-name">Larisa</div>
@@ -2955,7 +2968,7 @@
             </div>
             <div class="team-member">
               <div class="team-avatar">
-                <img src="img/dani.svg" alt="Dani, Lash Extensions at Studio 1308" loading="lazy"
+                <img src="img/opt/dani-340.webp" width="340" height="510" alt="Dani, Lash Extensions at Studio 1308" loading="lazy" decoding="async"
                   onerror="this.style.display='none'; this.parentElement.textContent='D';">
               </div>
               <div class="team-name">Dani</div>
@@ -2964,7 +2977,7 @@
           </div>
 
           <div class="stylist-ctas">
-            <a href="#" class="btn-wine popup_btn">
+            <a href="#book-widget" class="btn-wine popup_btn">
               Book Your Head Spa
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <path d="M5 12h14M12 5l7 7-7 7" />
@@ -3043,7 +3056,7 @@
       </div>
 
       <div class="process-cta r">
-        <a href="#" class="btn-gold popup_btn">
+        <a href="#book-widget" class="btn-gold popup_btn">
           Book Your Head Spa Ritual
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <path d="M5 12h14M12 5l7 7-7 7" />
@@ -3121,7 +3134,7 @@
         <h2>Book Your<br><em>Appointment Today</em></h2>
         <p>New guests receive 10% off. Limited weekly slots available. Easy online booking takes under 2 minutes.</p>
         <div class="book-ctas">
-          <a href="#" class="btn-gold popup_btn">
+          <a href="#book-widget" class="btn-gold popup_btn">
             Book Your Head Spa
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <path d="M5 12h14M12 5l7 7-7 7" />
@@ -3171,7 +3184,7 @@
       <div class="footer-grid">
         <div class="f-brand">
           <div style="margin-bottom:.9rem;">
-            <img src='img/logo-transparent1.png' width='120' alt="Logo" />
+            <img src="img/opt/logo-320.webp" width="120" height="54" alt="Logo" loading="lazy" decoding="async">
             <!-- <div style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;letter-spacing:.12em;color:var(--champagne);text-transform:uppercase;line-height:1;">1308 Studio</div>
           <div style="font-family:'Montserrat',sans-serif;font-size:.52rem;font-weight:500;letter-spacing:.28em;color:rgba(250,246,240,.5);text-transform:uppercase;margin-top:4px;">Salon &amp; Spa · Savannah</div> -->
           </div>
@@ -3192,7 +3205,7 @@
         <div class="f-col">
           <h4>Contact &amp; Book</h4>
           <a href="tel:+19128000555">+1 912 800 0555</a>
-          <a href="#" class="popup_btn">Book Now</a>
+          <a href="#book-widget" class="popup_btn">Book Now</a>
           <h4 style="margin-top:1rem;">Follow Us</h4>
           <div class='footer-socials'>
             <a href="https://www.instagram.com/1308studiosalonspa?igsh=MTh4d3lnM25wemhwbQ%3D%3D&utm_source=qr"
@@ -3239,7 +3252,7 @@
       </svg>
       Call
     </a>
-    <a href="#" class="m-book popup_btn">
+    <a href="#book-widget" class="m-book popup_btn">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
         <path d="M5 12h14M12 5l7 7-7 7" />
       </svg>
@@ -3329,7 +3342,7 @@
       <p class="rev-text" id="revtext-${review.id}">"${review.text}"</p>
       <button class="see-more-btn" id="revbtn-${review.id}" onclick="toggleRevText(${review.id})">See more</button>
       <div class="rev-author">
-        <div class="rev-av"><img src="${review.avatar}" alt="${review.name}"></div>
+        <div class="rev-av"><img src="${review.avatar}" alt="${review.name}" width="36" height="36" loading="lazy" decoding="async"></div>
         <div>
           <div class="rev-name">${review.name}</div>
           <div class="rev-svc">${review.service}</div>
@@ -3347,6 +3360,20 @@
 
     (function ($) {
       $(document).ready(function () {
+        // Slide 2 is fetched only after the page has loaded, so it never competes with slide 1 (the LCP image).
+        // Applied to every copy in .hero-photos, including slick's clones.
+        function loadHeroSlide2() {
+          $('.hero-photos img[data-src]').each(function () {
+            var ss = this.getAttribute('data-srcset');
+            if (ss) this.srcset = ss;
+            this.src = this.getAttribute('data-src');
+            this.removeAttribute('data-src');
+            this.removeAttribute('data-srcset');
+          });
+        }
+        if (document.readyState === 'complete') setTimeout(loadHeroSlide2, 1200);
+        else window.addEventListener('load', function () { setTimeout(loadHeroSlide2, 1200); });
+
         $('.hero-photos').slick({
           slidesToShow: 1,
           slidesToScroll: 1,
@@ -3486,7 +3513,26 @@
   </script>
 
   <!-- ===================== 1308 STUDIO CHAT WIDGET ===================== -->
-  <script src="chatbot.js"></script>
+  <script>
+    // The chat widget is heavy and not needed for the first screen — load it on the first scroll or tap.
+    (function () {
+      var loaded = false;
+      var events = ['scroll', 'pointerdown', 'touchstart', 'keydown'];
+      function load() {
+        if (loaded) return;
+        loaded = true;
+        events.forEach(function (e) { window.removeEventListener(e, load); });
+        var css = document.createElement('link');
+        css.rel = 'stylesheet';
+        css.href = 'chatbot.css';
+        document.head.appendChild(css);
+        var js = document.createElement('script');
+        js.src = 'chatbot.js';
+        document.body.appendChild(js);
+      }
+      events.forEach(function (e) { window.addEventListener(e, load, { passive: true, once: true }); });
+    })();
+  </script>
 
   <!-- ===================== GALLERY LIGHTBOX ===================== -->
   <div class="gallery-lightbox" id="galleryLightbox">
@@ -3509,22 +3555,31 @@
 
       if (!$lightbox.length || !$slider.length || !$galleryImgs.length) return;
 
-      $galleryImgs.each(function () {
-        var $img = $(this);
-        var src = $img.attr('src');
-        var alt = ($img.attr('alt') || '').replace(/"/g, '&quot;');
-        $slider.append('<div class="g-slide"><img src="' + src + '" alt="' + alt + '"></div>');
-      });
+      // Slides are built on first open, and the full-size images load on demand,
+      // so the page no longer downloads the whole gallery twice at load time.
+      var sliderReady = false;
+      function ensureSlider() {
+        if (sliderReady) return;
+        sliderReady = true;
+        $galleryImgs.each(function () {
+          var $img = $(this);
+          var src = $img.attr('data-full') || $img.attr('src');
+          var alt = ($img.attr('alt') || '').replace(/"/g, '&quot;');
+          $slider.append('<div class="g-slide"><img data-lazy="' + src + '" alt="' + alt + '"></div>');
+        });
 
-      $slider.slick({
-        arrows: true,
-        dots: false,
-        infinite: true,
-        speed: 400,
-        adaptiveHeight: true
-      });
+        $slider.slick({
+          arrows: true,
+          dots: false,
+          infinite: true,
+          speed: 400,
+          adaptiveHeight: true,
+          lazyLoad: 'ondemand'
+        });
+      }
 
       function openLightbox(index) {
+        ensureSlider();
         $lightbox.addClass('open');
         $('body').css('overflow', 'hidden');
         $slider.slick('slickGoTo', index, true);
