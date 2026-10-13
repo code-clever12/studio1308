@@ -29,14 +29,14 @@
     content="European technique, Southern hospitality. Free parking front & back. Book your hair appointment today.">
   <meta name="twitter:image" content="https://studio1308.com/img/hero1.jpeg">
 
-  <link rel="icon" type="image/x-icon" href="img/logo-transparent1.png">
+  <link rel="icon" type="image/png" href="img/opt/favicon-96.png">
+  <link rel="preload" as="image" href="img/opt/hero1-800.webp" imagesrcset="img/opt/hero1-800.webp 800w, img/opt/hero1-1200.webp 1200w, img/opt/hero1-1600.webp 1600w" imagesizes="(max-width: 1080px) 100vw, 57vw" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="slick.css">
-  <link rel="stylesheet" href="chatbot.css">
   <!-- Google Tag Manager -->
   <script>
     (function (w, d, s, l, i) {
@@ -176,6 +176,8 @@
     html,
     body {
       overflow-x: hidden;
+      /* clip (unlike hidden) does not turn html/body into scroll containers, which was silently disabling the sticky header */
+      overflow-x: clip;
       max-width: 100%;
     }
 
@@ -741,9 +743,8 @@
     }
 
     /* =============================================
-       PROMO BAR - date-driven, see PROMO config in JS
-       Hidden by default; only shown when today falls
-       inside PROMO.start / PROMO.end.
+       PROMO BAR - new-guest offer. Shown when the markup
+       carries the is-active class (it does by default).
     ============================================= */
     .promo-bar {
       display: none;
@@ -859,6 +860,34 @@
 
       .promo-bar-inner {
         gap: .4rem .6rem;
+      }
+    }
+
+    /* Phones: keep the new-guest banner to one line so it takes little of the first screen */
+    @media (max-width: 480px) {
+      .promo-bar {
+        padding: .4rem .75rem;
+      }
+
+      .promo-bar-inner {
+        gap: .35rem .5rem;
+      }
+
+      .promo-bar-badge {
+        font-size: .58rem;
+        letter-spacing: .1em;
+        padding: .2rem .5rem;
+      }
+
+      .promo-bar-text {
+        font-size: .8rem;
+      }
+
+      .promo-bar-cta {
+        font-size: .62rem;
+        letter-spacing: .06em;
+        padding: .35rem .6rem;
+        min-height: 32px;
       }
     }
 
@@ -2656,6 +2685,42 @@
         grid-template-columns: 1fr;
       }
     }
+    /* New-guest offer line in the hero, above the Book button */
+    .hero-offer {
+      display: flex;
+      flex-direction: column;
+      gap: .15rem;
+      margin: 0 0 1rem;
+      padding-left: .85rem;
+      border-left: 2px solid var(--champagne);
+    }
+
+    .hero-offer strong {
+      font-family: var(--body);
+      font-size: .95rem;
+      font-weight: 600;
+      letter-spacing: .02em;
+      color: var(--champagne-light);
+    }
+
+    .hero-offer span {
+      font-family: var(--body);
+      font-size: .72rem;
+      color: rgba(250, 246, 240, .7);
+    }
+    /* Keep the header (phone + Book Now) in view while scrolling on desktop and tablet.
+       On phones (640px and below) the fixed Call / Book Now bar at the bottom does this job. */
+    @media (max-width: 640px) {
+      .topbar {
+        position: relative;
+      }
+    }
+
+    @media (min-width: 641px) {
+      #book-widget {
+        scroll-margin-top: 120px;
+      }
+    }
   </style>
 </head>
 
@@ -2666,13 +2731,12 @@
       style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 
-  <!-- ===================== PROMO BAR (auto shows/hides — see PROMO config near bottom script) ===================== -->
-  <div class="promo-bar" id="promoBar">
+  <!-- ===================== PROMO BAR (new-guest offer, always on) ===================== -->
+  <div class="promo-bar is-active" id="promoBar">
     <div class="promo-bar-inner">
-      <span class="promo-bar-badge">Limited Time</span>
-      <span class="promo-bar-text" id="promoBarText">Back To School</span>
-      <span class="promo-bar-count" id="promoBarCountdown">--d --h --m --s</span>
-      <a href="#" target="_blank" class="promo-bar-cta popup_btn">Claim Offer →</a>
+      <span class="promo-bar-badge">New Guests</span>
+      <span class="promo-bar-text" id="promoBarText">10% off your first visit</span>
+      <a href="#book-widget" class="promo-bar-cta popup_btn">Claim Offer →</a>
     </div>
   </div>
 
@@ -2680,7 +2744,7 @@
   <header class="topbar" id="topbar">
     <div class="topbar-inner">
       <a href="#hero" class="logo-text">
-        <img src="img/logo-transparent1.png" alt="1308 Studio" class="logo-badge">
+        <img src="img/opt/logo-320.webp" alt="1308 Studio" class="logo-badge" width="159" height="72">
       </a>
       <div class="topbar-right">
         <a href="tel:+19128000555" class="topbar-phone">
@@ -2690,7 +2754,7 @@
           </svg>
           <span>+1 912 800 0555</span>
         </a>
-        <a href="#" target="_blank" class="topbar-book popup_btn">Book Now</a>
+        <a href="#book-widget" class="topbar-book popup_btn">Book Now</a>
       </div>
     </div>
   </header>
@@ -2698,13 +2762,11 @@
   <!-- ===================== HERO ===================== -->
   <section class="hero" id="hero" data-section-name="Hero">
     <div class="hero-photos">
-      <div class="hero-photo"><img src="img/hero1.jpeg" alt="Luxury hair salon Savannah GA — Studio 1308 interior"
-          loading="eager"></div>
-      <div class="hero-photo"><img src="img/hero2.jpeg" alt="Studio 1308 hair salon Savannah GA storefront"
-          loading="eager"></div>
+      <div class="hero-photo"><img src="img/opt/hero1-800.webp" srcset="img/opt/hero1-800.webp 800w, img/opt/hero1-1200.webp 1200w, img/opt/hero1-1600.webp 1600w" sizes="(max-width: 1080px) 100vw, 57vw" width="1200" height="800" alt="Luxury hair salon Savannah GA — Studio 1308 interior" fetchpriority="high" decoding="async"></div>
+      <div class="hero-photo"><img data-srcset="img/opt/hero2-800.webp 800w, img/opt/hero2-1200.webp 1200w, img/opt/hero2-1600.webp 1600w" data-src="img/opt/hero2-800.webp" sizes="(max-width: 1080px) 100vw, 57vw" width="1200" height="800" alt="Studio 1308 hair salon Savannah GA storefront" decoding="async"></div>
     </div>
     <div class="hero-panel"></div>
-    <img class="hero-wm" src="img/logo-badge.jpg" alt="">
+    <img class="hero-wm" src="img/opt/logo-badge-640.webp" width="640" height="543" alt="" loading="lazy" decoding="async">
 
     <div class="hero-content">
       <div class="hero-stars">
@@ -2733,8 +2795,13 @@
         <span class="txt">FREE PARKING — FRONT &amp; BACK</span>
       </div>
 
+      <div class="hero-offer">
+        <strong>New guests: 10% off your first visit</strong>
+        <span>New guests only. Applies to your first visit.</span>
+      </div>
+
       <div class="hero-ctas">
-        <a href="#" target="_blank" class="btn-gold popup_btn">
+        <a href="#book-widget" class="btn-gold popup_btn">
           Book My Appointment
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <path d="M5 12h14M12 5l7 7-7 7" />
@@ -2765,110 +2832,110 @@
       <div class="gallery-collapse" id="galleryCollapse">
         <div class="gallery-grid r">
           <div class="g-item g-tall r d1">
-            <img src="img/gallery/hair/BalayageWaves.jpg" alt="Balayage Waves at Studio 1308" loading="lazy">
+            <img src="img/opt/gallery/hair/BalayageWaves-600.webp" data-full="img/opt/gallery/hair/BalayageWaves-full.webp" width="520" height="521" decoding="async" alt="Balayage Waves at Studio 1308" loading="lazy">
             <div class="g-cap"><span>Balayage Waves</span></div>
           </div>
           <div class="g-item r d2">
-            <img src="img/gallery/hair/ClassicBridalUpdo.jpg" alt="Classic Bridal Updo at Studio 1308" loading="lazy">
+            <img src="img/opt/gallery/hair/ClassicBridalUpdo-600.webp" data-full="img/opt/gallery/hair/ClassicBridalUpdo-full.webp" width="520" height="694" decoding="async" alt="Classic Bridal Updo at Studio 1308" loading="lazy">
             <div class="g-cap"><span>Classic Bridal Updo</span></div>
           </div>
           <div class="g-item r d3">
-            <img src="img/gallery/hair/DesiBridalHair.jpg" alt="Desi Bridal Hair at Studio 1308" loading="lazy">
+            <img src="img/opt/gallery/hair/DesiBridalHair-600.webp" data-full="img/opt/gallery/hair/DesiBridalHair-full.webp" width="520" height="521" decoding="async" alt="Desi Bridal Hair at Studio 1308" loading="lazy">
             <div class="g-cap"><span>Desi Bridal Hair</span></div>
           </div>
           <div class="g-item r d1">
-            <img src="img/gallery/hair/ElegantHollywoodWaves.jpg" alt="Elegant Hollywood Waves at Studio 1308"
+            <img src="img/opt/gallery/hair/ElegantHollywoodWaves-600.webp" data-full="img/opt/gallery/hair/ElegantHollywoodWaves-full.webp" width="520" height="520" decoding="async" alt="Elegant Hollywood Waves at Studio 1308"
               loading="lazy">
             <div class="g-cap"><span>Elegant Hollywood Waves</span></div>
           </div>
           <div class="g-item r d2">
-            <img src="img/gallery/hair/GlamorousCurlyHair.jpg" alt="Glamorous Curly Hair at Studio 1308" loading="lazy">
+            <img src="img/opt/gallery/hair/GlamorousCurlyHair-600.webp" data-full="img/opt/gallery/hair/GlamorousCurlyHair-full.webp" width="520" height="521" decoding="async" alt="Glamorous Curly Hair at Studio 1308" loading="lazy">
             <div class="g-cap"><span>Glamorous Curly Hair</span></div>
           </div>
           <div class="g-item g-tall r d3">
-            <img src="img/gallery/hair/RomanticSoftCurl.jpg" alt="Romantic Soft Curl at Studio 1308" loading="lazy">
+            <img src="img/opt/gallery/hair/RomanticSoftCurl-600.webp" data-full="img/opt/gallery/hair/RomanticSoftCurl-full.webp" width="520" height="520" decoding="async" alt="Romantic Soft Curl at Studio 1308" loading="lazy">
             <div class="g-cap"><span>Romantic Soft Curl</span></div>
           </div>
           <div class="g-item r d4">
-            <img src="img/gallery/hair/SignatureBridalHair.jpg" alt="Signature Bridal Hair at Studio 1308"
+            <img src="img/opt/gallery/hair/SignatureBridalHair-600.webp" data-full="img/opt/gallery/hair/SignatureBridalHair-full.webp" width="520" height="520" decoding="async" alt="Signature Bridal Hair at Studio 1308"
               loading="lazy">
             <div class="g-cap"><span>Signature Bridal Hair</span></div>
           </div>
           <div class="g-item r d5">
-            <img src="img/gallery/hair/SleekBridalHair.jpg" alt="Sleek Bridal Hair at Studio 1308" loading="lazy">
+            <img src="img/opt/gallery/hair/SleekBridalHair-600.webp" data-full="img/opt/gallery/hair/SleekBridalHair-full.webp" width="520" height="520" decoding="async" alt="Sleek Bridal Hair at Studio 1308" loading="lazy">
             <div class="g-cap"><span>Sleek Bridal Hair</span></div>
           </div>
           <div class="g-item r d6">
-            <img src="img/gallery/hair/SoftBridalWaves.jpg" alt="Soft Bridal Waves at Studio 1308" loading="lazy">
+            <img src="img/opt/gallery/hair/SoftBridalWaves-600.webp" data-full="img/opt/gallery/hair/SoftBridalWaves-full.webp" width="520" height="519" decoding="async" alt="Soft Bridal Waves at Studio 1308" loading="lazy">
             <div class="g-cap"><span>Soft Bridal Waves</span></div>
           </div>
           <div class="g-item r d6">
-            <img src="img/gallery/hair/VoluminousBeachWaves.jpg" alt="Voluminous Beach Waves at Studio 1308"
+            <img src="img/opt/gallery/hair/VoluminousBeachWaves-600.webp" data-full="img/opt/gallery/hair/VoluminousBeachWaves-full.webp" width="520" height="520" decoding="async" alt="Voluminous Beach Waves at Studio 1308"
               loading="lazy">
             <div class="g-cap"><span>Voluminous Beach Waves</span></div>
           </div>
           <div class="g-item r d1">
-            <img src="img/gallery/hair/AshBalayage.jpg" alt="Ash Balayage at Studio 1308" loading="lazy">
+            <img src="img/opt/gallery/hair/AshBalayage-600.webp" data-full="img/opt/gallery/hair/AshBalayage-full.webp" width="520" height="694" decoding="async" alt="Ash Balayage at Studio 1308" loading="lazy">
             <div class="g-cap"><span>Ash Balayage</span></div>
           </div>
           <div class="g-item r d2">
-            <img src="img/gallery/hair/AshBrown.jpg" alt="Ash Brown at Studio 1308" loading="lazy">
+            <img src="img/opt/gallery/hair/AshBrown-600.webp" data-full="img/opt/gallery/hair/AshBrown-full.webp" width="520" height="694" decoding="async" alt="Ash Brown at Studio 1308" loading="lazy">
             <div class="g-cap"><span>Ash Brown</span></div>
           </div>
           <div class="g-item r d3">
-            <img src="img/gallery/hair/BlondeBlowout.jpg" alt="Blonde Blowout at Studio 1308" loading="lazy">
+            <img src="img/opt/gallery/hair/BlondeBlowout-600.webp" data-full="img/opt/gallery/hair/BlondeBlowout-full.webp" width="520" height="694" decoding="async" alt="Blonde Blowout at Studio 1308" loading="lazy">
             <div class="g-cap"><span>Blonde Blowout</span></div>
           </div>
           <div class="g-item r d4">
-            <img src="img/gallery/hair/BrunetteBalayage.jpg" alt="Brunette Balayage at Studio 1308" loading="lazy">
+            <img src="img/opt/gallery/hair/BrunetteBalayage-600.webp" data-full="img/opt/gallery/hair/BrunetteBalayage-full.webp" width="520" height="694" decoding="async" alt="Brunette Balayage at Studio 1308" loading="lazy">
             <div class="g-cap"><span>Brunette Balayage</span></div>
           </div>
           <div class="g-item r d5">
-            <img src="img/gallery/hair/ClassicBalayage.jpg" alt="Classic Balayage at Studio 1308" loading="lazy">
+            <img src="img/opt/gallery/hair/ClassicBalayage-600.webp" data-full="img/opt/gallery/hair/ClassicBalayage-full.webp" width="520" height="694" decoding="async" alt="Classic Balayage at Studio 1308" loading="lazy">
             <div class="g-cap"><span>Classic Balayage</span></div>
           </div>
           <div class="g-item r d6">
-            <img src="img/gallery/hair/FullHighlights.jpg" alt="Full Highlights at Studio 1308" loading="lazy">
+            <img src="img/opt/gallery/hair/FullHighlights-600.webp" data-full="img/opt/gallery/hair/FullHighlights-full.webp" width="520" height="694" decoding="async" alt="Full Highlights at Studio 1308" loading="lazy">
             <div class="g-cap"><span>Full Highlights</span></div>
           </div>
           <div class="g-item r d1">
-            <img src="img/gallery/hair/HairExtensions.jpg" alt="Hair Extensions at Studio 1308" loading="lazy">
+            <img src="img/opt/gallery/hair/HairExtensions-600.webp" data-full="img/opt/gallery/hair/HairExtensions-full.webp" width="520" height="694" decoding="async" alt="Hair Extensions at Studio 1308" loading="lazy">
             <div class="g-cap"><span>Hair Extensions</span></div>
           </div>
           <div class="g-item r d2">
-            <img src="img/gallery/hair/HoneyHighlights.jpg" alt="Honey Highlights at Studio 1308" loading="lazy">
+            <img src="img/opt/gallery/hair/HoneyHighlights-600.webp" data-full="img/opt/gallery/hair/HoneyHighlights-full.webp" width="520" height="694" decoding="async" alt="Honey Highlights at Studio 1308" loading="lazy">
             <div class="g-cap"><span>Honey Highlights</span></div>
           </div>
           <div class="g-item r d3">
-            <img src="img/gallery/hair/IceBlonde.jpg" alt="Ice Blonde at Studio 1308" loading="lazy">
+            <img src="img/opt/gallery/hair/IceBlonde-600.webp" data-full="img/opt/gallery/hair/IceBlonde-full.webp" width="520" height="694" decoding="async" alt="Ice Blonde at Studio 1308" loading="lazy">
             <div class="g-cap"><span>Ice Blonde</span></div>
           </div>
           <div class="g-item r d4">
-            <img src="img/gallery/hair/MochaGloss.jpg" alt="Mocha Gloss at Studio 1308" loading="lazy">
+            <img src="img/opt/gallery/hair/MochaGloss-600.webp" data-full="img/opt/gallery/hair/MochaGloss-full.webp" width="520" height="694" decoding="async" alt="Mocha Gloss at Studio 1308" loading="lazy">
             <div class="g-cap"><span>Mocha Gloss</span></div>
           </div>
           <div class="g-item r d5">
-            <img src="img/gallery/hair/PlatinumBalayage.jpg" alt="Platinum Balayage at Studio 1308" loading="lazy">
+            <img src="img/opt/gallery/hair/PlatinumBalayage-600.webp" data-full="img/opt/gallery/hair/PlatinumBalayage-full.webp" width="520" height="694" decoding="async" alt="Platinum Balayage at Studio 1308" loading="lazy">
             <div class="g-cap"><span>Platinum Balayage</span></div>
           </div>
           <div class="g-item r d6">
-            <img src="img/gallery/hair/RootMelt.jpg" alt="Root Melt at Studio 1308" loading="lazy">
+            <img src="img/opt/gallery/hair/RootMelt-600.webp" data-full="img/opt/gallery/hair/RootMelt-full.webp" width="520" height="694" decoding="async" alt="Root Melt at Studio 1308" loading="lazy">
             <div class="g-cap"><span>Root Melt</span></div>
           </div>
           <div class="g-item r d1">
-            <img src="img/gallery/hair/SignatureBlonde.jpg" alt="Signature Blonde at Studio 1308" loading="lazy">
+            <img src="img/opt/gallery/hair/SignatureBlonde-600.webp" data-full="img/opt/gallery/hair/SignatureBlonde-full.webp" width="520" height="694" decoding="async" alt="Signature Blonde at Studio 1308" loading="lazy">
             <div class="g-cap"><span>Signature Blonde</span></div>
           </div>
           <div class="g-item r d2">
-            <img src="img/gallery/hair/SilkPress.jpg" alt="Silk Press at Studio 1308" loading="lazy">
+            <img src="img/opt/gallery/hair/SilkPress-600.webp" data-full="img/opt/gallery/hair/SilkPress-full.webp" width="520" height="694" decoding="async" alt="Silk Press at Studio 1308" loading="lazy">
             <div class="g-cap"><span>Silk Press</span></div>
           </div>
           <div class="g-item r d3">
-            <img src="img/gallery/hair/SleekBrunette.jpg" alt="Sleek Brunette at Studio 1308" loading="lazy">
+            <img src="img/opt/gallery/hair/SleekBrunette-600.webp" data-full="img/opt/gallery/hair/SleekBrunette-full.webp" width="520" height="694" decoding="async" alt="Sleek Brunette at Studio 1308" loading="lazy">
             <div class="g-cap"><span>Sleek Brunette</span></div>
           </div>
           <div class="g-item r d4">
-            <img src="img/gallery/hair/SoftHighlights.jpg" alt="Soft Highlights at Studio 1308" loading="lazy">
+            <img src="img/opt/gallery/hair/SoftHighlights-600.webp" data-full="img/opt/gallery/hair/SoftHighlights-full.webp" width="520" height="694" decoding="async" alt="Soft Highlights at Studio 1308" loading="lazy">
             <div class="g-cap"><span>Soft Highlights</span></div>
           </div>
 
@@ -2891,7 +2958,7 @@
         daily hair transformations
       </p>
       <div class="gallery-cta r">
-        <a href="#" target="_blank" class="btn-gold popup_btn">
+        <a href="#book-widget" class="btn-gold popup_btn">
           Book My Hair Appointment
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <path d="M5 12h14M12 5l7 7-7 7" />
@@ -2912,7 +2979,7 @@
 
       <div class="service-grid">
         <div class="svc-card r d1">
-          <div class="svc-img"><img src="img/hair_color.jpg"
+          <div class="svc-img"><img src="img/opt/hair_color.webp" width="534" height="676" decoding="async"
               alt="Hair color service at Studio 1308 hair salon Savannah GA" loading="lazy"></div>
           <div class="svc-body">
             <h3>Hair - Color</h3>
@@ -2921,11 +2988,11 @@
               <div class="svc-price"><span class="pfrom">from </span>$95</div>
             </div>
           </div>
-          <a href="#" target="_blank" class="svc-book popup_btn">Book This →</a>
+          <a href="#book-widget" class="svc-book popup_btn">Book This →</a>
         </div>
 
         <div class="svc-card r d2">
-          <div class="svc-img"><img src="img/bombshell_blow_dry.jpg"
+          <div class="svc-img"><img src="img/opt/bombshell_blow_dry.webp" width="267" height="338" decoding="async"
               alt="Bombshell blowout at Studio 1308 hair salon Savannah" loading="lazy"></div>
           <div class="svc-body">
             <h3>Bombshell Blow Dry</h3>
@@ -2934,11 +3001,11 @@
               <div class="svc-price"><span class="pfrom">from </span>$45</div>
             </div>
           </div>
-          <a href="#" target="_blank" class="svc-book popup_btn">Book This →</a>
+          <a href="#book-widget" class="svc-book popup_btn">Book This →</a>
         </div>
 
         <div class="svc-card r d3">
-          <div class="svc-img"><img src="img/glass_effect_hair.jpg"
+          <div class="svc-img"><img src="img/opt/glass_effect_hair.webp" width="534" height="676" decoding="async"
               alt="Glass effect hair gloss treatment, luxury hair salon Savannah" loading="lazy"></div>
           <div class="svc-body">
             <h3>Glass Effect Hair</h3>
@@ -2948,11 +3015,11 @@
               <span class="svc-badge">Popular</span>
             </div>
           </div>
-          <a href="#" target="_blank" class="svc-book popup_btn">Book This →</a>
+          <a href="#book-widget" class="svc-book popup_btn">Book This →</a>
         </div>
 
         <div class="svc-card r d4">
-          <div class="svc-img"><img src="img/special_event_hairstyle.jpg"
+          <div class="svc-img"><img src="img/opt/special_event_hairstyle.webp" width="534" height="676" decoding="async"
               alt="Special event hairstyle at Studio 1308 hair salon Savannah GA" loading="lazy"></div>
           <div class="svc-body">
             <h3>Special Event Hairstyle</h3>
@@ -2961,12 +3028,12 @@
               <div class="svc-price"><span class="pfrom">from </span>$125</div>
             </div>
           </div>
-          <a href="#" class="svc-book popup_btn">Book This →</a>
+          <a href="#book-widget" class="svc-book popup_btn">Book This →</a>
         </div>
       </div>
 
       <div class="services-cta r">
-        <a href="#" class="btn-wine popup_btn">
+        <a href="#book-widget" class="btn-wine popup_btn">
           View Full Menu &amp; Book Online
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <path d="M5 12h14M12 5l7 7-7 7" />
@@ -2990,7 +3057,7 @@
           <div class="own-box">
             <div class="stylist-photo-frame">
           <!-- Inga's real headshot -->
-          <img src="img/Inga-Krasileviciute.jpg"
+          <img src="img/opt/Inga-Krasileviciute-160.webp" width="160" height="160" decoding="async"
             alt="Inga Krasileviciute, owner and lead hairstylist at Studio 1308, Savannah GA"
             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
           <div class="stylist-monogram" style="display:none;">IK</div>
@@ -3016,7 +3083,7 @@
           <div class="team-strip">
             <div class="team-member">
               <div class="team-avatar">
-                <img src="img/inga.png" alt="Inga, Head Spa Specialist at Studio 1308" loading="lazy"
+                <img src="img/opt/inga-340.webp" width="340" height="469" alt="Inga, Head Spa Specialist at Studio 1308" loading="lazy" decoding="async"
                   onerror="this.style.display='none'; this.parentElement.textContent='I';">
               </div>
               <div class="team-name">Inga</div>
@@ -3024,7 +3091,7 @@
             </div>
             <div class="team-member">
               <div class="team-avatar">
-                <img src="img/alma.svg" alt="Alma, hairstylist at Studio 1308"
+                <img src="img/opt/alma-340.webp" width="340" height="450" alt="Alma, hairstylist at Studio 1308" loading="lazy" decoding="async"
                   onerror="this.style.display='none'; this.parentElement.textContent='A';">
               </div>
               <div class="team-name">Alma</div>
@@ -3032,7 +3099,7 @@
             </div>
             <div class="team-member">
               <div class="team-avatar">
-                <img src="img/omaira.svg" alt="Omaira, Master Hairstylist at Studio 1308" loading="lazy"
+                <img src="img/opt/omaira-340.webp" width="340" height="510" alt="Omaira, Master Hairstylist at Studio 1308" loading="lazy" decoding="async"
                   onerror="this.style.display='none'; this.parentElement.textContent='O';">
               </div>
               <div class="team-name">Omaira</div>
@@ -3040,7 +3107,7 @@
             </div>
             <div class="team-member">
               <div class="team-avatar">
-                <img src="img/manar.svg" alt="Manar, Wax Specialist at Studio 1308" loading="lazy"
+                <img src="img/opt/manar-340.webp" width="340" height="473" alt="Manar, Wax Specialist at Studio 1308" loading="lazy" decoding="async"
                   onerror="this.style.display='none'; this.parentElement.textContent='M';">
               </div>
               <div class="team-name">Manar</div>
@@ -3048,7 +3115,7 @@
             </div>
             <div class="team-member">
               <div class="team-avatar">
-                <img src="img/stacey.svg" alt="Stacey, Facial Specialist at Studio 1308" loading="lazy"
+                <img src="img/opt/stacey-340.webp" width="340" height="473" alt="Stacey, Facial Specialist at Studio 1308" loading="lazy" decoding="async"
                   onerror="this.style.display='none'; this.parentElement.textContent='S';">
               </div>
               <div class="team-name">Stacey</div>
@@ -3056,7 +3123,7 @@
             </div>
             <div class="team-member">
               <div class="team-avatar">
-                <img src="img/larisa.svg" alt="Larisa, Facial Specialist at Studio 1308" loading="lazy"
+                <img src="img/opt/larisa-340.webp" width="340" height="490" alt="Larisa, Facial Specialist at Studio 1308" loading="lazy" decoding="async"
                   onerror="this.style.display='none'; this.parentElement.textContent='L';">
               </div>
               <div class="team-name">Larisa</div>
@@ -3064,7 +3131,7 @@
             </div>
             <div class="team-member">
               <div class="team-avatar">
-                <img src="img/dani.svg" alt="Dani, Lash Extensions at Studio 1308" loading="lazy"
+                <img src="img/opt/dani-340.webp" width="340" height="510" alt="Dani, Lash Extensions at Studio 1308" loading="lazy" decoding="async"
                   onerror="this.style.display='none'; this.parentElement.textContent='D';">
               </div>
               <div class="team-name">Dani</div>
@@ -3073,7 +3140,7 @@
           </div>
 
           <div class="stylist-ctas">
-            <a href="#" class="btn-wine popup_btn">
+            <a href="#book-widget" class="btn-wine popup_btn">
               Book With Our Team
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <path d="M5 12h14M12 5l7 7-7 7" />
@@ -3152,7 +3219,7 @@
       </div>
 
       <div class="process-cta r">
-        <a href="#" class="btn-gold popup_btn">
+        <a href="#book-widget" class="btn-gold popup_btn">
           Book Your Consultation
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <path d="M5 12h14M12 5l7 7-7 7" />
@@ -3213,7 +3280,7 @@
         <h2>Book Your<br><em>Appointment Today</em></h2>
         <p>New guests receive 10% off. Limited weekly slots available. Easy online booking takes under 2 minutes.</p>
         <div class="book-ctas">
-          <a href="#" class="btn-gold popup_btn">
+          <a href="#book-widget" class="btn-gold popup_btn">
             Book My Hair Appointment
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <path d="M5 12h14M12 5l7 7-7 7" />
@@ -3263,7 +3330,7 @@
       <div class="footer-grid">
         <div class="f-brand">
           <div style="margin-bottom:.9rem;">
-            <img src='img/logo-transparent1.png' width='120' alt="Logo" />
+            <img src="img/opt/logo-320.webp" width="120" height="54" alt="Logo" loading="lazy" decoding="async">
             <!-- <div style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;letter-spacing:.12em;color:var(--champagne);text-transform:uppercase;line-height:1;">1308 Studio</div>
           <div style="font-family:'Montserrat',sans-serif;font-size:.52rem;font-weight:500;letter-spacing:.28em;color:rgba(250,246,240,.5);text-transform:uppercase;margin-top:4px;">Salon &amp; Spa · Savannah</div> -->
           </div>
@@ -3284,7 +3351,7 @@
         <div class="f-col">
           <h4>Contact &amp; Book</h4>
           <a href="tel:+19128000555">+1 912 800 0555</a>
-          <a href="#" class="popup_btn">Book Now</a>
+          <a href="#book-widget" class="popup_btn">Book Now</a>
           <h4 style="margin-top:1rem;">Follow Us</h4>
           <div class='footer-socials'>
             <a href="https://www.instagram.com/1308studiosalonspa?igsh=MTh4d3lnM25wemhwbQ%3D%3D&utm_source=qr"
@@ -3331,7 +3398,7 @@
       </svg>
       Call
     </a>
-    <a href="#" class="m-book popup_btn">
+    <a href="#book-widget" class="m-book popup_btn">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
         <path d="M5 12h14M12 5l7 7-7 7" />
       </svg>
@@ -3404,7 +3471,7 @@
       <p class="rev-text" id="revtext-${review.id}">"${review.text}"</p>
       <button class="see-more-btn" id="revbtn-${review.id}" onclick="toggleRevText(${review.id})">See more</button>
       <div class="rev-author">
-        <div class="rev-av"><img src="${review.avatar}" alt="${review.name}"></div>
+        <div class="rev-av"><img src="${review.avatar}" alt="${review.name}" width="36" height="36" loading="lazy" decoding="async"></div>
         <div>
           <div class="rev-name">${review.name}</div>
           <div class="rev-svc">${review.service}</div>
@@ -3422,6 +3489,19 @@
 
     (function ($) {
       $(document).ready(function () {
+        // Slide 2 is fetched only after the page has loaded, so it never competes with slide 1 (the LCP image).
+        // Applied to every copy in .hero-photos, including slick's clones.
+        function loadHeroSlide2() {
+          $('.hero-photos img[data-src]').each(function () {
+            this.srcset = this.getAttribute('data-srcset');
+            this.src = this.getAttribute('data-src');
+            this.removeAttribute('data-src');
+            this.removeAttribute('data-srcset');
+          });
+        }
+        if (document.readyState === 'complete') setTimeout(loadHeroSlide2, 1200);
+        else window.addEventListener('load', function () { setTimeout(loadHeroSlide2, 1200); });
+
         $('.hero-photos').slick({
           slidesToShow: 1,
           slidesToScroll: 1,
@@ -3506,91 +3586,6 @@
       });
     })();
 
-    /* =============================================
-       PROMO CONFIG — edit these 5 lines when the
-       special offer is locked in. Everything else
-       (bar, countdown, lead card copy) turns on/off
-       by itself based on today's date. Nothing to
-       redesign each time.
-    ============================================= */
-    const PROMO = {
-      enabled: true,                        // master switch — set false to kill the promo entirely
-      start: '2026-07-19T00:00:00',       // promo goes live at this date/time
-      end: '2026-08-20T23:59:59',       // promo auto-hides after this date/time
-      barText: 'Back To School - 20% Off All Services',
-      eyebrow: '🔥 Limited-Time Offer',
-      title: 'Claim Your <em>20% Off</em> Back To School Offer',
-      sub: "Book before it's gone - tell us a bit about you and we'll text you back within minutes."
-    };
-
-    (function initPromo() {
-      if (!PROMO.enabled) return;
-      const start = new Date(PROMO.start);
-      const end = new Date(PROMO.end);
-
-      const bar = document.getElementById('promoBar');
-      // Hero lead card was removed from this page — these are all optional now,
-      // so the promo bar itself keeps working independently of them.
-      const card = document.getElementById('heroLeadCard');
-      const eyebrowEl = document.getElementById('leadEyebrow');
-      const titleEl = document.getElementById('leadTitle');
-      const subEl = document.getElementById('leadSub');
-
-      function isLive() {
-        // Preview override for testing/QA: open the page as index.html?promo=1
-        if (new URLSearchParams(location.search).get('promo') === '1') return true;
-        const now = new Date();
-        return now >= start && now <= end;
-      }
-
-      function pad(n) { return String(n).padStart(2, '0'); }
-
-      // Snapshot the original (non-promo) copy once, before we ever touch it
-      const defaults = card ? {
-        eyebrow: eyebrowEl.innerHTML,
-        title: titleEl.innerHTML,
-        sub: subEl.innerHTML
-      } : null;
-
-      let wasLive = null; // force first-run copy swap
-
-      function tick() {
-        const live = isLive();
-
-        if (live !== wasLive) {
-          if (bar) bar.classList.toggle('is-active', live);
-          if (card) {
-            card.classList.toggle('is-promo', live);
-            eyebrowEl.innerHTML = live ? PROMO.eyebrow : defaults.eyebrow;
-            titleEl.innerHTML = live ? PROMO.title : defaults.title;
-            subEl.innerHTML = live ? PROMO.sub : defaults.sub;
-          }
-          if (live) {
-            const barTextEl = document.getElementById('promoBarText');
-            if (barTextEl) barTextEl.textContent = PROMO.barText;
-          }
-          wasLive = live;
-        }
-
-        if (!live) return;
-
-        const diff = end - new Date();
-        const d = Math.max(0, Math.floor(diff / 86400000));
-        const h = Math.max(0, Math.floor((diff % 86400000) / 3600000));
-        const m = Math.max(0, Math.floor((diff % 3600000) / 60000));
-        const s = Math.max(0, Math.floor((diff % 60000) / 1000));
-
-        const countdownEl = document.getElementById('promoBarCountdown');
-        if (countdownEl) countdownEl.textContent = `${d}d ${pad(h)}h ${pad(m)}m ${pad(s)}s`;
-
-        const chipEl = document.getElementById('promoChip');
-        if (chipEl) chipEl.textContent = `⏳ Offer ends in ${d}d ${pad(h)}h ${pad(m)}m`;
-      }
-
-      tick();
-      setInterval(tick, 1000);
-    })();
-
     // ── Scroll reveal (used by gallery + future sections)
     const io = new IntersectionObserver(entries => {
       entries.forEach(e => {
@@ -3612,7 +3607,26 @@
   </script>
 
   <!-- ===================== 1308 STUDIO CHAT WIDGET ===================== -->
-  <script src="chatbot.js"></script>
+  <script>
+    // The chat widget is heavy and not needed for the first screen — load it on the first scroll or tap.
+    (function () {
+      var loaded = false;
+      var events = ['scroll', 'pointerdown', 'touchstart', 'keydown'];
+      function load() {
+        if (loaded) return;
+        loaded = true;
+        events.forEach(function (e) { window.removeEventListener(e, load); });
+        var css = document.createElement('link');
+        css.rel = 'stylesheet';
+        css.href = 'chatbot.css';
+        document.head.appendChild(css);
+        var js = document.createElement('script');
+        js.src = 'chatbot.js';
+        document.body.appendChild(js);
+      }
+      events.forEach(function (e) { window.addEventListener(e, load, { passive: true, once: true }); });
+    })();
+  </script>
 
   <!-- ===================== GALLERY LIGHTBOX ===================== -->
   <div class="gallery-lightbox" id="galleryLightbox">
@@ -3635,22 +3649,31 @@
 
       if (!$lightbox.length || !$slider.length || !$galleryImgs.length) return;
 
-      $galleryImgs.each(function () {
-        var $img = $(this);
-        var src = $img.attr('src');
-        var alt = ($img.attr('alt') || '').replace(/"/g, '&quot;');
-        $slider.append('<div class="g-slide"><img src="' + src + '" alt="' + alt + '"></div>');
-      });
+      // Slides are built on first open, and the full-size images load on demand,
+      // so the page no longer downloads the whole gallery twice at load time.
+      var sliderReady = false;
+      function ensureSlider() {
+        if (sliderReady) return;
+        sliderReady = true;
+        $galleryImgs.each(function () {
+          var $img = $(this);
+          var src = $img.attr('data-full') || $img.attr('src');
+          var alt = ($img.attr('alt') || '').replace(/"/g, '&quot;');
+          $slider.append('<div class="g-slide"><img data-lazy="' + src + '" alt="' + alt + '"></div>');
+        });
 
-      $slider.slick({
-        arrows: true,
-        dots: false,
-        infinite: true,
-        speed: 400,
-        adaptiveHeight: true
-      });
+        $slider.slick({
+          arrows: true,
+          dots: false,
+          infinite: true,
+          speed: 400,
+          adaptiveHeight: true,
+          lazyLoad: 'ondemand'
+        });
+      }
 
       function openLightbox(index) {
+        ensureSlider();
         $lightbox.addClass('open');
         $('body').css('overflow', 'hidden');
         $slider.slick('slickGoTo', index, true);

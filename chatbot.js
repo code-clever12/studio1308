@@ -15,7 +15,10 @@
   var STUDIO_PHONE_DISPLAY = '+1 (912) 800-0555';
   var STUDIO_PHONE_TEL = '+19128000555';
 
-  document.addEventListener('DOMContentLoaded', init);
+  // The widget may be injected after the page has loaded (deferred on landing pages), so don't wait for an event that already fired.
+  // setTimeout lets the rest of this script (e.g. STOPWORDS below) finish initialising before init runs.
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else setTimeout(init, 0);
 
   // ── Storage helpers — wrapped defensively so a locked-down privacy mode
   // degrades to "nothing remembered" instead of breaking the widget. ──
