@@ -30,7 +30,9 @@
   <meta name="twitter:image" content="https://studio1308.com/img/hero1.jpeg">
 
   <link rel="icon" type="image/png" href="img/opt/favicon-96.png">
-  <link rel="preload" as="image" href="img/opt/hero1-800.webp" imagesrcset="img/opt/hero1-800.webp 800w, img/opt/hero1-1200.webp 1200w, img/opt/hero1-1600.webp 1600w" imagesizes="(max-width: 1080px) 100vw, 57vw" fetchpriority="high">
+  <link rel="preload" as="image" href="img/opt/hero1-800.webp"
+    imagesrcset="img/opt/hero1-800.webp 800w, img/opt/hero1-1200.webp 1200w, img/opt/hero1-1600.webp 1600w"
+    imagesizes="(max-width: 1080px) 100vw, 57vw" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -65,7 +67,7 @@
     });
   </script>
 
-  <!-- Local business structured data — powers Google rich results (rating stars, hours, map) -->
+  <!-- Local business structured data - powers Google rich results (rating stars, hours, map) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -99,7 +101,7 @@
   }
   </script>
 
-  <!-- FAQPage structured data — mirrors the visible FAQ section exactly (Google requirement). -->
+  <!-- FAQPage structured data - mirrors the visible FAQ section exactly (Google requirement). -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -493,7 +495,7 @@
       flex: 1 1 auto;
     }
 
-    /* Highlight CTA: Free Parking badge — the hook, sits right above the buttons */
+    /* Highlight CTA: Free Parking badge - the hook, sits right above the buttons */
     .hero-parking-badge {
       display: inline-flex;
       align-items: center;
@@ -1127,7 +1129,7 @@
     }
 
     /* =============================================
-       GALLERY — SHOW MORE REVEAL
+       GALLERY - SHOW MORE REVEAL
     ============================================= */
     .gallery-wrap {
       border-radius: 12px;
@@ -1141,7 +1143,7 @@
       transition: max-height .7s var(--ease);
     }
 
-    /* Overlay only exists once JS marks the section as collapsible —
+    /* Overlay only exists once JS marks the section as collapsible -
        keeps the gallery fully visible for no-JS users. */
     .gallery-fade {
       display: none;
@@ -1405,7 +1407,7 @@
       border: 1px solid var(--taupe-light);
     }
 
-    /* Photo frame — circular, matches the source photo's own circular crop. Degrades to a monogram if no real photo is present */
+    /* Photo frame - circular, matches the source photo's own circular crop. Degrades to a monogram if no real photo is present */
     .stylist-photo-frame {
       position: relative;
       width: 100%;
@@ -1773,7 +1775,7 @@
       margin: 0 -12px;
     }
 
-    /* Override hero's dark-photo dot styling — this carousel sits on a light card background */
+    /* Override hero's dark-photo dot styling - this carousel sits on a light card background */
     .reviews-grid ul.slick-dots {
       position: static;
       margin-top: 1.75rem !important;
@@ -1885,8 +1887,18 @@
       margin-top: 2.25rem;
     }
 
-    a.g-badge-pill { color: inherit; text-decoration: none; transition: transform .2s, box-shadow .2s, border-color .2s; }
-    a.g-badge-pill:hover { transform: translateY(-2px); border-color: var(--champagne); box-shadow: 0 6px 18px rgba(0,0,0,.08); }
+    a.g-badge-pill {
+      color: inherit;
+      text-decoration: none;
+      transition: transform .2s, box-shadow .2s, border-color .2s;
+    }
+
+    a.g-badge-pill:hover {
+      transform: translateY(-2px);
+      border-color: var(--champagne);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, .08);
+    }
+
     .g-badge-pill {
       display: inline-flex;
       align-items: center;
@@ -2446,7 +2458,7 @@
     }
 
     /* =============================================
-       SMALL PHONES (iPhone SE, small Android — 380px and under)
+       SMALL PHONES (iPhone SE, small Android - 380px and under)
        Everything above already scales fluidly via clamp()/fr units;
        this tier only tightens the spots that still read too large
        or too tight at the very bottom of the phone range.
@@ -2513,7 +2525,7 @@
     }
 
     /* =============================================
-       GALLERY LIGHTBOX — click a photo to open a full-screen slider
+       GALLERY LIGHTBOX - click a photo to open a full-screen slider
     ============================================= */
     .gallery-sec .gallery-grid img {
       cursor: zoom-in;
@@ -2634,7 +2646,7 @@
         right: 14px;
       }
     }
-  
+
     /* Owner row: small photo beside the "Owner" label */
     .stylist-card {
       grid-template-columns: 1fr;
@@ -2695,6 +2707,7 @@
         grid-template-columns: 1fr;
       }
     }
+
     /* New-guest offer line in the hero, above the Book button */
     .hero-offer {
       display: flex;
@@ -2718,6 +2731,7 @@
       font-size: .72rem;
       color: rgba(250, 246, 240, .7);
     }
+
     /* Keep the header (phone + Book Now) in view while scrolling on desktop and tablet.
        On phones (640px and below) the fixed Call / Book Now bar at the bottom does this job. */
     @media (max-width: 640px) {
@@ -2772,11 +2786,18 @@
   <!-- ===================== HERO ===================== -->
   <section class="hero" id="hero" data-section-name="Hero">
     <div class="hero-photos">
-      <div class="hero-photo"><img src="img/opt/hero1-800.webp" srcset="img/opt/hero1-800.webp 800w, img/opt/hero1-1200.webp 1200w, img/opt/hero1-1600.webp 1600w" sizes="(max-width: 1080px) 100vw, 57vw" width="1200" height="800" alt="Blowout salon Savannah GA — Studio 1308 interior" fetchpriority="high" decoding="async"></div>
-      <div class="hero-photo"><img data-srcset="img/opt/hero2-800.webp 800w, img/opt/hero2-1200.webp 1200w, img/opt/hero2-1600.webp 1600w" data-src="img/opt/hero2-800.webp" sizes="(max-width: 1080px) 100vw, 57vw" width="1200" height="800" alt="Studio 1308 blowout salon Savannah GA storefront" decoding="async"></div>
+      <div class="hero-photo"><img src="img/opt/hero1-800.webp"
+          srcset="img/opt/hero1-800.webp 800w, img/opt/hero1-1200.webp 1200w, img/opt/hero1-1600.webp 1600w"
+          sizes="(max-width: 1080px) 100vw, 57vw" width="1200" height="800"
+          alt="Blowout salon Savannah GA - Studio 1308 interior" fetchpriority="high" decoding="async"></div>
+      <div class="hero-photo"><img
+          data-srcset="img/opt/hero2-800.webp 800w, img/opt/hero2-1200.webp 1200w, img/opt/hero2-1600.webp 1600w"
+          data-src="img/opt/hero2-800.webp" sizes="(max-width: 1080px) 100vw, 57vw" width="1200" height="800"
+          alt="Studio 1308 blowout salon Savannah GA storefront" decoding="async"></div>
     </div>
     <div class="hero-panel"></div>
-    <img class="hero-wm" src="img/opt/logo-badge-640.webp" width="640" height="543" alt="" loading="lazy" decoding="async">
+    <img class="hero-wm" src="img/opt/logo-badge-640.webp" width="640" height="543" alt="" loading="lazy"
+      decoding="async">
 
     <div class="hero-content">
       <div class="hero-stars">
@@ -2788,7 +2809,9 @@
         Savannah <em>Blowouts</em> at the #1 Hair Salon by Google Reviews
       </h1>
       <p class="hero-sub">
-        Searching for a blowout in Savannah? Studio 1308, ranked #1 hair salon in Savannah 31415 in BusinessRate's Best of 2026 awards, gives you bouncy waves and incredible volume with our Bombshell Blow Dry — a Hollywood-grade blowout that holds all week, from $45.
+        Searching for a blowout in Savannah? Studio 1308, ranked #1 hair salon in Savannah 31415 in BusinessRate's Best
+        of 2026 awards, gives you bouncy waves and incredible volume with our Bombshell Blow Dry - a Hollywood-grade
+        blowout that holds all week, from $45.
       </p>
       <div class="hero-loc">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -2801,7 +2824,7 @@
 
       <div class="hero-parking-badge">
         <span class="t-ic">🅿️</span>
-        <span class="txt">FREE PARKING — FRONT &amp; BACK</span>
+        <span class="txt">FREE PARKING - FRONT &amp; BACK</span>
       </div>
 
       <div class="hero-offer">
@@ -2840,45 +2863,62 @@
       <div class="gallery-collapse" id="galleryCollapse">
         <div class="gallery-grid r">
           <div class="g-item r d3">
-            <img src="img/opt/gallery/hair/BlondeBlowout-600.webp" data-full="img/opt/gallery/hair/BlondeBlowout-full.webp" width="520" height="694" decoding="async" alt="Blonde Blowout at Studio 1308" loading="lazy">
+            <img src="img/opt/gallery/hair/BlondeBlowout-600.webp"
+              data-full="img/opt/gallery/hair/BlondeBlowout-full.webp" width="520" height="694" decoding="async"
+              alt="Blonde Blowout at Studio 1308" loading="lazy">
             <div class="g-cap"><span>Blonde Blowout</span></div>
           </div>
           <div class="g-item r d1">
-            <img src="img/opt/gallery/hair/ElegantHollywoodWaves-600.webp" data-full="img/opt/gallery/hair/ElegantHollywoodWaves-full.webp" width="520" height="520" decoding="async" alt="Elegant Hollywood Waves at Studio 1308"
-              loading="lazy">
+            <img src="img/opt/gallery/hair/ElegantHollywoodWaves-600.webp"
+              data-full="img/opt/gallery/hair/ElegantHollywoodWaves-full.webp" width="520" height="520" decoding="async"
+              alt="Elegant Hollywood Waves at Studio 1308" loading="lazy">
             <div class="g-cap"><span>Elegant Hollywood Waves</span></div>
           </div>
           <div class="g-item r d6">
-            <img src="img/opt/gallery/hair/VoluminousBeachWaves-600.webp" data-full="img/opt/gallery/hair/VoluminousBeachWaves-full.webp" width="520" height="520" decoding="async" alt="Voluminous Beach Waves at Studio 1308"
-              loading="lazy">
+            <img src="img/opt/gallery/hair/VoluminousBeachWaves-600.webp"
+              data-full="img/opt/gallery/hair/VoluminousBeachWaves-full.webp" width="520" height="520" decoding="async"
+              alt="Voluminous Beach Waves at Studio 1308" loading="lazy">
             <div class="g-cap"><span>Voluminous Beach Waves</span></div>
           </div>
           <div class="g-item r d2">
-            <img src="img/opt/gallery/hair/SilkPress-600.webp" data-full="img/opt/gallery/hair/SilkPress-full.webp" width="520" height="694" decoding="async" alt="Silk Press at Studio 1308" loading="lazy">
+            <img src="img/opt/gallery/hair/SilkPress-600.webp" data-full="img/opt/gallery/hair/SilkPress-full.webp"
+              width="520" height="694" decoding="async" alt="Silk Press at Studio 1308" loading="lazy">
             <div class="g-cap"><span>Silk Press</span></div>
           </div>
           <div class="g-item r d2">
-            <img src="img/opt/gallery/hair/GlamorousCurlyHair-600.webp" data-full="img/opt/gallery/hair/GlamorousCurlyHair-full.webp" width="520" height="521" decoding="async" alt="Glamorous Curly Hair at Studio 1308" loading="lazy">
+            <img src="img/opt/gallery/hair/GlamorousCurlyHair-600.webp"
+              data-full="img/opt/gallery/hair/GlamorousCurlyHair-full.webp" width="520" height="521" decoding="async"
+              alt="Glamorous Curly Hair at Studio 1308" loading="lazy">
             <div class="g-cap"><span>Glamorous Curly Hair</span></div>
           </div>
           <div class="g-item g-tall r d3">
-            <img src="img/opt/gallery/hair/RomanticSoftCurl-600.webp" data-full="img/opt/gallery/hair/RomanticSoftCurl-full.webp" width="520" height="520" decoding="async" alt="Romantic Soft Curl at Studio 1308" loading="lazy">
+            <img src="img/opt/gallery/hair/RomanticSoftCurl-600.webp"
+              data-full="img/opt/gallery/hair/RomanticSoftCurl-full.webp" width="520" height="520" decoding="async"
+              alt="Romantic Soft Curl at Studio 1308" loading="lazy">
             <div class="g-cap"><span>Romantic Soft Curl</span></div>
           </div>
           <div class="g-item r d6">
-            <img src="img/opt/gallery/hair/SoftBridalWaves-600.webp" data-full="img/opt/gallery/hair/SoftBridalWaves-full.webp" width="520" height="519" decoding="async" alt="Soft Bridal Waves at Studio 1308" loading="lazy">
+            <img src="img/opt/gallery/hair/SoftBridalWaves-600.webp"
+              data-full="img/opt/gallery/hair/SoftBridalWaves-full.webp" width="520" height="519" decoding="async"
+              alt="Soft Bridal Waves at Studio 1308" loading="lazy">
             <div class="g-cap"><span>Soft Bridal Waves</span></div>
           </div>
           <div class="g-item r d3">
-            <img src="img/opt/gallery/hair/SleekBrunette-600.webp" data-full="img/opt/gallery/hair/SleekBrunette-full.webp" width="520" height="694" decoding="async" alt="Sleek Brunette at Studio 1308" loading="lazy">
+            <img src="img/opt/gallery/hair/SleekBrunette-600.webp"
+              data-full="img/opt/gallery/hair/SleekBrunette-full.webp" width="520" height="694" decoding="async"
+              alt="Sleek Brunette at Studio 1308" loading="lazy">
             <div class="g-cap"><span>Sleek Brunette</span></div>
           </div>
           <div class="g-item r d5">
-            <img src="img/opt/gallery/hair/SleekBridalHair-600.webp" data-full="img/opt/gallery/hair/SleekBridalHair-full.webp" width="520" height="520" decoding="async" alt="Sleek Bridal Hair at Studio 1308" loading="lazy">
+            <img src="img/opt/gallery/hair/SleekBridalHair-600.webp"
+              data-full="img/opt/gallery/hair/SleekBridalHair-full.webp" width="520" height="520" decoding="async"
+              alt="Sleek Bridal Hair at Studio 1308" loading="lazy">
             <div class="g-cap"><span>Sleek Bridal Hair</span></div>
           </div>
           <div class="g-item g-tall r d1">
-            <img src="img/opt/gallery/hair/BalayageWaves-600.webp" data-full="img/opt/gallery/hair/BalayageWaves-full.webp" width="520" height="521" decoding="async" alt="Balayage Waves at Studio 1308" loading="lazy">
+            <img src="img/opt/gallery/hair/BalayageWaves-600.webp"
+              data-full="img/opt/gallery/hair/BalayageWaves-full.webp" width="520" height="521" decoding="async"
+              alt="Balayage Waves at Studio 1308" loading="lazy">
             <div class="g-cap"><span>Balayage Waves</span></div>
           </div>
 
@@ -2917,7 +2957,7 @@
       <div class="sec-head r">
         <span class="eyebrow">Blowout Menu · Savannah, GA</span>
         <h2>Blowout &amp; Styling Services</h2>
-        <p>Transparent pricing, no surprises at checkout — every service below, ready to book.</p>
+        <p>Transparent pricing, no surprises at checkout - every service below, ready to book.</p>
       </div>
 
       <div class="service-grid">
@@ -2926,7 +2966,7 @@
               alt="Bombshell blowout at Studio 1308 hair salon Savannah" loading="lazy"></div>
           <div class="svc-body">
             <h3>Bombshell Blow Dry</h3>
-            <p>Bouncy waves and incredible volume — Hollywood-grade blowout that holds all week.</p>
+            <p>Bouncy waves and incredible volume - Hollywood-grade blowout that holds all week.</p>
             <div class="svc-foot">
               <div class="svc-price"><span class="pfrom">from </span>$45</div>
             </div>
@@ -2952,7 +2992,7 @@
               alt="Glass effect hair gloss treatment, luxury hair salon Savannah" loading="lazy"></div>
           <div class="svc-body">
             <h3>Glass Effect Hair</h3>
-            <p>Mirror-shine treatment — ultra-smooth, frizz-free, reflective hair that turns heads.</p>
+            <p>Mirror-shine treatment - ultra-smooth, frizz-free, reflective hair that turns heads.</p>
             <div class="svc-foot">
               <div class="svc-price">$179</div>
               <span class="svc-badge">Popular</span>
@@ -2996,24 +3036,24 @@
       </div>
 
       <div class="stylist-card r">
-<div class="stylist-info">
+        <div class="stylist-info">
           <div class="own-box">
             <div class="stylist-photo-frame">
-          <!-- Inga's real headshot -->
-          <img src="img/opt/Inga-Krasileviciute-160.webp" width="160" height="160" loading="lazy" decoding="async"
-            alt="Inga Krasileviciute, owner and lead hairstylist at Studio 1308, Savannah GA"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div class="stylist-monogram" style="display:none;">IK</div>
-          <span class="stylist-award-ribbon" title="Award Winner">🏆</span>
-        </div>
+              <!-- Inga's real headshot -->
+              <img src="img/opt/Inga-Krasileviciute-160.webp" width="160" height="160" loading="lazy" decoding="async"
+                alt="Inga Krasileviciute, owner and lead hairstylist at Studio 1308, Savannah GA"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="stylist-monogram" style="display:none;">IK</div>
+              <span class="stylist-award-ribbon" title="Award Winner">🏆</span>
+            </div>
             <span class="stylist-eyebrow">Owner &amp; Lead Hairstylist</span>
           </div>
           <div class="stylist-name">Inga Krasileviciute</div>
           <div class="stylist-title">Multi-Award-Winning Hairstylist &amp; Makeup Artist</div>
 
           <div class="stylist-badges">
-            <span class="stylist-badge">🏆 BTC Top 25 Hot Shot Winner — 2023</span>
-            <span class="stylist-badge">🏆 BTC Top 25 Hot Shot Winner — 2025</span>
+            <span class="stylist-badge">🏆 BTC Top 25 Hot Shot Winner - 2023</span>
+            <span class="stylist-badge">🏆 BTC Top 25 Hot Shot Winner - 2025</span>
           </div>
 
           <p class="stylist-bio">
@@ -3026,7 +3066,8 @@
           <div class="team-strip">
             <div class="team-member">
               <div class="team-avatar">
-                <img src="img/opt/inga-340.webp" width="340" height="469" alt="Inga, Head Spa Specialist at Studio 1308" loading="lazy" decoding="async"
+                <img src="img/opt/inga-340.webp" width="340" height="469" alt="Inga, Head Spa Specialist at Studio 1308"
+                  loading="lazy" decoding="async"
                   onerror="this.style.display='none'; this.parentElement.textContent='I';">
               </div>
               <div class="team-name">Inga</div>
@@ -3034,7 +3075,8 @@
             </div>
             <div class="team-member">
               <div class="team-avatar">
-                <img src="img/opt/alma-340.webp" width="340" height="450" alt="Alma, hairstylist at Studio 1308" loading="lazy" decoding="async"
+                <img src="img/opt/alma-340.webp" width="340" height="450" alt="Alma, hairstylist at Studio 1308"
+                  loading="lazy" decoding="async"
                   onerror="this.style.display='none'; this.parentElement.textContent='A';">
               </div>
               <div class="team-name">Alma</div>
@@ -3042,7 +3084,8 @@
             </div>
             <div class="team-member">
               <div class="team-avatar">
-                <img src="img/opt/omaira-340.webp" width="340" height="510" alt="Omaira, Master Hairstylist at Studio 1308" loading="lazy" decoding="async"
+                <img src="img/opt/omaira-340.webp" width="340" height="510"
+                  alt="Omaira, Master Hairstylist at Studio 1308" loading="lazy" decoding="async"
                   onerror="this.style.display='none'; this.parentElement.textContent='O';">
               </div>
               <div class="team-name">Omaira</div>
@@ -3050,7 +3093,8 @@
             </div>
             <div class="team-member">
               <div class="team-avatar">
-                <img src="img/opt/manar-340.webp" width="340" height="473" alt="Manar, Wax Specialist at Studio 1308" loading="lazy" decoding="async"
+                <img src="img/opt/manar-340.webp" width="340" height="473" alt="Manar, Wax Specialist at Studio 1308"
+                  loading="lazy" decoding="async"
                   onerror="this.style.display='none'; this.parentElement.textContent='M';">
               </div>
               <div class="team-name">Manar</div>
@@ -3058,7 +3102,8 @@
             </div>
             <div class="team-member">
               <div class="team-avatar">
-                <img src="img/opt/stacey-340.webp" width="340" height="473" alt="Stacey, Facial Specialist at Studio 1308" loading="lazy" decoding="async"
+                <img src="img/opt/stacey-340.webp" width="340" height="473"
+                  alt="Stacey, Facial Specialist at Studio 1308" loading="lazy" decoding="async"
                   onerror="this.style.display='none'; this.parentElement.textContent='S';">
               </div>
               <div class="team-name">Stacey</div>
@@ -3066,7 +3111,8 @@
             </div>
             <div class="team-member">
               <div class="team-avatar">
-                <img src="img/opt/larisa-340.webp" width="340" height="490" alt="Larisa, Facial Specialist at Studio 1308" loading="lazy" decoding="async"
+                <img src="img/opt/larisa-340.webp" width="340" height="490"
+                  alt="Larisa, Facial Specialist at Studio 1308" loading="lazy" decoding="async"
                   onerror="this.style.display='none'; this.parentElement.textContent='L';">
               </div>
               <div class="team-name">Larisa</div>
@@ -3074,7 +3120,8 @@
             </div>
             <div class="team-member">
               <div class="team-avatar">
-                <img src="img/opt/dani-340.webp" width="340" height="510" alt="Dani, Lash Extensions at Studio 1308" loading="lazy" decoding="async"
+                <img src="img/opt/dani-340.webp" width="340" height="510" alt="Dani, Lash Extensions at Studio 1308"
+                  loading="lazy" decoding="async"
                   onerror="this.style.display='none'; this.parentElement.textContent='D';">
               </div>
               <div class="team-name">Dani</div>
@@ -3101,13 +3148,14 @@
       <div class="sec-head r">
         <span class="eyebrow">Google Reviews · Savannah, GA</span>
         <h2>What Savannah Says About Our <em>Hair</em></h2>
-        <p>Real reviews from real clients — no cherry-picked screenshots, straight from Google.</p>
+        <p>Real reviews from real clients - no cherry-picked screenshots, straight from Google.</p>
       </div>
 
       <div class="reviews-grid r" id="reviewsGrid"></div>
 
       <div class="g-badge r">
-        <a class="g-badge-pill" href="https://maps.app.goo.gl/a33NRYrzhPW4jEWN9" target="_blank" rel="noopener noreferrer" aria-label="View Studio 1308 reviews on Google">
+        <a class="g-badge-pill" href="https://maps.app.goo.gl/a33NRYrzhPW4jEWN9" target="_blank"
+          rel="noopener noreferrer" aria-label="View Studio 1308 reviews on Google">
           <svg width="18" height="18" viewBox="0 0 24 24">
             <path
               d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -3136,7 +3184,7 @@
       <div class="sec-head r">
         <span class="eyebrow">Our Process</span>
         <h2>How We Get It Right <em>The First Time</em></h2>
-        <p>The biggest fear in a hair appointment isn't price — it's ending up with something you didn't ask for. Here's
+        <p>The biggest fear in a hair appointment isn't price - it's ending up with something you didn't ask for. Here's
           how we prevent that.</p>
       </div>
 
@@ -3145,18 +3193,18 @@
           <div class="step-n">1</div>
           <h3>The Real Consultation</h3>
           <p>We start with your photos, not our guesses. Show us your inspiration and we'll tell you honestly what's
-            achievable for your hair — before a single tool touches your head.</p>
+            achievable for your hair - before a single tool touches your head.</p>
         </div>
         <div class="step r d2">
           <div class="step-n">2</div>
           <h3>A Formula Made For You</h3>
           <p>No pre-set recipes. Every color and treatment is custom-mixed for your hair's exact condition, tone, and
-            goal — not a one-size-fits-all shortcut.</p>
+            goal - not a one-size-fits-all shortcut.</p>
         </div>
         <div class="step r d3">
           <div class="step-n">3</div>
           <h3>We Check In, Not Just Cut</h3>
-          <p>We pause mid-service to confirm you love the direction — so nothing is "final" until you've seen it and
+          <p>We pause mid-service to confirm you love the direction - so nothing is "final" until you've seen it and
             approved it yourself.</p>
         </div>
       </div>
@@ -3185,7 +3233,8 @@
         <div class="faq-item">
           <button class="faq-q">How much is a blowout in Savannah?</button>
           <div class="faq-a">
-            <p>Our Bombshell Blow Dry starts from $45. The online booking menu always shows current pricing, and new guests get 10% off their first visit.</p>
+            <p>Our Bombshell Blow Dry starts from $45. The online booking menu always shows current pricing, and new
+              guests get 10% off their first visit.</p>
           </div>
         </div>
         <div class="faq-item">
@@ -3197,25 +3246,29 @@
         <div class="faq-item">
           <button class="faq-q">Can I book a blowout for a wedding or event?</button>
           <div class="faq-a">
-            <p>Yes. Our Special Event Hairstyle starts from $125 and specializes in Hollywood waves, east European styles, and a humidity-proof hold.</p>
+            <p>Yes. Our Special Event Hairstyle starts from $125 and specializes in Hollywood waves, east European
+              styles, and a humidity-proof hold.</p>
           </div>
         </div>
         <div class="faq-item">
           <button class="faq-q">Do you do blowouts on curly or textured hair?</button>
           <div class="faq-a">
-            <p>Yes. Our stylists work with every hair type and texture, from stick-straight to tight curls. Just let us know your hair's specific needs when you book or during your consultation.</p>
+            <p>Yes. Our stylists work with every hair type and texture, from stick-straight to tight curls. Just let us
+              know your hair's specific needs when you book or during your consultation.</p>
           </div>
         </div>
         <div class="faq-item">
           <button class="faq-q">Do I need an appointment, or can I walk in?</button>
           <div class="faq-a">
-            <p>We recommend booking ahead to guarantee your preferred stylist and time slot. Call us or book online and we'll always do our best to fit you in.</p>
+            <p>We recommend booking ahead to guarantee your preferred stylist and time slot. Call us or book online and
+              we'll always do our best to fit you in.</p>
           </div>
         </div>
         <div class="faq-item">
           <button class="faq-q">Is the free parking actually easy to find?</button>
           <div class="faq-a">
-            <p>Yes. Free parking is available directly in front of and behind our building at 1308 Martin Luther King Jr Blvd, Savannah, GA. No meters, no permits, no circling the block.</p>
+            <p>Yes. Free parking is available directly in front of and behind our building at 1308 Martin Luther King Jr
+              Blvd, Savannah, GA. No meters, no permits, no circling the block.</p>
           </div>
         </div>
       </div>
@@ -3247,7 +3300,7 @@
         </div>
       </div>
 
-      <!-- Inline Vagaro booking widget — every "Book Now" button scrolls here -->
+      <!-- Inline Vagaro booking widget - every "Book Now" button scrolls here -->
       <div class="book-widget-wrap r" id="book-widget">
         <div id="frameTitle" class="embedded-widget-title"
           style="font-size: 20px; color: var(--bordeaux-deep); font-family: var(--body); line-height: 24px; padding: 0 10px 14px; text-align: center; box-sizing: border-box;">
@@ -3362,7 +3415,7 @@
   <script src="slick.min.js"></script>
   <script src="datalayer.js"></script>
   <script>
-    // Real Google reviews, pulled directly from studio1308.com — filtered to hair-relevant
+    // Real Google reviews, pulled directly from studio1308.com - filtered to hair-relevant
     // reviews only (color, cuts, updos, wedding hair), same as the Gallery/Services sections.
     const reviews = [
       {
@@ -3559,7 +3612,7 @@
 
   <!-- ===================== 1308 STUDIO CHAT WIDGET ===================== -->
   <script>
-    // The chat widget is heavy and not needed for the first screen — load it on the first scroll or tap.
+    // The chat widget is heavy and not needed for the first screen - load it on the first scroll or tap.
     (function () {
       var loaded = false;
       var events = ['scroll', 'pointerdown', 'touchstart', 'keydown'];
