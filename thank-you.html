@@ -45,6 +45,13 @@
     var BOOKING_VALUE_API = 'https://studio1308.code-clever.com/api/v1/booking-value';
     var VALUE_TIMEOUT_MS = 3000;
 
+    // Asks the browser to confirm before the tab is closed or reloaded while the
+    // lookup is still pending, so the conversion isn't lost by leaving too early.
+    function warnBeforeLeaving(event) {
+      event.preventDefault();
+      event.returnValue = ''; // older browsers need this to show the prompt
+    }
+
     function fetchBookingValue(id, done) {
       var finished = false;
       var timer = null;
@@ -53,10 +60,13 @@
         if (finished) return;
         finished = true;
         clearTimeout(timer);
+        // Lookup is over (answered, failed or timed out): stop holding the tab open.
+        window.removeEventListener('beforeunload', warnBeforeLeaving);
         done(result);
       }
 
       if (!id || !window.fetch) { finish(null); return; }
+      window.addEventListener('beforeunload', warnBeforeLeaving);
       timer = setTimeout(function () { finish(null); }, VALUE_TIMEOUT_MS);
 
       // Plain GET with no custom headers, so the browser needs no CORS preflight.
