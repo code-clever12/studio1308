@@ -45,6 +45,11 @@
     var BOOKING_VALUE_API = 'https://studio1308.code-clever.com/api/v1/booking-value';
     var VALUE_TIMEOUT_MS = 5000;
 
+    // Statuses that mean a firm booking right after checkout: Vagaro reports a
+    // brand-new booking as "Accepted", and "Confirmed" once the client confirms it.
+    // Anything else (Cancel, Deleted, Denied, Need Acceptance...) gets no value.
+    var VALUE_STATUSES = ['Accepted', 'Confirmed'];
+
     // Asks the browser to confirm before the tab is closed or reloaded while the
     // lookup is still pending, so the conversion isn't lost by leaving too early.
     function warnBeforeLeaving(event) {
@@ -73,7 +78,7 @@
       fetch(BOOKING_VALUE_API + '?appointment_id=' + encodeURIComponent(id))
         .then(function (res) { return res.ok ? res.json() : null; })
         .then(function (data) {
-          var value = data && data.appointment_id === id && data.status === 'Confirmed' ? Number(data.value) : NaN;
+          var value = data && data.appointment_id === id && VALUE_STATUSES.indexOf(data.status) !== -1 ? Number(data.value) : NaN;
           finish(isFinite(value) && value > 0 && value < 10000 ? { value: value, currency: 'USD' } : null);
         })
         .catch(function () { finish(null); });
