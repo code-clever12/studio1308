@@ -60,28 +60,49 @@
     function fetchBookingValue(id, done) {
       var finished = false;
       var timer = null;
+      var startedAt = Date.now();
+      var httpStatus = null;
 
-      function finish(result) {
+      function elapsed() { return (Date.now() - startedAt) + 'ms'; }
+
+      function finish(result, reason) {
         if (finished) return;
         finished = true;
         clearTimeout(timer);
         // Lookup is over (answered, failed or timed out): stop holding the tab open.
         window.removeEventListener('beforeunload', warnBeforeLeaving);
+        // 3. feedback: what the page is about to send
+        console.log('[booking-value] 3/3 feedback (' + elapsed() + '):',
+          result ? 'sending value ' + result.value + ' ' + result.currency : 'sending WITHOUT value - ' + reason);
         done(result);
       }
 
-      if (!id || !window.fetch) { finish(null); return; }
+      if (!id || !window.fetch) { finish(null, !id ? 'no appointmentId in the URL' : 'fetch not supported'); return; }
       window.addEventListener('beforeunload', warnBeforeLeaving);
-      timer = setTimeout(function () { finish(null); }, VALUE_TIMEOUT_MS);
+      timer = setTimeout(function () { finish(null, 'timed out after ' + VALUE_TIMEOUT_MS + 'ms'); }, VALUE_TIMEOUT_MS);
+
+      // 1. api call
+      console.log('[booking-value] 1/3 api call: GET ' + BOOKING_VALUE_API + ' (appointment ' + id + ', timeout ' + VALUE_TIMEOUT_MS + 'ms)');
 
       // Plain GET with no custom headers, so the browser needs no CORS preflight.
       fetch(BOOKING_VALUE_API + '?appointment_id=' + encodeURIComponent(id))
-        .then(function (res) { return res.ok ? res.json() : null; })
+        .then(function (res) { httpStatus = res.status; return res.ok ? res.json() : null; })
         .then(function (data) {
           var value = data && data.appointment_id === id && VALUE_STATUSES.indexOf(data.status) !== -1 ? Number(data.value) : NaN;
-          finish(isFinite(value) && value > 0 && value < 10000 ? { value: value, currency: 'USD' } : null);
+          var valid = isFinite(value) && value > 0 && value < 10000;
+          var reason = valid ? '' : !data ? 'API answered HTTP ' + httpStatus
+            : data.appointment_id !== id ? 'appointment ID in the answer does not match'
+            : VALUE_STATUSES.indexOf(data.status) === -1 ? 'status "' + data.status + '" gets no value'
+            : 'value "' + data.value + '" is not usable';
+          // 2. processing: what came back and whether it is usable
+          console.log('[booking-value] 2/3 processing (' + elapsed() + '): HTTP ' + httpStatus,
+            data, valid ? '-> valid' : '-> rejected: ' + reason, finished ? '(arrived after the lookup ended, ignored)' : '');
+          finish(valid ? { value: value, currency: 'USD' } : null, reason);
         })
-        .catch(function () { finish(null); });
+        .catch(function (err) {
+          console.log('[booking-value] 2/3 processing (' + elapsed() + '): request failed', err);
+          finish(null, 'request failed (network or CORS)');
+        });
     }
 
     function fireBookingConversion(booking) {
