@@ -43,7 +43,18 @@
     // VALUE_TIMEOUT_MS, or on any error / unconfirmed booking, the conversion is
     // sent without a value, exactly as it was before.
     var BOOKING_VALUE_API = 'https://studio1308.code-clever.com/api/v1/booking-value';
+    // Tracking script version. Everything lives inline in this page, so there is no
+    // separate asset to cache-bust: bump this when the logic changes (it shows in the
+    // console) and the page itself is re-fetched on the next deploy.
+    var TRACKING_VERSION = '2026-11-05-retry';
+    // Total time the whole lookup (all attempts) may take before the conversion is sent without a value.
     var VALUE_TIMEOUT_MS = 12000;
+    // Vagaro can take a few seconds to show a brand-new booking, so a lookup that comes
+    // back empty is asked again after this pause, until VALUE_TIMEOUT_MS runs out.
+    var RETRY_DELAY_MS = 2500;
+    // Answers worth asking again: 404 = Vagaro doesn't show the booking yet,
+    // 429 = too many requests, 502 = Vagaro was unavailable for a moment.
+    var RETRY_HTTP_STATUSES = [404, 429, 502];
 
     // Statuses that mean a firm booking right after checkout: Vagaro reports a
     // brand-new booking as "Accepted", and "Confirmed" once the client confirms it.
@@ -59,9 +70,10 @@
 
     function fetchBookingValue(id, done) {
       var finished = false;
-      var timer = null;
+      var timer = null;      // overall deadline
+      var retryTimer = null; // pause before the next attempt
       var startedAt = Date.now();
-      var httpStatus = null;
+      var attempt = 0;
 
       function elapsed() { return (Date.now() - startedAt) + 'ms'; }
 
@@ -69,6 +81,7 @@
         if (finished) return;
         finished = true;
         clearTimeout(timer);
+        clearTimeout(retryTimer);
         // Lookup is over (answered, failed or timed out): stop holding the tab open.
         window.removeEventListener('beforeunload', warnBeforeLeaving);
         // 3. feedback: what the page is about to send
@@ -81,28 +94,63 @@
       window.addEventListener('beforeunload', warnBeforeLeaving);
       timer = setTimeout(function () { finish(null, 'timed out after ' + VALUE_TIMEOUT_MS + 'ms'); }, VALUE_TIMEOUT_MS);
 
-      // 1. api call
-      console.log('[booking-value] 1/3 api call: GET ' + BOOKING_VALUE_API + ' (appointment ' + id + ', timeout ' + VALUE_TIMEOUT_MS + 'ms)');
+      console.log('[booking-value] tracking version ' + TRACKING_VERSION);
 
-      // Plain GET with no custom headers, so the browser needs no CORS preflight.
-      fetch(BOOKING_VALUE_API + '?appointment_id=' + encodeURIComponent(id))
-        .then(function (res) { httpStatus = res.status; return res.ok ? res.json() : null; })
-        .then(function (data) {
-          var value = data && data.appointment_id === id && VALUE_STATUSES.indexOf(data.status) !== -1 ? Number(data.value) : NaN;
-          var valid = isFinite(value) && value > 0 && value < 10000;
-          var reason = valid ? '' : !data ? 'API answered HTTP ' + httpStatus
-            : data.appointment_id !== id ? 'appointment ID in the answer does not match'
-            : VALUE_STATUSES.indexOf(data.status) === -1 ? 'status "' + data.status + '" gets no value'
-            : 'value "' + data.value + '" is not usable';
-          // 2. processing: what came back and whether it is usable
-          console.log('[booking-value] 2/3 processing (' + elapsed() + '): HTTP ' + httpStatus,
-            data, valid ? '-> valid' : '-> rejected: ' + reason, finished ? '(arrived after the lookup ended, ignored)' : '');
-          finish(valid ? { value: value, currency: 'USD' } : null, reason);
-        })
-        .catch(function (err) {
-          console.log('[booking-value] 2/3 processing (' + elapsed() + '): request failed', err);
-          finish(null, 'request failed (network or CORS)');
-        });
+      // Asks again after a pause, unless the deadline would pass before the next answer could arrive.
+      function retryOrFinish(reason) {
+        if (finished) return;
+        if (Date.now() - startedAt + RETRY_DELAY_MS >= VALUE_TIMEOUT_MS) {
+          finish(null, reason + ' (no time left to retry)');
+          return;
+        }
+        console.log('[booking-value] retrying in ' + RETRY_DELAY_MS + 'ms (' + elapsed() + ' used) - ' + reason);
+        retryTimer = setTimeout(lookup, RETRY_DELAY_MS);
+      }
+
+      function lookup() {
+        if (finished) return;
+        var httpStatus = null;
+        attempt++;
+
+        // 1. api call
+        console.log('[booking-value] 1/3 api call #' + attempt + ': GET ' + BOOKING_VALUE_API + ' (appointment ' + id + ', ' + elapsed() + ' of ' + VALUE_TIMEOUT_MS + 'ms used)');
+
+        // Plain GET with no custom headers, so the browser needs no CORS preflight.
+        // cache:'no-store' makes sure a retry really reaches the server again.
+        fetch(BOOKING_VALUE_API + '?appointment_id=' + encodeURIComponent(id), { cache: 'no-store' })
+          .then(function (res) { httpStatus = res.status; return res.ok ? res.json() : null; })
+          .then(function (data) {
+            if (finished) {
+              console.log('[booking-value] 2/3 processing (' + elapsed() + '): HTTP ' + httpStatus, data, '(arrived after the lookup ended, ignored)');
+              return;
+            }
+            var firm = !!data && data.appointment_id === id && VALUE_STATUSES.indexOf(data.status) !== -1;
+            var value = firm ? Number(data.value) : NaN;
+            var valid = isFinite(value) && value > 0 && value < 10000;
+            var reason = valid ? '' : !data ? 'API answered HTTP ' + httpStatus
+              : data.appointment_id !== id ? 'appointment ID in the answer does not match'
+              : !firm ? 'status "' + data.status + '" gets no value'
+              : 'value "' + data.value + '" is not usable';
+            // Worth asking again: Vagaro doesn't show the booking yet (404), is busy (429/502),
+            // or showed it without an amount so far (null / 0). Anything else is a final answer.
+            var retry = !valid && (!data ? RETRY_HTTP_STATUSES.indexOf(httpStatus) !== -1
+              : firm && (data.value === null || Number(data.value) === 0));
+            // 2. processing: what came back and whether it is usable
+            console.log('[booking-value] 2/3 processing (' + elapsed() + '): HTTP ' + httpStatus,
+              data, valid ? '-> valid' : retry ? '-> not yet: ' + reason : '-> rejected: ' + reason);
+            if (valid) finish({ value: value, currency: 'USD' }, '');
+            else if (retry) retryOrFinish(reason);
+            else finish(null, reason);
+          })
+          .catch(function (err) {
+            if (finished) return;
+            console.log('[booking-value] 2/3 processing (' + elapsed() + '): request failed', err);
+            // A dropped connection is as likely to be momentary as a 502.
+            retryOrFinish('request failed (network or CORS)');
+          });
+      }
+
+      lookup();
     }
 
     function fireBookingConversion(booking) {
